@@ -4,7 +4,7 @@ import TheHeader from "@/components/TheHeader.vue";
 
 <template>
   <main>
-    <TheHeader title="test"></TheHeader>
+    <TheHeader></TheHeader>
   </main>
 </template>
 
