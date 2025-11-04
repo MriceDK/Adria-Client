@@ -22,9 +22,9 @@ const currentNavigation = ref(1)
 nav {
   margin: 27px auto 0 auto;
   position: relative;
-  width: 590px;
+  width: 700px;
   height: 30px;
-  background-color: #34495e;
+  background-color: lightgray;
   border-radius: 8px;
   font-size: 0;
   padding: 10px;
