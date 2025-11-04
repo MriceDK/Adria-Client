@@ -4,25 +4,45 @@ defineProps({
     type: String,
     required: true,
   },
+  imageSource: {
+    type: String,
+    required: true,
+  },selectedTab: {
+    type: String,
+    required: true,
+  }
 })
+const emit = defineEmits(['navigation-click'])
+
 </script>
 
 <template>
-<button @click="$emit('NavigationClick',title)">
-  {{ title }}
-</button>
+  <li @click="$emit('navigation-click',title)" :class="{selected: selectedTab === title}">
+    <div>
+
+    </div>
+    {{ title }}
+
+  </li>
 </template>
 
 <style scoped>
-button {
+li{
   padding: 10px 10px;
   border-radius: 50px;
   cursor: pointer;
   border: 0;
   background-color: white;
   box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
-  text-transform: uppercase;
-  transition: all 0.5s ease;
-  width: 25%;
+  width: 20%;
+  float: left;
+  font-size: 1rem;
+  text-align: center;
+}
+div{
+
+}
+.selected{
+  background: #000;
 }
 </style>
