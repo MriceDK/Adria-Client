@@ -84,7 +84,7 @@ function saveGoals() {
   background: white;
   border: 0.1rem solid lightgray;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .row {

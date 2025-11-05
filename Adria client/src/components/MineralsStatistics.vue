@@ -1,10 +1,21 @@
 <template>
   <section class="minerals-section">
     <div class="row">
-      <div>
-        <h2>Minerals</h2>
-        <p>Daily mineral intake goals</p>
+      <div class="header-left">
+        <div class="icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class="lucide lucide-activity">
+            <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path>
+          </svg>
+        </div>
+
+        <div class="text-block">
+          <h2>Minerals</h2>
+          <p>Daily mineral intake goals</p>
+        </div>
       </div>
+
       <div class="actions">
         <button v-if="!isEditingMinerals" @click="isEditingMinerals = true" class="btn">Edit</button>
         <template v-else>
@@ -74,5 +85,141 @@ onMounted(loadData)
 </script>
 
 <style scoped>
+.minerals-section {
+  background: white;
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+  padding: 2rem;
+}
 
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-circle {
+  background-color: #dcfce7;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle svg {
+  width: 2rem;
+  height: 2rem;
+  stroke: #22c55e;
+}
+
+.text-block h2 {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: black;
+  margin: 0;
+}
+
+.text-block p {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn {
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid lightgray;
+  border-radius: 0.5rem;
+  background: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background: lightgray;
+}
+
+.btn.save {
+  background: black;
+  color: white;
+}
+
+.btn.save:hover {
+  background: darkslategray;
+}
+
+.minerals-list, .minerals-edit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1rem;
+}
+
+.mineral-card {
+  border: 0.1rem solid #fb2c36;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #ffe9eb;
+}
+
+.mineral-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.mineral-label {
+  color: #fb2c36;
+  font-weight: bold;
+  margin: 0;
+}
+
+.mineral-goal {
+  color: gray;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.mineral-current {
+  text-align: left;
+  color: #fb2c36;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.mineral-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+}
+
+.mineral-edit input {
+  width: 4rem;
+  padding: 0.25rem;
+  border: 0.1rem solid lightgray;
+  border-radius: 0.5rem;
+  text-align: center;
+}
 </style>
