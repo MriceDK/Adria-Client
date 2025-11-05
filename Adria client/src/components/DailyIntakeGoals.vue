@@ -17,10 +17,15 @@
     </div>
 
     <div v-if="!isEditing" class="goals-list">
-      <div v-for="item in goals" :key="item.label" class="goal-card">
-        <h4>{{ item.label }}</h4>
+      <div v-for="item in goals" :key="item.label" class="goal-card" :class="{ water: item.label === 'Water' }">
+      <h4>{{ item.label }}</h4>
         <p>{{ item.current }}{{ item.unit }} / {{ item.goal }}{{ item.unit }}</p>
-        <ProgressBar :value="item.current" :max="item.goal" />
+
+        <ProgressBar
+            :value="item.current"
+            :max="item.goal"
+            :color="item.label === 'Water' ? 'linear-gradient(90deg, #60a5fa, #3b82f6)' : null"/>
+
         <p class="remaining">{{ (item.goal - item.current).toFixed(1) }}{{ item.unit }} remaining</p>
       </div>
     </div>
@@ -122,12 +127,12 @@ p {
 }
 
 .btn.save {
-  background: dodgerblue;
+  background: black;
   color: white;
 }
 
 .btn.save:hover {
-  background: blue;
+  background: darkslategray;
 }
 
 .goal-card {
@@ -168,5 +173,13 @@ p {
   border: 0.1rem solid lightgray;
   border-radius: 0.5rem;
   text-align: center;
+}
+
+.goal-card.water, .goal-card.water h4, .goal-card.water p {
+  color: deepskyblue;
+}
+
+.goal-card.water {
+  border-color: deepskyblue;
 }
 </style>
