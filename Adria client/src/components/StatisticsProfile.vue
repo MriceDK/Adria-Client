@@ -8,19 +8,46 @@
         <button v-if="!isEditing" @click="isEditing = true" class="btn">Change Goals</button>
 
         <template v-else>
-          <button class="btn cancel">Cancel</button>
-          <button class="btn save">Save</button>
+          <button @click="cancelEdit" class="btn cancel">Cancel</button>
+          <button @click="saveGoals" class="btn save">Save</button>
         </template>
       </div>
     </div>
 
+    <div v-if="!isEditing" class="goals-list">
+      <div v-for="item in goals" :key="item.label" class="goal-card">
+        <h4>{{ item.label }}</h4>
+        <p>{{ item.current }}{{ item.unit }} / {{ item.goal }}{{ item.unit }}</p>
+        <p class="remaining">{{ (item.goal - item.current).toFixed(1) }}{{ item.unit }} remaining</p>
+      </div>
+    </div>
+
+    <div v-else class="goals-edit">
+      <div v-for="(goal, index) in editableGoals" :key="goal.label" class="goal-edit">
+        <label>{{ goal.label }} ({{ goal.unit }})</label>
+        <input type="number" v-model.number="editableGoals[index].goal" />
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup>
-import { ref} from 'vue'
+import { ref } from 'vue'
 
 const isEditing = ref(false)
+const goals = ref([])
+const editableGoals = ref([])
+
+
+function cancelEdit() {
+  editableGoals.value = goals.value
+  isEditing.value = false
+}
+
+function saveGoals() {
+  goals.value = editableGoals.value
+  isEditing.value = false
+}
 </script>
 
 <style scoped>
