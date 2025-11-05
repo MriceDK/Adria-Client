@@ -1,11 +1,12 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
+import DailyIntakeGoals from "@/components/DailyIntakeGoals.vue";
 </script>
 
 <template>
   <main>
-    <TheHeader></TheHeader>
-
+    <TheHeader />
+    <DailyIntakeGoals />
   </main>
 </template>
 

@@ -143,7 +143,7 @@ p {
   background: white;
 }
 
-.goal-card h4 {
+.goal-card h4, .goals-edit label {
   margin-bottom: 0.25rem;
   font-weight: bold;
 }
