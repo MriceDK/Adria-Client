@@ -2,6 +2,7 @@
 
 import DailyIntakeGoals from "@/components/DailyIntakeGoalsStatistics.vue";
 import DailyIntakeGoalsStatistics from "@/components/DailyIntakeGoalsStatistics.vue";
+import MineralsStatistics from "@/components/MineralsStatistics.vue";
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import DailyIntakeGoalsStatistics from "@/components/DailyIntakeGoalsStatistics.
       <DailyIntakeGoalsStatistics />
     </div>
     <div class="statistics">
-      <DailyIntakeGoalsStatistics />
+      <MineralsStatistics />
     </div>
   </main>
 </template>
