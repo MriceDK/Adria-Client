@@ -1,11 +1,11 @@
 <script setup>
 import NavigationButton from "@/components/NavigationButton.vue";
 import {ref} from "vue";
-
+const emit = defineEmits(['navigation-click'])
 
 function handleNavigationClick(title) {
   selectedTab.value = title;
-
+  emit("navigation-click", selectedTab.value);
 }
 const currentNavigation = ref(1)
 const selectedTab = ref("scanner")
