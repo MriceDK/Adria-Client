@@ -32,12 +32,21 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const isEditing = ref(false)
 const goals = ref([])
 const editableGoals = ref([])
 
+onMounted(() => {
+  goals.value = [
+    { label: 'Protein', current: 75, goal: 150, unit: 'g' },
+    { label: 'Carbohydrates', current: 120, goal: 250, unit: 'g' },
+    { label: 'Fats', current: 20, goal: 65, unit: 'g' },
+    { label: 'Water', current: 1750, goal: 2500, unit: 'ml' }
+  ]
+  editableGoals.value = goals.value
+})
 
 function cancelEdit() {
   editableGoals.value = goals.value
