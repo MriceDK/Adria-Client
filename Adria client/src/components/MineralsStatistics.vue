@@ -27,6 +27,12 @@
       </div>
     </div>
 
+    <div v-else class="minerals-edit">
+      <div v-for="(mineral, i) in editableMinerals" :key="mineral.label" class="mineral-edit">
+        <label>{{ mineral.label }} ({{ mineral.unit }})</label>
+        <input v-model.number="editableMinerals[i].goal" type="number" />
+      </div>
+    </div>
   </section>
 </template>
 
