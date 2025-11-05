@@ -2,13 +2,24 @@
   <section class="goals-section">
 
     <div class="row">
-      <div>
-        <h1>Daily Intake Goals</h1>
-        <p>Macronutrient targets</p>
+      <div class="header-left">
+        <div class="icon-circle goals-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round"
+               class="lucide lucide-droplet">
+            <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>
+          </svg>
+        </div>
+
+        <div class="text-block">
+          <h2>Daily Intake Goals</h2>
+          <p>Macronutrient targets</p>
+        </div>
       </div>
+
       <div class="actions">
         <button v-if="!isEditing" @click="isEditing = true" class="btn">Change Goals</button>
-
         <template v-else>
           <button @click="cancelEdit" class="btn cancel">Cancel</button>
           <button @click="saveGoals" class="btn save">Save</button>
@@ -69,30 +80,56 @@ function saveGoals() {
 </script>
 
 <style scoped>
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-h1 {
-  font-size: 1.7rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-p {
-  font-size: 1rem;
-  color: gray;
-  margin-top: 0.25rem;
-}
-
 .goals-section {
   background: white;
   border: 0.1rem solid lightgray;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-circle.goals-icon {
+  background-color: #dbeafe;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle.goals-icon svg {
+  width: 2rem;
+  height: 2rem;
+  stroke: #2563eb;
+}
+
+.text-block h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.text-block p {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
 }
 
 .actions {
@@ -100,12 +137,6 @@ p {
   justify-content: flex-end;
   gap: 0.5rem;
   margin-bottom: 1rem;
-}
-
-.goals-list, .goals-edit {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  gap: 1rem;
 }
 
 .btn {
@@ -132,6 +163,12 @@ p {
   background: darkslategray;
 }
 
+.goals-list, .goals-edit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
 .goal-card {
   border: 0.1rem solid lightgray;
   border-radius: 1rem;
@@ -154,6 +191,14 @@ p {
   color: gray;
 }
 
+.goal-card.water, .goal-card.water h4, .goal-card.water p {
+  color: deepskyblue;
+}
+
+.goal-card.water {
+  border-color: deepskyblue;
+}
+
 .goal-edit {
   display: flex;
   flex-direction: column;
@@ -170,13 +215,5 @@ p {
   border: 0.1rem solid lightgray;
   border-radius: 0.5rem;
   text-align: center;
-}
-
-.goal-card.water, .goal-card.water h4, .goal-card.water p {
-  color: deepskyblue;
-}
-
-.goal-card.water {
-  border-color: deepskyblue;
 }
 </style>

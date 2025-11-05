@@ -1,6 +1,8 @@
 <script setup>
 
-import DailyIntakeGoals from "@/components/DailyIntakeGoals.vue";
+import DailyIntakeGoals from "@/components/DailyIntakeGoalsStatistics.vue";
+import DailyIntakeGoalsStatistics from "@/components/DailyIntakeGoalsStatistics.vue";
+import MineralsStatistics from "@/components/MineralsStatistics.vue";
 </script>
 
 <template>
@@ -10,10 +12,10 @@ import DailyIntakeGoals from "@/components/DailyIntakeGoals.vue";
       <p>Track and manage your health statistics</p>
     </div>
     <div class="statistics">
-      <DailyIntakeGoals />
+      <DailyIntakeGoalsStatistics />
     </div>
     <div class="statistics">
-      <DailyIntakeGoals />
+      <MineralsStatistics />
     </div>
   </main>
 </template>
