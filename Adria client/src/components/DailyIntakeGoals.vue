@@ -20,6 +20,7 @@
       <div v-for="item in goals" :key="item.label" class="goal-card">
         <h4>{{ item.label }}</h4>
         <p>{{ item.current }}{{ item.unit }} / {{ item.goal }}{{ item.unit }}</p>
+        <ProgressBar :value="item.current" :max="item.goal" />
         <p class="remaining">{{ (item.goal - item.current).toFixed(1) }}{{ item.unit }} remaining</p>
       </div>
     </div>
@@ -35,6 +36,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import ProgressBar from "@/components/ProgressBar.vue";
 
 const isEditing = ref(false)
 const goals = ref([])
