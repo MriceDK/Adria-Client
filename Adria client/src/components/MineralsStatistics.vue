@@ -13,6 +13,20 @@
         </template>
       </div>
     </div>
+
+
+    <div v-if="!isEditingMinerals" class="minerals-list">
+      <div v-for="item in minerals" :key="item.label" class="mineral-card">
+        <div class="mineral-top">
+          <h4 class="mineral-label">{{ item.label }}</h4>
+          <p class="mineral-goal">{{ item.goal }}{{ item.unit }} goal</p>
+        </div>
+        <div class="mineral-current">
+          {{ item.current }}{{ item.unit }}
+        </div>
+      </div>
+    </div>
+
   </section>
 </template>
 
