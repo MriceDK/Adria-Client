@@ -49,10 +49,10 @@ const editableGoals = ref([])
 
 onMounted(() => {
   goals.value = [
-    { label: 'Protein', current: 75, goal: 150, unit: 'g' },
-    { label: 'Carbohydrates', current: 120, goal: 250, unit: 'g' },
-    { label: 'Fats', current: 20, goal: 65, unit: 'g' },
-    { label: 'Water', current: 1750, goal: 2500, unit: 'ml' }
+    { label: 'Protein', current: 75.7, goal: 150, unit: 'g' },
+    { label: 'Carbohydrates', current: 120.9, goal: 250, unit: 'g' },
+    { label: 'Fats', current: 17.3, goal: 65, unit: 'g' },
+    { label: 'Water', current: 1750.4, goal: 2500, unit: 'ml' }
   ]
   editableGoals.value = goals.value
 })
@@ -93,9 +93,6 @@ p {
   border: 0.1rem solid lightgray;
   border-radius: 1rem;
   padding: 1rem;
-  max-width: 80%;
-  margin: auto;
-  font-family: system-ui, sans-serif;
 }
 
 .actions {

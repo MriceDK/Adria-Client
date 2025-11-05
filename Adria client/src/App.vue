@@ -1,12 +1,13 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
 import DailyIntakeGoals from "@/components/DailyIntakeGoals.vue";
+import HealthProfile from "@/components/HealthProfile.vue";
 </script>
 
 <template>
   <main>
     <TheHeader />
-    <DailyIntakeGoals />
+    <HealthProfile />
   </main>
 </template>
 
