@@ -35,18 +35,8 @@ function Draw() {
 </script>
 
 <template>
-  <div class='ui container'>
     <video ref="video" class="camera-stream" autoplay playsinline webkit-playsinline muted hidden/>
-    <canvas ref="canvas" class="camera-stream" width="512" height="512"></canvas>/
-<!--    <img v-else :src="imageData.image" v-bind:style="{transform: 'rotate(' + imageData.image_orientation + 'deg'}" class="camera-stream">-->
-
-<!--    <img v-if="!imageData.image" class="camera-stream" src="../../src/assets/image.png">-->
-<!--    <img v-else :src="imageData.image" class="camera-stream" />-->
-
-  </div>
-
-
-
+    <canvas ref="canvas" class="camera-stream" width="512" height="512"></canvas>
 </template>
 
 <style>
