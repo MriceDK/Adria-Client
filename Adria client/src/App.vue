@@ -1,5 +1,6 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
+import HealthProfile from "@/components/HealthProfile.vue";
 import Scanner from "@/components/Scanner.vue";
 </script>
 
@@ -7,6 +8,8 @@ import Scanner from "@/components/Scanner.vue";
   <main>
     <TheHeader></TheHeader>
     <scanner></scanner>
+    <TheHeader />
+    <HealthProfile />
   </main>
 </template>
 
