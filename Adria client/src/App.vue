@@ -1,5 +1,7 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
+import HealthProfile from "@/components/HealthProfile.vue";
+import Scanner from "@/components/Scanner.vue";
 import ShopTab from "@/components/ShopTab.vue";
 import {ref} from "vue";
 
@@ -19,6 +21,10 @@ function handleNavigationClick(tab) {
 
 <template>
   <main>
+    <TheHeader></TheHeader>
+    <scanner></scanner>
+    <TheHeader />
+    <HealthProfile />
     <TheHeader @navigation-click="handleNavigationClick"></TheHeader>
     <component :is="componentMap[selectedTab]"> </component>
   </main>
