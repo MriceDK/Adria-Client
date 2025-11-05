@@ -45,8 +45,6 @@ function cancelEdit() {
 }
 
 function saveGoals() {
-  goals.value = editableGoals.value
-  isEditing.value = false
 }
 </script>
 
