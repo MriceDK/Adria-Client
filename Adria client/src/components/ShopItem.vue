@@ -1,9 +1,11 @@
 <script setup>
 defineProps({
   image: String,
-  title: String,
-  description: String,
-  cost: Number,
+  item: {
+    title: String,
+    description: String,
+    cost: Number
+  }
 })
 </script>
 
@@ -11,27 +13,36 @@ defineProps({
   <div class="shopitem">
     <!-- image -->
     <img :src="image" alt="" class="image">
-    <!-- titel -->
-    <p>{{ title }}</p>
-    <!-- cost -->
-    <p>{{cost}}</p>
-    <!-- type -->
-    <p>{{description}}</p>
-    <!-- button -->
-    <button>add to cart</button>
+    <div class="info">
+      <!-- titel -->
+      <p class="title">{{ item.title }}</p>
+      <!-- cost -->
+      <p class="price">{{item.cost}}</p>
+      <!-- type -->
+      <p>{{item.description}}</p>
+      <!-- button -->
+      <button>add to cart</button>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .shopitem{
   border: 1px solid lightgray;
-  width: 30%;
+  width: 28%;
   height: 100%;
   display: inline-block;
   margin: 1% 1% 0 1%;
-
+  border-radius: 1rem;
   }
 .image{
   width: 100%;
+  border-bottom: 1px solid lightgray;
+}
+.title{
+   font-weight: bold;
+}
+.info{
+margin: 1%;
 }
 </style>
