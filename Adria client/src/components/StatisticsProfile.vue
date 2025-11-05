@@ -1,9 +1,11 @@
 <template>
   <section class="goals-section">
 
-    <div>
-      <h1>Daily Intake Goals</h1>
-      <p>Macronutrient targets</p>
+    <div class="row">
+      <div>
+        <h1>Daily Intake Goals</h1>
+        <p>Macronutrient targets</p>
+      </div>
       <div class="actions">
         <button v-if="!isEditing" @click="isEditing = true" class="btn">Change Goals</button>
 
@@ -60,5 +62,109 @@ function saveGoals() {
 </script>
 
 <style scoped>
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
 
+h1 {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+p {
+  font-size: 1rem;
+  color: gray;
+  margin-top: 0.25rem;
+}
+
+.goals-section {
+  background: white;
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+  padding: 1rem;
+  max-width: 80%;
+  margin: auto;
+  font-family: system-ui, sans-serif;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.goals-list, .goals-edit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
+.btn {
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid lightgray;
+  border-radius: 0.5rem;
+  background: white;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  background: lightgray;
+}
+
+.btn.save {
+  background: dodgerblue;
+  color: white;
+}
+
+.btn.save:hover {
+  background: blue;
+}
+
+.goal-card {
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background: white;
+}
+
+.goal-card h4 {
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+.goal-card p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.remaining {
+  color: gray;
+}
+
+.goal-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+}
+
+.goal-edit input {
+  width: 4rem;
+  padding: 0.25rem;
+  border: 0.1rem solid lightgray;
+  border-radius: 0.5rem;
+  text-align: center;
+}
 </style>
