@@ -33,5 +33,50 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.cholesterol-panel {
+  margin-top: 2rem;
+}
 
+.panel-title {
+  font-size: 1.5rem;
+  color: #717182;
+  margin-bottom: 1rem;;
+}
+
+.cholesterol-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1rem;
+}
+
+.cholesterol-card {
+  border: 0.1rem solid #fb2c36;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #ffe9eb;
+}
+
+.cholesterol-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.cholesterol-label {
+  color: #fb2c36;
+  font-weight: bold;
+  margin: 0;
+}
+
+.cholesterol-goal {
+  color: gray;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.cholesterol-current {
+  color: #fb2c36;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
 </style>
