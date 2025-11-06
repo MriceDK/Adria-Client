@@ -1,7 +1,10 @@
 <script setup>
 import Camera from "@/components/Camera.vue";
+import FoodInfo from "@/components/FoodInfo.vue";
 import {ref} from "vue";
+
 const scanning = ref(false);
+const scanned = ref(false);
 
 </script>
 
@@ -10,7 +13,7 @@ const scanning = ref(false);
     <!--ScanCamera-->
     <!--Text-->
     <!--Scan button-->
-    <camera @scan="scanning = !scanning">
+    <camera @scan="scanning = !scanning" @scanned="scanned = true" v-if="!scanned">
       <div v-show="!scanning" class="start-scan">
         <p class="scan-title">Start Scanning</p>
         <p class="scan-description">Point your camera at any food item to instantly get detailed nutrition information</p>
@@ -20,6 +23,7 @@ const scanning = ref(false);
         <p class="scan-description">Analyzing nutrition information</p>
       </div>
     </camera>
+    <food-info v-else></food-info>
    </div>
 
   <div hidden class="scanning">

@@ -9,7 +9,7 @@ const canvas = ref(null);
 const video = ref(null);
 const ctx = ref(null);
 
-const emit = defineEmits(['scan'])
+const emit = defineEmits(['scan', 'scanned'])
 
 const constraints = ref({
   video: true,
@@ -50,9 +50,7 @@ function draw() {
 }
 
 function scan() {
-  setTimeout(function () {
-    setStream(video.value.srcObject);
-  }, 1000000)
+  setTimeout(function () {emit('scanned')}, 3000)
 
 }
 
