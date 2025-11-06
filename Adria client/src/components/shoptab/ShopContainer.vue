@@ -7,7 +7,7 @@ const dummydata = {
     cost: 5
   },
   item2: {
-    title: "banaan",
+    title: "appel",
     description: "een fruit",
     cost: 5
   },
@@ -37,11 +37,15 @@ const dummydata = {
     cost: 5
   }
 }
+const emit = defineEmits(['add-to-cart'])
+function handleAddToCart(item) {
+  emit("add-to-cart", item)
+}
 </script>
 
 <template>
   <div class="shop-container">
-    <ShopItem v-for="item in dummydata" :item="item"/>
+    <ShopItem v-for="item in dummydata" :item="item" @add-to-cart="handleAddToCart"/>
   </div>
 </template>
 

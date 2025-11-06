@@ -1,30 +1,29 @@
 <script setup>
-import shoppingCartItem from './shoppingCartItem.vue'
+import ShoppingCartItem from './ShoppingCartItem.vue'
 import {ref} from "vue";
 
+const props = defineProps({
+  cartItems: Array
+});
+console.log(props);
 const cartEnabled = ref(false)
-const selectedItems = {
-  item: {
-    title: "banaan",
-    description: "een fruit",
-    cost: 5
-  },
-  item2: {
-    title: "banaan",
-    description: "een fruit",
-    cost: 5
-  }};
+
+function testfunc() {
+  console.log(props)
+}
+
 </script>
 
 <template>
-  <div class="cartIcon" @click="cartEnabled = !cartEnabled; console.log(cartEnabled)" v-show="!cartEnabled">
+  <div class="cartIcon" @click="cartEnabled = !cartEnabled; console.log(props.cartItems)" v-show="!cartEnabled">
     <img src="../../assets/icons/shopping-cart-outline-svgrepo-com.svg" alt="">
   </div>
   <div class="cartcontainer" v-show="cartEnabled">
     <p>your shoppingcart</p>
-    <p @click="cartEnabled = !cartEnabled; console.log(cartEnabled)">close</p>
+    <!--p @click="cartEnabled = !cartEnabled; testfunc();">close</p-->
+    <p @click="testfunc">testfunc</p>
     <div>
-      <shoppingCartItem v-for="item in selectedItems" :item="item" />
+      <ShoppingCartItem v-for="(item, index) in props.cartItems" :key="index" :item="item" />
     </div>
   </div>
 </template>

@@ -2,11 +2,18 @@
 
 import ShopContainer from "@/components/shoptab/ShopContainer.vue";
 import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
+import {ref} from "vue";
+
+const cartItems = ref([]);
+
+function handleAddToCart(item) {
+  cartItems.value.push(item);
+}
 </script>
 
 <template>
-  <shopping-cart/>
-  <shop-container/>
+  <ShoppingCart :cart-items="cartItems" />
+  <ShopContainer @add-to-cart="handleAddToCart"/>
 </template>
 
 <style scoped>
