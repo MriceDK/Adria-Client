@@ -12,7 +12,7 @@ defineProps({
 <template>
   <div class="cartitem">
     <!-- image -->
-    <img src="../../assets/icons/statsicon.png" :alt="item.title" class="image" />
+    <img :src="image" :alt="item.title" class="image" />
 
     <div class="info">
       <!-- Title + Price -->
