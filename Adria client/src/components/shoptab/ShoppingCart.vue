@@ -6,6 +6,7 @@ const props = defineProps({
   cartItems: Array
 });
 const cartEnabled = ref(false)
+const checkoutEnable = ref(false)
 const cartTotalPrice = computed(() => {
   return props.cartItems.reduce((total, item) => total + item.cost, 0);
 });
@@ -36,10 +37,15 @@ function handleOpenCart() {
           <p>total</p>
           <p>{{cartTotalPrice}}</p>
         </div>
+        <div class="bottom-row">
+          <button class="clearbutton">clear cart</button>
+          <button class="checkoutbutton" @click="checkoutEnable =! checkoutEnable">checkout</button>
+        </div>
       </div>
     <div class="backgroundShadow" @click="cartEnabled = !cartEnabled;">
     </div>
   </div>
+
 
 </template>
 
@@ -90,12 +96,15 @@ function handleOpenCart() {
     justify-content: space-between;
     align-items: center;
     width: 98%;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .cartitems{
-    height: 80%;
+    height: 75%;
     overflow-y: scroll;
     border-radius: 8px;
+    border-bottom: 1px solid lightgray;
   }
   .backgroundShadow {
     background-color: black;
@@ -108,5 +117,19 @@ function handleOpenCart() {
   }
   .amount{
     color: gray;
+  }
+  .clearbutton{
+    width: 49%;
+    height: 2.5rem;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 1em;
+  }
+  .clearbutton:hover{
+    background-color: lightgray;
+  }
+  .checkoutbutton{
+    width: 49%;
+    height: 2.5rem;
   }
 </style>
