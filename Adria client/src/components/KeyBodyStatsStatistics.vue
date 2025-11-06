@@ -62,12 +62,16 @@
         </div>
       </div>
     </div>
+
+    <CholesterolPanel />
+
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue"
 import ProgressBar from "@/components/ProgressBar.vue";
+import CholesterolPanel from "@/components/CholesterolPanel.vue";
 
 const bodyStats = ref([])
 
