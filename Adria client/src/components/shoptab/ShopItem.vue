@@ -12,7 +12,7 @@ defineProps({
 <template>
   <div class="shopitem">
     <!-- image -->
-    <img :src="image" alt="" class="image" />
+    <img src="../../assets/icons/statsicon.png" :alt="item.title" class="image" />
 
     <div class="info">
       <!-- Title + Price in One Line -->
@@ -34,7 +34,7 @@ defineProps({
 .shopitem {
   border: 1px solid #e0e0e0;
   border-radius: 1rem;
-  width: 280px;
+  width: 23%;
   overflow: hidden;
   background: #fff;
   display: flex;
@@ -51,7 +51,7 @@ defineProps({
 
 .image {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
   border-bottom: 1px solid #eee;
 }
