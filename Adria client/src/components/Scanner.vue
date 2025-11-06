@@ -33,6 +33,7 @@ template {
   height: 100vh;
 }
 .start-scan {
+  font-family: var(--main-font-family),sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +43,7 @@ template {
 }
 
 .scan-title {
+  font-family: var(--main-font-family),sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.7rem;

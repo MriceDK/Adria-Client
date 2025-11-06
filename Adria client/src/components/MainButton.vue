@@ -1,27 +1,49 @@
 <script setup>
-const props = defineProps({black : Boolean})
+const props = defineProps({
+  black : Boolean,
+  disabled : Boolean
+});
 </script>
 
 <template>
-  <button :class="{black : props.black}"><slot></slot></button>
+  <button :disabled="props.disabled" :class="{black : props.black}"><slot></slot></button>
 </template>
 
 <style scoped>
 button {
-  background-color: transparent;
-  padding: 0.5rem;
+  font-family: var(--main-font-family),sans-serif;
+  background-color: var(--main-bg-color);
+  padding: 0.5rem 2rem;
   font-size: 1rem;
   max-width: fit-content;
-  border: solid 0.075rem #181818;
+  border: solid 0.075rem var(--secondary-bg-color);
   border-radius: 0.35rem;
 }
 button:hover {
-  background-color: lightgray;
+  background-color: var(--secondary-bg-color);
 }
 
 .black {
-  background: black;
-  color: white;
+  background: var(--main-text-color);
+  color: var(--main-bg-color);
+}
+
+.black:hover {
+  background: var(--hover-black-color);
+}
+
+button:disabled {
+  opacity: 50%;
+}
+
+button:disabled:hover {
+  opacity: 50%;
+  background-color: var(--main-bg-color);
+}
+.black:disabled:hover {
+  opacity: 50%;
+
+  background-color: var(--main-text-color)
 }
 
 </style>
