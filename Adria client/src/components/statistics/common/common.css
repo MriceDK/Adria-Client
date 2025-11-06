@@ -1,0 +1,89 @@
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.text-block h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+.text-block p {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0.25rem 0 0;
+}
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+.btn {
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: 0.1rem solid lightgray;
+    border-radius: 0.5rem;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.9rem;
+}
+.btn:hover {
+    background: lightgray;
+}
+.btn.save {
+    background: black;
+    color: white;
+}
+.btn.save:hover {
+    background: darkslategray;
+}
+
+/* === THEMED HEADER ICON COLORS === */
+
+.icon-circle {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Daily Intake Goals (blue theme) */
+.icon-circle.goals-icon {
+    background-color: #dbeafe; /* light blue background */
+}
+.icon-circle.goals-icon svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #2563eb; /* vivid blue stroke */
+}
+
+/* Minerals (green theme) */
+.icon-circle.minerals-icon {
+    background-color: #dcfce7;
+}
+.icon-circle.minerals-icon svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #22c55e;
+}
+
+/* Body Stats (red theme) */
+.icon-circle.stats-icon {
+    background-color: #fee2e2;
+}
+.icon-circle.stats-icon svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #ef4444;
+}
