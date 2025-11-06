@@ -1,6 +1,7 @@
 <script setup>
 
 import NutrientInfo from "@/components/NutrientInfo.vue";
+import MainButton from "@/components/MainButton.vue";
 </script>
 
 <template>
@@ -23,6 +24,8 @@ import NutrientInfo from "@/components/NutrientInfo.vue";
     <nutrient-info :nutrient-value="150" nutrient-unit="g" class="carbs">Carbs</nutrient-info>
     <nutrient-info :nutrient-value="150" nutrient-unit="g" class="fiber">Fiber</nutrient-info>
     <nutrient-info :nutrient-value="150" nutrient-unit="g" class="fat">Fat</nutrient-info>
+    <main-button class="add-to-tracker" :black="true">Add To Tracker</main-button>
+    <main-button class="scan-again" >Scan again</main-button>
   </div>
 </template>
 
@@ -59,6 +62,15 @@ import NutrientInfo from "@/components/NutrientInfo.vue";
 .fiber{
   grid-area: fiber;
 }
+.add-to-tracker {
+  grid-area: add-to-tracker;
+  width: 100%;
+}
+.scan-again {
+  grid-area: scan-again;
+  width: 100%;
+
+}
 /* Layout for the grid */
 .nutrition-grid {
   display: grid;
@@ -68,7 +80,8 @@ import NutrientInfo from "@/components/NutrientInfo.vue";
   "food-name cancel-button"
   "calories calories"
   "protein carbs"
-  "fat fiber";
+  "fat fiber"
+  "add-to-tracker scan-again";
   border: solid 0.1rem var(--secondary-bg-color);
   border-radius: 1rem;
   padding: 1rem;

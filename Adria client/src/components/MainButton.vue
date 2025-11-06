@@ -15,7 +15,6 @@ button {
   background-color: var(--main-bg-color);
   padding: 0.5rem 2rem;
   font-size: 1rem;
-  max-width: fit-content;
   border: solid 0.075rem var(--secondary-bg-color);
   border-radius: 0.35rem;
 }
