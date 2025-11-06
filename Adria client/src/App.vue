@@ -8,9 +8,9 @@ import {ref} from "vue";
 
 const selectedTab = ref("scanner")
 const componentMap = {
-  scanner:ShopTab,
+  scanner:Scanner,
   tracker:ShopTab,
-  statistics:ShopTab,
+  statistics:HealthProfile,
   shop:ShopTab
 };
 
@@ -21,10 +21,6 @@ function handleNavigationClick(tab) {
 
 <template>
   <main>
-    <TheHeader></TheHeader>
-    <scanner></scanner>
-    <TheHeader />
-    <HealthProfile />
     <TheHeader @navigation-click="handleNavigationClick"></TheHeader>
     <component :is="componentMap[selectedTab]"> </component>
   </main>
