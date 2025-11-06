@@ -31,5 +31,7 @@ function handleNavigationClick(tab) {
 </template>
 
 <style scoped>
-
+*{
+  font-family: system-ui, sans-serif;
+}
 </style>
