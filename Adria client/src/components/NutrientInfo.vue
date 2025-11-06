@@ -29,7 +29,7 @@ const props = defineProps({
   font-size: 1rem;
   font-weight: 600;
   color: #6b7280; /* gray-500 */
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 
 .nutrient-value {

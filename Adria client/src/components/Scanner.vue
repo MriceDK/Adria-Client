@@ -68,6 +68,6 @@ template {
   font-size: 1rem;
   margin-bottom: 2rem;
   text-align: center;
-  max-width: 370px;
+  max-width: 23rem;
 }
 </style>
