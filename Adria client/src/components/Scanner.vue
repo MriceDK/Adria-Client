@@ -2,22 +2,31 @@
 import Camera from "@/components/Camera.vue";
 import {ref} from "vue";
 const scanning = ref(false);
+
 </script>
 
 <template>
-  <div class="start-scan">
-    <camera>
-      <p class="scan-title">Start Scanning</p>
-      <p class="scan-description">Point your camera at any food item to instantly get detailed nutrition information</p>
+  <div class="scan-start-screen">
+    <!--ScanCamera-->
+    <!--Text-->
+    <!--Scan button-->
+    <camera @scan="scanning = !scanning">
+      <div v-show="!scanning" class="start-scan">
+        <p class="scan-title">Start Scanning</p>
+        <p class="scan-description">Point your camera at any food item to instantly get detailed nutrition information</p>
+      </div>
+      <div v-show="scanning" class="scan">
+        <p class="scan-title">Scanning...</p>
+        <p class="scan-description">Analyzing nutrition information</p>
+      </div>
     </camera>
    </div>
 
   <div hidden class="scanning">
   </div>
 
-<!--ScanCamera-->
-<!--Text-->
-<!--Scan button-->
+
+
 
 <!--Open webcam sequence-->
 <!--"Analyze webcam"-->
@@ -32,7 +41,7 @@ const scanning = ref(false);
 template {
   height: 100vh;
 }
-.start-scan {
+.scan-start-screen {
   font-family: var(--main-font-family),sans-serif;
   display: flex;
   flex-direction: column;
