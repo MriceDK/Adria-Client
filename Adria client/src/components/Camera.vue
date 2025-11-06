@@ -116,8 +116,8 @@ function startScan() {
 .camera-icon-wrapper {
   background: var(--secondary-bg-color);
   border-radius: 50%;
-  width: 180px;
-  height: 180px;
+  width: 10rem;
+  height: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,9 +125,8 @@ function startScan() {
 }
 
 .camera-icon {
-  width: 80px;
-  height: 80px;
-  color: #888e9f;
+  width: 5rem;
+  height: 5rem;
 }
 
 </style>
