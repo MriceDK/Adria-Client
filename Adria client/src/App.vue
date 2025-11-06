@@ -4,6 +4,7 @@ import HealthProfile from "@/components/HealthProfile.vue";
 import Scanner from "@/components/Scanner.vue";
 import ShopTab from "@/components/ShopTab.vue";
 import {ref} from "vue";
+import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
 
 
 const selectedTab = ref("scanner")
@@ -20,18 +21,20 @@ function handleNavigationClick(tab) {
 </script>
 
 <template>
-  <main>
-    <TheHeader></TheHeader>
-    <scanner></scanner>
-    <TheHeader />
-    <HealthProfile />
+  <header>
     <TheHeader @navigation-click="handleNavigationClick"></TheHeader>
+  </header>
+  <main>
     <component :is="componentMap[selectedTab]"> </component>
+    <shopping-cart/>
   </main>
 </template>
 
 <style scoped>
 *{
   font-family: system-ui, sans-serif;
+}
+header {
+  margin-bottom: 2rem;
 }
 </style>
