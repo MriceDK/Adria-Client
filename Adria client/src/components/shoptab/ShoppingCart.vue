@@ -46,7 +46,7 @@ function handleOpenCart() {
     <div class="backgroundShadow" @click="checkoutEnable = !checkoutEnable; console.log(checkoutEnable)">
     </div>
   </div>
-  <CheckoutPopup v-show="checkoutEnable"></CheckoutPopup>
+  <CheckoutPopup v-if="checkoutEnable" :cart-items="cartItems" :cart-total="cartTotalPrice" :cart-amount="amountOfItems"></CheckoutPopup>
 
 </template>
 
