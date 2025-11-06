@@ -1,6 +1,7 @@
 <script setup>
 import ShoppingCartItem from './ShoppingCartItem.vue'
 import {computed, ref} from "vue";
+import CheckoutPopup from "./CheckoutPopup.vue";
 
 const props = defineProps({
   cartItems: Array
@@ -42,10 +43,10 @@ function handleOpenCart() {
           <button class="checkoutbutton" @click="checkoutEnable =! checkoutEnable">checkout</button>
         </div>
       </div>
-    <div class="backgroundShadow" @click="cartEnabled = !cartEnabled;">
+    <div class="backgroundShadow" @click="checkoutEnable = !checkoutEnable; console.log(checkoutEnable)">
     </div>
   </div>
-
+  <CheckoutPopup v-show="checkoutEnable"></CheckoutPopup>
 
 </template>
 
