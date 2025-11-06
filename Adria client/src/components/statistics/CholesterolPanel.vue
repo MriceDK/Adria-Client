@@ -3,33 +3,38 @@
     <p class="panel-title">Cholesterol Panel</p>
 
     <div class="cholesterol-list">
-      <div v-for="item in cholesterol" :key="item.label" class="cholesterol-card">
+      <StatCard
+          v-for="item in cholesterol"
+          :key="item.label"
+          color="red"
+      >
+      <template #header>
         <div class="cholesterol-top">
           <h4 class="cholesterol-label">{{ item.label }}</h4>
           <p class="cholesterol-goal">{{ item.goalLabel }}</p>
         </div>
+      </template>
 
+      <template #content>
         <div class="cholesterol-current">
           {{ item.current }} {{ item.unit }}
         </div>
-      </div>
+      </template>
+      </StatCard>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { ref, onMounted } from "vue";
+import StatCard from "./common/StatCard.vue";
+import cholesterolData from "@/data/cholesterol.js";
 
-const cholesterol = ref([])
+const cholesterol = ref([]);
 
 onMounted(() => {
-  cholesterol.value = [
-    { label: "Total", current: 210, goalLabel: "<200 mg/dL", unit: "mg/dL" },
-    { label: "HDL", current: 38, goalLabel: "≥40 mg/dL", unit: "mg/dL" },
-    { label: "LDL", current: 110, goalLabel: "<100 mg/dL", unit: "mg/dL" },
-    { label: "Triglycerides", current: 160, goalLabel: "<150 mg/dL", unit: "mg/dL" }
-  ]
-})
+  cholesterol.value = cholesterolData;
+});
 </script>
 
 <style scoped>
@@ -40,20 +45,13 @@ onMounted(() => {
 .panel-title {
   font-size: 1.5rem;
   color: #717182;
-  margin-bottom: 1rem;;
+  margin-bottom: 1rem;
 }
 
 .cholesterol-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
   gap: 1rem;
-}
-
-.cholesterol-card {
-  border: 0.1rem solid #fb2c36;
-  border-radius: 1rem;
-  padding: 1rem;
-  background: #ffe9eb;
 }
 
 .cholesterol-top {
@@ -63,8 +61,9 @@ onMounted(() => {
 }
 
 .cholesterol-label {
-  color: #fb2c36;
-  font-weight: bold;
+  font-size: 1.25rem;
+  color: #FB2C36;
+  font-weight: normal;
   margin: 0;
 }
 
@@ -75,8 +74,9 @@ onMounted(() => {
 }
 
 .cholesterol-current {
-  color: #fb2c36;
-  font-size: 1rem;
-  margin-top: 0.5rem;
+  color: #FB2C36;
+  font-size: 1.25rem;
+  margin-top: 1rem;
 }
+
 </style>

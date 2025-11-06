@@ -146,4 +146,10 @@ onMounted(() => {
 .value-highlight.good { color: #37D477; }
 .value-highlight.warning { color: #F0B100; }
 .value-highlight.blueText { color: #2b7fff; }
+
+.stats-list .stat-card {
+  background: white;
+  padding: 2rem;
+}
+
 </style>
