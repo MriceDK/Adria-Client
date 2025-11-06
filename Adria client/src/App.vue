@@ -26,7 +26,6 @@ function handleNavigationClick(tab) {
   </header>
   <main>
     <component :is="componentMap[selectedTab]"> </component>
-    <shopping-cart/>
   </main>
 </template>
 

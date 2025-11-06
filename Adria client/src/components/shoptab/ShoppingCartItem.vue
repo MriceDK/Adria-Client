@@ -38,20 +38,19 @@ defineProps({
   border-radius: 8px;
   background-color: #fff;
   margin-bottom: 1rem;
+  border: 1px solid lightgray;
 }
 
 .cartitem:hover {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
-/* Image */
 .image {
   width: 80px;
   height: 80px;
   object-fit: contain;
 }
 
-/* Info Section */
 .info {
   flex-grow: 1;
   display: flex;
