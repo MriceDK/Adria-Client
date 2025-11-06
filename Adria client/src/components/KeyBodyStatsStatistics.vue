@@ -2,72 +2,98 @@
   <section class="body-stats-section">
     <div class="row">
       <div class="header-left">
-        <div class="icon-circle stats-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round"
-               class="lucide lucide-heart">
-            <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path>
-          </svg>
-        </div>
         <div class="text-block">
           <h2>Key Body Stats</h2>
           <p>Health measurements and vitals</p>
         </div>
       </div>
     </div>
+
+    <div class="stats-list">
+      <div v-for="stat in bodyStats" :key="stat.label" class="stat-card">
+        <div class="stat-header">
+          <h4>{{ stat.label }}</h4>
+          <p v-if="stat.targetMin !== undefined && stat.targetMax !== undefined">
+            <template v-if="stat.targetMin === stat.targetMax">
+              {{ stat.targetMax }}{{ stat.unit || '' }}
+            </template>
+            <template v-else>
+              {{ stat.targetMin }}–{{ stat.targetMax }}{{ stat.unit || '' }}
+            </template>
+          </p>
+        </div>
+
+        <div class="stat-value">
+          <span class="value-highlight">{{ stat.current }}</span>
+          <span v-if="stat.unit" class="unit">{{ stat.unit }}</span>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
+<script setup>
+import { ref, onMounted } from "vue"
+
+const bodyStats = ref([])
+
+onMounted(() => {
+  bodyStats.value = [
+    { label: 'Body Fat (%)', current: '15%', targetMin: 10, targetMax: 25 },
+    { label: 'BMI', current: '26.5', targetMin: 18.5, targetMax: 25 },
+    { label: 'Blood Pressure', current: '135', targetMin: 0, targetMax: 120, unit: 'mmHg' },
+    { label: 'Resting Heart Rate', current: '75', targetMin: 60, targetMax: 100, unit: 'bpm' },
+    { label: 'Fasting Blood Glucose', current: '95', targetMin: 70, targetMax: 100, unit: 'mg/dL' },
+    { label: 'Hydration (%)', current: '85%', targetMin: 100, targetMax: 100 }
+  ]
+})
+</script>
+
 <style scoped>
-.body-stats-section {
-  background: white;
-  border: 0.1rem solid #E5E5E5;
-  border-radius: 1rem;
-  padding: 2rem;
+.stats-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 1rem;
 }
 
-.row {
+.stat-card {
+  border-radius: 1rem;
+  border: 0.1rem solid #E5E5E5;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
+}
+
+.stat-header h4 {
   margin-bottom: 2rem;
+  font-size: 1.25rem;
 }
 
-.header-left {
+.stat-header p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0.25rem 0;
+}
+
+.stat-value {
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.25rem;
 }
 
-.icon-circle.stats-icon {
-  background-color: #fee2e2;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-circle.stats-icon svg {
-  width: 2rem;
-  height: 2rem;
-  stroke: #ef4444;
-}
-
-.text-block h2 {
-  font-size: 1.7rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-.text-block p {
-  font-size: 1rem;
+.stat-value .unit {
   color: #717182;
-  margin: 0;
+  font-size: 1.25rem;
+}
+
+.value-highlight {
+  color: #111;
 }
 </style>
