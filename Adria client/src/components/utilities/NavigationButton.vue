@@ -18,31 +18,30 @@ const emit = defineEmits(['navigation-click'])
 
 <template>
   <li @click="$emit('navigation-click',title)" :class="{selected: selectedTab === title}">
-    <div>
-
-    </div>
     {{ title }}
-
   </li>
 </template>
 
 <style scoped>
 li{
-  padding: 10px 10px;
+  font-family: var(--main-font-family),sans-serif;
+  font-weight: 600;
+  padding: 0.25rem 0.25rem;
   border-radius: 50px;
   cursor: pointer;
   border: 0;
-  background-color: white;
-  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  background-color: var(--secondary-bg-color);
   width: 20%;
   float: left;
-  font-size: 1rem;
+  font-size: 0.75rem;
   text-align: center;
 }
 div{
 
 }
 .selected{
-  background: #000;
+  background: var(--main-bg-color);
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+
 }
 </style>

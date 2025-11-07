@@ -6,12 +6,12 @@ import ShopTab from "@/components/shoptab/ShopTab.vue";
 import {ref} from "vue";
 
 
-const selectedTab = ref("scanner")
+const selectedTab = ref("Scanner")
 const componentMap = {
-  scanner:Scanner,
-  tracker:ShopTab,
-  statistics:HealthProfile,
-  shop:ShopTab
+  Scanner:Scanner,
+  Tracker:ShopTab,
+  Statistics:HealthProfile,
+  Shop:ShopTab
 };
 
 function handleNavigationClick(tab) {
