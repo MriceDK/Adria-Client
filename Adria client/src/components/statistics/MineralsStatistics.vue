@@ -139,4 +139,35 @@ function mineralStatus(item) {
   border-radius: 0.5rem;
   text-align: center;
 }
+
+.mineral-card.low {
+  border-color: #fb2c36;
+  background: #ffe9eb;
+}
+
+.mineral-card.near {
+  border-color: #d1d5db;
+  background: #f9fafb;
+}
+
+.mineral-card.good {
+  border-color: #22c55e;
+  background: #dcfce7;
+}
+
+.mineral-card.low .mineral-current,
+.mineral-card.low .mineral-label {
+  color: #fb2c36;
+}
+
+.mineral-card.good .mineral-current,
+.mineral-card.good .mineral-label {
+  color: #22c55e;
+}
+
+.mineral-card.near .mineral-current,
+.mineral-card.near .mineral-label {
+  color: #6b7280;
+}
+
 </style>
