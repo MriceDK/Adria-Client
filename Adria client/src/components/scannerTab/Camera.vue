@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import MainButton from "@/components/MainButton.vue";
+import MainButton from "@/components/utilities/MainButton.vue";
 
 let isScanning = ref(false);
 let cameraEnabled = ref(false);
@@ -43,10 +43,12 @@ function setStream(stream) {
 }
 
 function draw() {
-  ctx.value.drawImage(video.value, 0, 0, canvas.value.width, canvas.value.height);
-  if (isScanning.value) {
-    scan();
-  } else requestAnimationFrame(draw);
+  if (canvas.value && video.value) {
+    ctx.value.drawImage(video.value, 0, 0, canvas.value.width, canvas.value.height);
+    if (isScanning.value) {
+      scan();
+    } else requestAnimationFrame(draw);
+  }
 }
 
 function scan() {
