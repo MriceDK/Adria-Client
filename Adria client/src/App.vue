@@ -21,7 +21,7 @@ function handleNavigationClick(tab) {
 
 <template>
   <main>
-    <TheHeader @navigation-click="handleNavigationClick"></TheHeader>
+    <TheHeader @navigation-click="handleNavigationClick" @logo-click="handleNavigationClick"></TheHeader>
     <component :is="componentMap[selectedTab]"> </component>
   </main>
 </template>

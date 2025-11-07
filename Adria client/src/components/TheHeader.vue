@@ -1,17 +1,23 @@
 <script setup>
 import NavigationButton from "@/components/utilities/NavigationButton.vue";
 import {ref} from "vue";
-const emit = defineEmits(['navigation-click'])
+const emit = defineEmits(['navigation-click', 'logo-click'])
 
 function handleNavigationClick(title) {
   selectedTab.value = title;
   emit("navigation-click", selectedTab.value);
 }
-const currentNavigation = ref(1)
+
+function handleLogoClick() {
+  emit("logo-click", "Scanner");
+  selectedTab.value = "Scanner";
+}
+
 const selectedTab = ref("Scanner")
 </script>
 
 <template>
+  <img @click="handleLogoClick" class="logo" src="../assets/icons/nutriscan-high-resolution-logo_1-Photoroom.png" alt="Nutriscan Logo">
   <nav>
     <ul>
       <NavigationButton class="icon scanner" title="Scanner" imageSource="../assets/icons/trackerIcon.png" :selectedTab="selectedTab" @navigation-click="handleNavigationClick"></NavigationButton>
@@ -23,8 +29,19 @@ const selectedTab = ref("Scanner")
 </template>
 
 <style scoped>
+.logo {
+  display: block;
+  height: 4rem;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.logo:hover {
+  transition: ease-in 0.1s;
+  filter: brightness(0) saturate(100%) invert(56%) sepia(21%) saturate(958%) hue-rotate(82deg) brightness(88%) contrast(88%);
+}
+
 nav {
-  margin: 2rem auto 0 auto;
+  margin: 1rem auto 0 auto;
   width: 40rem;
   height: 1.45rem;
   background-color: var(--secondary-bg-color);
