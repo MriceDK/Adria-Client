@@ -63,11 +63,11 @@
 import { ref, onMounted } from "vue";
 import StatisticsHeader from "./common/StatisticsHeader.vue";
 import StatCard from "./common/StatCard.vue";
-import ProgressBar from "../ProgressBar.vue";
 import CholesterolPanel from "./CholesterolPanel.vue";
 import bodyStatsData from "@/data/bodyStats.js";
 import "@/components/statistics/common/common.css";
 import IconHeart from "@/components/icons/statisticsIcons/IconHeart.vue";
+import ProgressBar from "@/components/utilities/ProgressBar.vue";
 
 const bodyStats = ref([]);
 
