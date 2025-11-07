@@ -3,31 +3,27 @@
     <p class="panel-title">Cholesterol Panel</p>
 
     <div class="cholesterol-list">
-      <StatCard
+      <div
           v-for="item in cholesterol"
           :key="item.label"
-          color="red"
+          class="cholesterol-card"
+          :class="cholesterolStatus(item)"
       >
-      <template #header>
         <div class="cholesterol-top">
           <h4 class="cholesterol-label">{{ item.label }}</h4>
-          <p class="cholesterol-goal">{{ item.goalLabel }}</p>
+          <p class="cholesterol-goal">{{ formatGoal(item.label, item.goal, item.unit) }}</p>
         </div>
-      </template>
 
-      <template #content>
         <div class="cholesterol-current">
           {{ item.current }} {{ item.unit }}
         </div>
-      </template>
-      </StatCard>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import StatCard from "./common/StatCard.vue";
+import {ref, onMounted} from "vue";
 import cholesterolData from "@/data/cholesterol.js";
 
 const cholesterol = ref([]);
@@ -35,12 +31,27 @@ const cholesterol = ref([]);
 onMounted(() => {
   cholesterol.value = cholesterolData;
 });
+
+function formatGoal(label, goal, unit) {
+  const numericGoal = parseFloat(goal);
+  if (label === "HDL") return `≥${numericGoal} ${unit}`;
+  return `<${numericGoal} ${unit}`;
+}
+
+function cholesterolStatus(item) {
+  const {label, current, goal} = item;
+  const value = parseFloat(current);
+  const target = parseFloat(goal);
+
+  if (label === "HDL") {
+    return value >= target ? "good" : "low";
+  } else {
+    return value < target ? "good" : "low";
+  }
+}
 </script>
 
 <style scoped>
-.cholesterol-panel {
-  margin-top: 2rem;
-}
 
 .panel-title {
   font-size: 1.5rem;
@@ -54,6 +65,32 @@ onMounted(() => {
   gap: 1rem;
 }
 
+.cholesterol-card {
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.cholesterol-card.low {
+  border-color: #fb2c36;
+  background: #ffe9eb;
+}
+
+.cholesterol-card.low .cholesterol-label,
+.cholesterol-card.low .cholesterol-current {
+  color: #fb2c36;
+}
+
+.cholesterol-card.good {
+  border-color: #22c55e;
+  background: #dcfce7;
+}
+
+.cholesterol-card.good .cholesterol-label,
+.cholesterol-card.good .cholesterol-current {
+  color: #22c55e;
+}
+
 .cholesterol-top {
   display: flex;
   justify-content: space-between;
@@ -62,7 +99,6 @@ onMounted(() => {
 
 .cholesterol-label {
   font-size: 1.25rem;
-  color: #FB2C36;
   font-weight: normal;
   margin: 0;
 }
@@ -74,7 +110,6 @@ onMounted(() => {
 }
 
 .cholesterol-current {
-  color: #FB2C36;
   font-size: 1.25rem;
   margin-top: 1rem;
 }
