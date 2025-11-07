@@ -19,13 +19,18 @@
     </StatisticsHeader>
 
     <div v-if="!isEditingMinerals" class="minerals-list">
-      <StatCard v-for="item in minerals" :key="item.label" color="red">
+      <StatCard
+          v-for="item in minerals"
+          :key="item.label"
+          :class="['mineral-card', mineralStatus(item)]"
+      >
         <template #header>
           <div class="mineral-top">
             <h4 class="mineral-label">{{ item.label }}</h4>
             <p class="mineral-goal">{{ item.goal }}{{ item.unit }} goal</p>
           </div>
         </template>
+
         <template #content>
           <div class="mineral-current">
             {{ item.current }}{{ item.unit }}
@@ -37,7 +42,7 @@
     <div v-else class="minerals-edit">
       <div v-for="(mineral, i) in editableMinerals" :key="mineral.label" class="mineral-edit">
         <label>{{ mineral.label }} ({{ mineral.unit }})</label>
-        <input v-model.number="editableMinerals[i].goal" type="number" />
+        <input v-model.number="editableMinerals[i].current" type="number" />
       </div>
     </div>
   </section>
@@ -68,6 +73,13 @@ function cancelEdit() {
 function saveMinerals() {
   minerals.value = editableMinerals.value;
   isEditingMinerals.value = false;
+}
+
+function mineralStatus(item) {
+  const progress = item.current / item.goal;
+  if (progress >= 1) return "good";
+  if (progress >= 0.9) return "near";
+  return "low";
 }
 </script>
 
