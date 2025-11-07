@@ -8,7 +8,7 @@ import MainButton from "@/components/utilities/MainButton.vue";
   <div class="nutrition-grid">
     <p class="food-name">Grilled Chicken breast</p>
     <div class="cancel">
-      <svg class="cancel-btn" width="800px" height="800px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <svg class="cancel-btn" width="800px" height="800px" viewBox="0 0 512 512">
         <title>cancel</title>
         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <g id="work-case" fill="#000000" transform="translate(91.520000, 91.520000)">
