@@ -2,9 +2,11 @@
 defineProps({
   image: String,
   item: {
+    SupplementId: String,
     title: String,
     description: String,
-    cost: Number
+    cost: Number,
+    count: Number
   }
 })
 </script>
@@ -18,7 +20,7 @@ defineProps({
       <!-- Title + Price -->
       <div class="top-row">
         <p class="title">{{ item.title }}</p>
-        <p class="price">€{{ item.cost }}</p>
+        <p class="price">€{{ item.cost }} x {{item.count}}</p>
       </div>
 
       <!-- description -->

@@ -1,16 +1,18 @@
 <script setup>
 const props = defineProps({
-  item:{
-    name: Number,
-    price: Number,
-    amount: Number
+  item: {
+    SupplementId: String,
+    title: String,
+    description: String,
+    cost: Number,
+    count: Number
   }
 });
 </script>
 
 <template>
-  <p >{{props.item.title}} x {{props.item.amount}}</p>
-  <p>{{props.item.price*props.item.amount}}</p>
+  <p >{{props.item.title}} x {{props.item.count}}</p>
+  <p>{{props.item.cost*props.item.count}}</p>
 </template>
 
 <style scoped>

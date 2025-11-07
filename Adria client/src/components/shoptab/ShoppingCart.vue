@@ -9,7 +9,7 @@ const props = defineProps({
 const cartEnabled = ref(false)
 const checkoutEnable = ref(false)
 const cartTotalPrice = computed(() => {
-  return props.cartItems.reduce((total, item) => total + item.cost, 0);
+  return props.cartItems.reduce((total, item) => total + item.cost*item.count, 0);
 });
 const amountOfItems = computed(() => {
   return props.cartItems.reduce((total) => total + 1, 0);
@@ -32,7 +32,7 @@ function handleOpenCart() {
         </div>
         <p class="amount"> total items in cart {{amountOfItems}}</p>
         <div class="cartitems">
-          <ShoppingCartItem v-for="(item, index) in props.cartItems" :key="index" :item="item" />
+          <ShoppingCartItem v-for="(item) in props.cartItems" :item="item" />
         </div>
         <div class="bottom-row">
           <p>total</p>
