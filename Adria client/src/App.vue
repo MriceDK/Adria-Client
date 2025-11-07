@@ -9,9 +9,9 @@ import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
 
 const selectedTab = ref("scanner")
 const componentMap = {
-  scanner:ShopTab,
+  scanner:Scanner,
   tracker:ShopTab,
-  statistics:ShopTab,
+  statistics:HealthProfile,
   shop:ShopTab
 };
 
@@ -22,7 +22,7 @@ function handleNavigationClick(tab) {
 
 <template>
   <header>
-    <TheHeader @navigation-click="handleNavigationClick"></TheHeader>
+        <TheHeader @navigation-click="handleNavigationClick"></TheHeader>
   </header>
   <main>
     <component :is="componentMap[selectedTab]"> </component>

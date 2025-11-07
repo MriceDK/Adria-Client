@@ -1,0 +1,10 @@
+:root {
+    --main-bg-color: #fff;
+    --secondary-bg-color: #ececf0;
+    --main-text-color: #0a0a0a;
+    --secondary-text-color: #717182;
+
+    --hover-black-color: #535353;
+
+    --main-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
