@@ -98,16 +98,16 @@ function saveGoals() {
 
 .goals-list, .goals-edit {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1rem;
 }
 
 .goal-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   margin-bottom: 3rem;
-  margin-top: 0.5rem;
 }
 
 .goal-header h4 {
@@ -127,9 +127,10 @@ function saveGoals() {
   color: gray;
   font-size: 1rem;
   margin-top: 1rem;
+  text-align: left;
 }
 
-.blueText .goal-values, .blueText h4,  .remaining.blueText{
+.blueText .goal-values, .blueText h4, .remaining.blueText {
   color: #2B7FFF;
 }
 
@@ -139,7 +140,7 @@ function saveGoals() {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  border: 0.1rem solid lightgray;
+  border: 0.1rem solid #E5E5E5;
   border-radius: 1rem;
 }
 
