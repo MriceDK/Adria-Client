@@ -11,10 +11,20 @@ const props = defineProps({
 </script>
 
 <template>
-  <p >{{props.item.title}} x {{props.item.count}}</p>
-  <p>{{props.item.cost*props.item.count}}</p>
+  <div class="checkoutitem">
+    <p >{{props.item.title}} x {{props.item.count}}</p>
+    <p>€{{props.item.cost*props.item.count}}</p>
+  </div>
 </template>
 
 <style scoped>
-
+.checkoutitem{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: gray;
+}
+.checkoutitem p{
+  margin:0.25rem;
+}
 </style>

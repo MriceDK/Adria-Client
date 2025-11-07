@@ -6,8 +6,10 @@ import CheckoutPopup from "./CheckoutPopup.vue";
 const props = defineProps({
   cartItems: Array
 });
+
 const cartEnabled = ref(false)
 const checkoutEnable = ref(false)
+
 const cartTotalPrice = computed(() => {
   return props.cartItems.reduce((total, item) => total + item.cost*item.count, 0);
 });
@@ -36,7 +38,7 @@ function handleOpenCart() {
         </div>
         <div class="bottom-row">
           <p>total</p>
-          <p>{{cartTotalPrice}}</p>
+          <p>€{{cartTotalPrice}}</p>
         </div>
         <div class="bottom-row">
           <button class="clearbutton">clear cart</button>
@@ -46,7 +48,7 @@ function handleOpenCart() {
     <div class="backgroundShadow" @click="cartEnabled = !cartEnabled">
     </div>
   </div>
-  <CheckoutPopup v-if="checkoutEnable" :cart-items="cartItems" :cart-total="cartTotalPrice" :cart-amount="amountOfItems"></CheckoutPopup>
+  <CheckoutPopup v-if="checkoutEnable" :cart-items="cartItems" :cart-total="cartTotalPrice" :cart-amount="amountOfItems" @close-checkout="checkoutEnable = false"></CheckoutPopup>
 
 </template>
 
@@ -96,7 +98,7 @@ function handleOpenCart() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 98%;
+    width: 96%;
     padding-left: 1rem;
     padding-right: 1rem;
   }
