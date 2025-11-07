@@ -4,10 +4,25 @@ import ShopContainer from "@/components/shoptab/ShopContainer.vue";
 import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
 import {ref} from "vue";
 
+
+
 const cartItems = ref([]);
 
+
+
 function handleAddToCart(item) {
-  cartItems.value.push(item);
+  let found = false;
+  for (let currentItem of cartItems.value) {
+    if (currentItem.SupplementId === item.SupplementId) {
+      currentItem.count++;
+      found = true;
+    }
+  }
+  if (!found) {
+      item.count = 1;
+      cartItems.value.push(item);
+  }
+  console.log(cartItems.value);
 }
 </script>
 
