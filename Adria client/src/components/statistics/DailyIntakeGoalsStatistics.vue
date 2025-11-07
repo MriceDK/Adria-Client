@@ -5,7 +5,7 @@
         subtitle="Macronutrient targets"
         iconClass="goals-icon"
     >
-      <template git #icon>
+      <template #icon>
         <IconDroplet />
       </template>
 
@@ -18,7 +18,6 @@
       </template>
     </StatisticsHeader>
 
-    <!-- View mode -->
     <div v-if="!isEditing" class="goals-list">
       <StatCard
           v-for="item in goals"
