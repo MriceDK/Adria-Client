@@ -6,12 +6,7 @@
         iconClass="goals-icon"
     >
       <template #icon>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round"
-             class="lucide lucide-droplet">
-          <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>
-        </svg>
+        <IconDroplet />
       </template>
 
       <template #actions>
@@ -55,7 +50,6 @@
       </StatCard>
     </div>
 
-    <!-- Edit mode -->
     <div v-else class="goals-edit">
       <div v-for="(goal, index) in editableGoals" :key="goal.label" class="goal-edit">
         <label>{{ goal.label }} ({{ goal.unit }})</label>
@@ -72,6 +66,7 @@ import StatCard from "./common/StatCard.vue";
 import ProgressBar from "./common/ProgressBar.vue";
 import goalsData from "@/data/dailyGoals.js";
 import "@/components/statistics/common/common.css";
+import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
 
 const isEditing = ref(false);
 const goals = ref([]);
