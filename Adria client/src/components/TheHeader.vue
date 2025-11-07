@@ -46,7 +46,7 @@ nav {
   height: 1.55rem;
   background-color: var(--secondary-bg-color);
   border-radius: 50px;
-  padding: 5px 0 5px 0;
+  padding: 0.25rem 0;
   font-size: 0;
 }
 ul{
