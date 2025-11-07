@@ -1,6 +1,6 @@
 <script setup>
-import Camera from "@/components/Camera.vue";
-import FoodInfo from "@/components/FoodInfo.vue";
+import Camera from "@/components/scannerTab/Camera.vue";
+import FoodInfo from "@/components/scannerTab/FoodInfo.vue";
 import {ref} from "vue";
 
 const scanning = ref(false);

@@ -1,8 +1,8 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
-import HealthProfile from "@/components/HealthProfile.vue";
-import Scanner from "@/components/Scanner.vue";
-import ShopTab from "@/components/ShopTab.vue";
+import HealthProfile from "@/components/statisticsTab/HealthProfile.vue";
+import Scanner from "@/components/scannerTab/Scanner.vue";
+import ShopTab from "@/components/shoptab/ShopTab.vue";
 import {ref} from "vue";
 
 

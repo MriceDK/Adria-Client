@@ -1,5 +1,5 @@
 <script setup>
-import NavigationButton from "@/components/NavigationButton.vue";
+import NavigationButton from "@/components/utilities/NavigationButton.vue";
 import {ref} from "vue";
 const emit = defineEmits(['navigation-click'])
 

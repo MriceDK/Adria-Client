@@ -1,7 +1,7 @@
 <script setup>
 
-import NutrientInfo from "@/components/NutrientInfo.vue";
-import MainButton from "@/components/MainButton.vue";
+import NutrientInfo from "@/components/scannerTab/NutrientInfo.vue";
+import MainButton from "@/components/utilities/MainButton.vue";
 </script>
 
 <template>
