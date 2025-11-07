@@ -1,18 +1,17 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
-import HealthProfile from "@/components/HealthProfile.vue";
-import Scanner from "@/components/Scanner.vue";
-import ShopTab from "@/components/ShopTab.vue";
+import HealthProfile from "@/components/statisticsTab/HealthProfile.vue";
+import Scanner from "@/components/scannerTab/Scanner.vue";
+import ShopTab from "@/components/shoptab/ShopTab.vue";
 import {ref} from "vue";
-import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
 
 
-const selectedTab = ref("scanner")
+const selectedTab = ref("Scanner")
 const componentMap = {
-  scanner:Scanner,
-  tracker:ShopTab,
-  statistics:HealthProfile,
-  shop:ShopTab
+  Scanner:Scanner,
+  Tracker:ShopTab,
+  Statistics:HealthProfile,
+  Shop:ShopTab
 };
 
 function handleNavigationClick(tab) {
@@ -22,7 +21,7 @@ function handleNavigationClick(tab) {
 
 <template>
   <header>
-        <TheHeader @navigation-click="handleNavigationClick"></TheHeader>
+    <TheHeader @navigation-click="handleNavigationClick" @logo-click="handleNavigationClick"></TheHeader>
   </header>
   <main>
     <component :is="componentMap[selectedTab]"> </component>

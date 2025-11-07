@@ -52,7 +52,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import ProgressBar from "@/components/ProgressBar.vue";
+import ProgressBar from "@/components/utilities/ProgressBar.vue";
 
 const isEditing = ref(false)
 const goals = ref([])

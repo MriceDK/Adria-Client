@@ -11,6 +11,7 @@ const props = defineProps({
 
 <style scoped>
 button {
+  cursor: pointer;
   font-family: var(--main-font-family),sans-serif;
   background-color: var(--main-bg-color);
   padding: 0.5rem 2rem;
@@ -33,6 +34,7 @@ button:hover {
 
 button:disabled {
   opacity: 50%;
+  cursor: not-allowed;
 }
 
 button:disabled:hover {
