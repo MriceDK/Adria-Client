@@ -24,6 +24,7 @@ const emit = defineEmits(['navigation-click'])
 
 <style scoped>
 li{
+  margin: 0;
   font-family: var(--main-font-family),sans-serif;
   font-weight: 600;
   padding: 0.25rem 0.25rem;
@@ -33,13 +34,14 @@ li{
   background-color: var(--secondary-bg-color);
   width: 20%;
   float: left;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   text-align: center;
 }
 div{
 
 }
 .selected{
+  transition: ease-in 0.2s;
   background: var(--main-bg-color);
   box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
 

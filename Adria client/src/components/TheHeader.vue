@@ -42,8 +42,8 @@ const selectedTab = ref("Scanner")
 
 nav {
   margin: 1rem auto 0 auto;
-  width: 40rem;
-  height: 1.45rem;
+  width: 45rem;
+  height: 1.55rem;
   background-color: var(--secondary-bg-color);
   border-radius: 50px;
   padding: 5px 0 5px 0;
@@ -61,7 +61,7 @@ ul{
 }
 .icon {
   background-repeat: no-repeat;
-  background-size: 0.8rem;
+  background-size: 1rem;
   background-position-y: center;
   background-position-x: 19%;
 }
@@ -77,6 +77,6 @@ ul{
 }
 .shop {
   background-image: url("../assets/icons/shopIcon.svg");
-  background-size: 1rem;
+  background-size: 1.3rem;
 }
 </style>
