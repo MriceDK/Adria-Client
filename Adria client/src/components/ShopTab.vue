@@ -22,7 +22,6 @@ function handleAddToCart(item) {
       item.count = 1;
       cartItems.value.push(item);
   }
-  console.log(cartItems.value);
 }
 </script>
 
