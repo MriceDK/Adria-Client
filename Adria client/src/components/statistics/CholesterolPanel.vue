@@ -78,5 +78,4 @@ onMounted(() => {
   font-size: 1.25rem;
   margin-top: 1rem;
 }
-
 </style>

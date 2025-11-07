@@ -21,16 +21,4 @@ defineProps({
   padding: 1.5rem;
   background: #f8f8f8;
 }
-.stat-card.red {
-  border-color: #fb2c36;
-  background: #ffe9eb;
-}
-.stat-card.blue {
-  border-color: #D5E5FF;
-  background: #f5f7ff;
-}
-.stat-card.green {
-  border-color: #22c55e;
-  background: #dcfce7;
-}
 </style>

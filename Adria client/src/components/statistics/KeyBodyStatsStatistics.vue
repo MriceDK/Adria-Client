@@ -98,11 +98,13 @@ onMounted(() => {
   border-radius: 1rem;
   padding: 2rem;
 }
+
 .stats-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 1rem;
 }
+
 .stat-header {
   display: flex;
   justify-content: space-between;
@@ -138,14 +140,8 @@ onMounted(() => {
   align-items: center;
   gap: 0.25rem;
 }
-.unit { color: #717182; }
-.value-highlight.good { color: #37D477; }
-.value-highlight.warning { color: #F0B100; }
-.value-highlight.blueText { color: #2b7fff; }
 
-.stats-list .stat-card {
-  background: white;
-  padding: 2rem;
+.unit {
+  color: #717182;
 }
-
 </style>
