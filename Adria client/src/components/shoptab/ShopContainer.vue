@@ -1,5 +1,5 @@
 <script setup>
-import ShopItem from './shopItem.vue'
+import ShopItem from './ShopItem.vue'
 const dummydata = {
   item: {
     title: "banaan",
