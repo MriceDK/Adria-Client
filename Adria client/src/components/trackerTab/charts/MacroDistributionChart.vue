@@ -32,11 +32,18 @@ const chartOptions = {
     legend: {
       position: "bottom",
       labels: {boxWidth: 14, padding: 12},
+      onClick: () => {}
     },
     tooltip: {
       borderWidth: 1,
       padding: 10,
       displayColors: false,
+      callbacks: {
+        label: (context) => {
+          const value = context.raw;
+          return value.toFixed(1) + "g";
+        }
+      }
     }
   }
 };
