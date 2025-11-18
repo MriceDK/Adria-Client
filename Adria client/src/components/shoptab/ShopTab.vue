@@ -1,14 +1,9 @@
 <script setup>
-
 import ShopContainer from "@/components/shoptab/ShopContainer.vue";
 import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
 import {ref} from "vue";
-
-
-
+import SearchBar from "@/components/utilities/SearchBar.vue";
 const cartItems = ref([]);
-
-
 
 function handleAddToCart(item) {
   let found = false;
@@ -27,6 +22,7 @@ function handleAddToCart(item) {
 
 <template>
   <ShoppingCart :cart-items="cartItems" />
+  <search-bar></search-bar>
   <ShopContainer @add-to-cart="handleAddToCart"/>
 </template>
 
