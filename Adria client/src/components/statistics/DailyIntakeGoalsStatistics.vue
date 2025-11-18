@@ -62,7 +62,7 @@
 import { ref, onMounted } from "vue";
 import StatisticsHeader from "./common/StatisticsHeader.vue";
 import StatCard from "./common/StatCard.vue";
-import ProgressBar from "../ProgressBar.vue";
+import ProgressBar from "../utilities/ProgressBar.vue";
 import goalsData from "@/data/dailyGoals.js";
 import "@/components/statistics/common/common.css";
 import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
