@@ -43,8 +43,13 @@
               class="remaining"
               :class="{ blueText: item.label === 'Water' }"
           >
-            {{ (item.goal - item.current).toFixed(1) }}{{ item.unit }} remaining
+            {{
+              item.current >= item.goal
+                  ? 'Goal reached'
+                  : (item.goal - item.current).toFixed(1) + item.unit + ' remaining'
+            }}
           </p>
+
         </template>
       </StatCard>
     </div>
