@@ -48,8 +48,8 @@ defineProps({
 }
 
 .image {
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
   object-fit: contain;
 }
 
