@@ -17,8 +17,9 @@
     "sonar-ci": "sonar-scanner -Dsonar.login=$SONAR_TOKEN"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "vue": "^3.5.22",
-    "vue-router": "^4.5.1"
+    "vue-chartjs": "^5.3.3"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",

@@ -19,12 +19,12 @@
         <template #header>
           <div class="stat-header">
             <h4>{{ stat.label }}</h4>
-            <p v-if="stat.targetMin !== undefined && stat.targetMax !== undefined">
-              <template v-if="stat.targetMin === stat.targetMax">
-                {{ stat.targetMax }}{{ stat.unit || '' }}
+            <p v-if="stat.targetMin !== undefined && stat.goal !== undefined">
+              <template v-if="stat.targetMin === stat.goal">
+                {{ stat.goal }}{{ stat.unit || '' }}
               </template>
               <template v-else>
-                {{ stat.targetMin }}–{{ stat.targetMax }}{{ stat.unit || '' }}
+                {{ stat.targetMin }}–{{ stat.goal }}{{ stat.unit || '' }}
               </template>
             </p>
           </div>
@@ -70,13 +70,19 @@ import IconHeart from "@/components/icons/statisticsIcons/IconHeart.vue";
 import ProgressBar from "@/components/utilities/ProgressBar.vue";
 
 const bodyStats = ref([]);
+const targetsMin = {
+  "Body Fat (%)": 10,
+  "BMI": 18.5,
+  "Blood Pressure": 0,
+  "Resting Heart Rate": 60,
+  "Fasting Blood Glucose": 70,
+  "Hydration (%)": 100
+};
+
 
 function isNormal(stat) {
   const num = parseFloat(stat.current.replace(/[^0-9.]/g, ""));
-  if (stat.targetMin !== undefined && stat.targetMax !== undefined) {
-    return num >= stat.targetMin && num <= stat.targetMax;
-  }
-  return false;
+  return num >= stat.targetMin && num <= stat.goal;
 }
 
 function cardColor(label) {
@@ -88,6 +94,10 @@ function cardColor(label) {
 
 onMounted(() => {
   bodyStats.value = bodyStatsData;
+  bodyStats.value.forEach(stat => {
+    stat.targetMin = targetsMin[stat.label];
+  });
+
 });
 </script>
 
