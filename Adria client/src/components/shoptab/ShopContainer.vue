@@ -1,5 +1,5 @@
 <script setup>
-import ShopItem from './shopItem.vue'
+import ShopItem from './ShopItem.vue'
 const dummydata = {
   item: {
     title: "banaan",
@@ -44,6 +44,8 @@ const dummydata = {
     SupplementId: "7"
   }
 }
+
+const props = defineProps(['searchInput'])
 const emit = defineEmits(['add-to-cart'])
 function handleAddToCart(item) {
   emit("add-to-cart", item)
@@ -52,7 +54,7 @@ function handleAddToCart(item) {
 
 <template>
   <div class="shop-container">
-    <ShopItem v-for="(item) in dummydata" :item="item" @add-to-cart="handleAddToCart"/>
+    <ShopItem v-for="(item) in dummydata" :item="item" @add-to-cart="handleAddToCart" v-show="item.title.includes(searchInput) || searchInput === ''" />
   </div>
 </template>
 
@@ -64,6 +66,7 @@ function handleAddToCart(item) {
     gap: 1.5rem;
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 5%;
   }
 
   ShopItem {
