@@ -18,11 +18,14 @@ function handleAddToCart(item) {
       cartItems.value.push(item);
   }
 }
+function handleSearch(input) {
+
+}
 </script>
 
 <template>
   <ShoppingCart :cart-items="cartItems" />
-  <search-bar></search-bar>
+  <search-bar @search-enter="handleSearch" />
   <ShopContainer @add-to-cart="handleAddToCart"/>
 </template>
 
