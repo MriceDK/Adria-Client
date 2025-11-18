@@ -20,8 +20,10 @@ function handleNavigationClick(tab) {
 </script>
 
 <template>
-  <main>
+  <header>
     <TheHeader @navigation-click="handleNavigationClick" @logo-click="handleNavigationClick"></TheHeader>
+  </header>
+  <main>
     <component :is="componentMap[selectedTab]"> </component>
   </main>
 </template>
@@ -29,5 +31,8 @@ function handleNavigationClick(tab) {
 <style scoped>
 *{
   font-family: system-ui, sans-serif;
+}
+header {
+  margin-bottom: 2rem;
 }
 </style>

@@ -19,6 +19,7 @@ const emit = defineEmits(['navigation-click'])
 <template>
   <li @click="$emit('navigation-click',title)" :class="{selected: selectedTab === title}">
     {{ title }}
+
   </li>
 </template>
 

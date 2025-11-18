@@ -7,6 +7,7 @@ defineProps({
     cost: Number
   }
 })
+const emit = defineEmits(['add-to-cart'])
 </script>
 
 <template>
@@ -25,7 +26,7 @@ defineProps({
       <p class="description">{{ item.description }}</p>
 
       <!-- button -->
-      <button>add to cart</button>
+      <button @click="emit('add-to-cart',item)">add to cart</button>
     </div>
   </div>
 </template>
