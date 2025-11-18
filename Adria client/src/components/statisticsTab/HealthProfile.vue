@@ -1,8 +1,8 @@
 <script setup>
 
-import DailyIntakeGoalsStatistics from "@/components/statistics/DailyIntakeGoalsStatistics.vue";
-import MineralsStatistics from "@/components/statistics/MineralsStatistics.vue";
-import KeyBodyStatsStatistics from "@/components/statistics/KeyBodyStatsStatistics.vue";
+import DailyIntakeGoalsStatistics from "@/components/statisticsTab/statistics/DailyIntakeGoalsStatistics.vue";
+import MineralsStatistics from "@/components/statisticsTab/statistics/MineralsStatistics.vue";
+import KeyBodyStatsStatistics from "@/components/statisticsTab/statistics/KeyBodyStatsStatistics.vue";
 </script>
 
 <template>

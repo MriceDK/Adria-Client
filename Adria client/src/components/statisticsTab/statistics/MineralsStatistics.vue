@@ -50,10 +50,10 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import StatisticsHeader from "./common/StatisticsHeader.vue";
-import StatCard from "./common/StatCard.vue";
+import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
+import StatCard from "@/components/statisticsTab/common/StatCard.vue";
 import mineralsData from "@/data/minerals.js";
-import "@/components/statistics/common/common.css";
+import "@/components/statisticsTab/common/common.css";
 import IconActivity from "@/components/icons/statisticsIcons/IconActivity.vue";
 
 const isEditingMinerals = ref(false);

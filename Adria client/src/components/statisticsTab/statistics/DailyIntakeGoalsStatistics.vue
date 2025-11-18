@@ -65,11 +65,11 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import StatisticsHeader from "./common/StatisticsHeader.vue";
-import StatCard from "./common/StatCard.vue";
-import ProgressBar from "../utilities/ProgressBar.vue";
+import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
+import StatCard from "@/components/statisticsTab/common/StatCard.vue";
+import ProgressBar from "../../utilities/ProgressBar.vue";
 import goalsData from "@/data/dailyGoals.js";
-import "@/components/statistics/common/common.css";
+import "@/components/statisticsTab/common/common.css";
 import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
 
 const isEditing = ref(false);
