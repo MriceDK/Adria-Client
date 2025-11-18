@@ -1,0 +1,42 @@
+.icon:hover {
+    transform: scale(1.05);
+}
+
+.icon-circle {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-circle.goals-icon {
+    background-color: #dbeafe;
+}
+
+.icon-circle.goals-icon svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #2563eb;
+}
+
+.icon-circle.minerals-icon {
+    background-color: #dcfce7;
+}
+
+.icon-circle.minerals-icon svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #22c55e;
+}
+
+.icon-circle.stats-icon {
+    background-color: #fee2e2;
+}
+
+.icon-circle.stats-icon svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: #ef4444;
+}
