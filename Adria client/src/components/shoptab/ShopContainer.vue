@@ -44,6 +44,8 @@ const dummydata = {
     SupplementId: "7"
   }
 }
+
+const props = defineProps(['searchInput'])
 const emit = defineEmits(['add-to-cart'])
 function handleAddToCart(item) {
   emit("add-to-cart", item)
@@ -51,8 +53,9 @@ function handleAddToCart(item) {
 </script>
 
 <template>
+  {{searchInput}}
   <div class="shop-container">
-    <ShopItem v-for="(item) in dummydata" :item="item" @add-to-cart="handleAddToCart"/>
+    <ShopItem v-for="(item) in dummydata" :item="item" @add-to-cart="handleAddToCart" v-show="item.title === searchInput || searchInput === ''" />
   </div>
 </template>
 
