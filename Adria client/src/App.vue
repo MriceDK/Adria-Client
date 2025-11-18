@@ -3,13 +3,14 @@ import TheHeader from "@/components/TheHeader.vue";
 import HealthProfile from "@/components/statisticsTab/HealthProfile.vue";
 import Scanner from "@/components/scannerTab/Scanner.vue";
 import ShopTab from "@/components/shoptab/ShopTab.vue";
+import Tracker from "@/components/trackerTab/Tracker.vue";
 import {ref} from "vue";
 
 
 const selectedTab = ref("Scanner")
 const componentMap = {
   Scanner:Scanner,
-  Tracker:ShopTab,
+  Tracker:Tracker,
   Statistics:HealthProfile,
   Shop:ShopTab
 };
