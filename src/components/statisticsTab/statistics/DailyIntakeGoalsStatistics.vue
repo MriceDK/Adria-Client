@@ -65,29 +65,28 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useStats } from "@/composables/useStats.js";
+import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 import StatCard from "@/components/statisticsTab/common/StatCard.vue";
-import ProgressBar from "../../utilities/ProgressBar.vue";
-import goalsData from "@/data/dailyGoals.js";
-import "@/components/statisticsTab/common/common.css";
-import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
+import ProgressBar from "@/components/utilities/ProgressBar.vue";
 
 const isEditing = ref(false);
 const goals = ref([]);
 const editableGoals = ref([]);
 
-onMounted(() => {
-  goals.value = goalsData;
-  editableGoals.value = goalsData;
+onMounted(async () => {
+  goals.value = await useStats("daily");
+  editableGoals.value = JSON.parse(JSON.stringify(goals.value));
 });
 
 function cancelEdit() {
-  editableGoals.value = goals.value;
+  editableGoals.value = JSON.parse(JSON.stringify(goals.value));
   isEditing.value = false;
 }
 
 function saveGoals() {
-  goals.value = editableGoals.value;
+  goals.value = JSON.parse(JSON.stringify(editableGoals.value));
   isEditing.value = false;
 }
 </script>
