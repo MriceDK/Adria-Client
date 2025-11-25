@@ -10,16 +10,15 @@ const emit = defineEmits(['close-checkout']);
 </script>
 
 <template>
-
-      <div class="popup">
-        <p class="title">Confirm Your Order</p>
-        <p class="description">You are about to place an order for {{ cartAmount }} items totaling €{{ cartTotal }}.</p>
-          <CheckoutItem v-for="item in props.cartItems" :item="item" />
-        <div class="bottom-row">
-          <button @click="emit('close-checkout')">Cancel</button>
-          <button>Confirm Order</button>
-        </div>
-      </div>
+  <div class="popup">
+    <p class="title">Confirm Your Order</p>
+    <p class="description">You are about to place an order for {{ cartAmount }} items totaling €{{ cartTotal }}.</p>
+    <CheckoutItem v-for="item in props.cartItems" :item="item" />
+    <div class="bottom-row">
+      <button @click="emit('close-checkout')">Cancel</button>
+      <button>Confirm Order</button>
+    </div>
+  </div>
   <div class="backgroundShadow" @click="emit('close-checkout')">
   </div>
 </template>
