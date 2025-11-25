@@ -35,17 +35,18 @@
             <span
                 class="value-highlight"
                 :class="{
-                good: isNormal(stat) && stat.label !== 'Hydration (%)',
-                warning: !isNormal(stat) && stat.label !== 'Hydration (%)',
-                blueText: stat.label === 'Hydration (%)'
+                good: isNormal(stat) && stat.label !== 'Hydration',
+                warning: !isNormal(stat) && stat.label !== 'Hydration',
+                blueText: stat.label === 'Hydration'
               }"
             >
-              {{ stat.current }}
+              {{ stat.current }}{{ stat.unit }}
+
             </span>
-            <span v-if="stat.unit" class="unit">{{ stat.unit }}</span>
+
             <ProgressBar
-                v-if="stat.label === 'Hydration (%)'"
-                :value="parseFloat(stat.current)"
+                v-if="stat.label === 'Hydration'"
+                :value="stat.current"
                 :max="100"
                 color="linear-gradient(90deg, #60a5fa, #3b82f6)"
                 class="mt-2"
@@ -55,49 +56,34 @@
       </StatCard>
     </div>
 
-    <CholesterolPanel />
+    <CholesterolPanel/>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import "@/components/statisticsTab/common/common.css";
+import {ref, onMounted} from "vue";
+import {useStats} from "@/composables/useStats.js";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 import StatCard from "@/components/statisticsTab/common/StatCard.vue";
-import CholesterolPanel from "./CholesterolPanel.vue";
-import bodyStatsData from "@/data/bodyStats.js";
-import "@/components/statisticsTab/common/common.css";
 import IconHeart from "@/components/icons/statisticsIcons/IconHeart.vue";
 import ProgressBar from "@/components/utilities/ProgressBar.vue";
+import CholesterolPanel from "@/components/statisticsTab/statistics/CholesterolPanel.vue";
 
 const bodyStats = ref([]);
-const targetsMin = {
-  "Body Fat (%)": 10,
-  "BMI": 18.5,
-  "Blood Pressure": 0,
-  "Resting Heart Rate": 60,
-  "Fasting Blood Glucose": 70,
-  "Hydration (%)": 100
-};
-
 
 function isNormal(stat) {
-  const num = parseFloat(stat.current.replace(/[^0-9.]/g, ""));
-  return num >= stat.targetMin && num <= stat.goal;
+  return stat.current >= stat.targetMin && stat.current <= stat.goal;
 }
 
 function cardColor(label) {
-  if (["Body Fat (%)", "BMI", "Blood Pressure"].includes(label)) return "red";
-  if (label === "Hydration (%)") return "blue";
-  if (["Resting Heart Rate", "Fasting Blood Glucose"].includes(label)) return "gray";
-  return "default";
+  if (["Body Fat", "BMI", "Blood Pressure"].includes(label)) return "red";
+  if (label === "Hydration") return "blue";
+  return "gray";
 }
 
-onMounted(() => {
-  bodyStats.value = bodyStatsData;
-  bodyStats.value.forEach(stat => {
-    stat.targetMin = targetsMin[stat.label];
-  });
-
+onMounted(async () => {
+  bodyStats.value = await useStats("body");
 });
 </script>
 
@@ -125,17 +111,17 @@ onMounted(() => {
   margin: 0;
 }
 
-.stat-header h4{
+.stat-header h4 {
   font-size: 1.25rem;
   font-weight: normal;
   margin-top: 0;
 }
 
-.red h4{
+.red h4 {
   color: #FB2C36;
 }
 
-.gray h4{
+.gray h4 {
   color: #717182;
 }
 
@@ -149,9 +135,5 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-}
-
-.unit {
-  color: #717182;
 }
 </style>
