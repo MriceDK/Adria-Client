@@ -24,7 +24,7 @@ create-image:
   image: registry.ci.infra.lan:5000/ad-project:server-DEPLOY
   only:
     - main
-  stage: deploy
+  stage: build
   services:
     - name: docker:dind
   tags:
