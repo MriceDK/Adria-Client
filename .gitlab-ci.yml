@@ -8,6 +8,7 @@ variables:
   IMAGE_NAME: hcr.technet.howest.be/adria-client-group-08:latest
 
 before_script:
+  - ln -s /ci/node_modules .
   - npm ci
 
 sonarqube_scan:
