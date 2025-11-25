@@ -1,4 +1,4 @@
-image: registry.ci.infra.lan:5000/node:22-alpine
+image: registry.ci.infra.lan:5000/project-2:client-QA
 
 stages:
   - qa
