@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm ci
 
 # Copy the rest of your source code
-COPY . .
+COPY Adria .
 
 # Build the app with the specified environment argument
 ARG BUILD_ENV=dev
