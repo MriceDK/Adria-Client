@@ -50,9 +50,9 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useStats } from "@/composables/useStats.js";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 import StatCard from "@/components/statisticsTab/common/StatCard.vue";
-import mineralsData from "@/data/minerals.js";
 import "@/components/statisticsTab/common/common.css";
 import IconActivity from "@/components/icons/statisticsIcons/IconActivity.vue";
 
@@ -60,25 +60,25 @@ const isEditingMinerals = ref(false);
 const minerals = ref([]);
 const editableMinerals = ref([]);
 
-onMounted(() => {
-  minerals.value = mineralsData;
-  editableMinerals.value = mineralsData;
+onMounted(async () => {
+  minerals.value = await useStats("minerals");
+  editableMinerals.value = JSON.parse(JSON.stringify(minerals.value));
 });
 
 function cancelEdit() {
-  editableMinerals.value = minerals.value;
+  editableMinerals.value = JSON.parse(JSON.stringify(minerals.value));
   isEditingMinerals.value = false;
 }
 
 function saveMinerals() {
-  minerals.value = editableMinerals.value;
+  minerals.value = JSON.parse(JSON.stringify(editableMinerals.value));
   isEditingMinerals.value = false;
 }
 
 function mineralStatus(item) {
-  const progress = item.current / item.goal;
-  if (progress >= 1) return "good";
-  if (progress >= 0.9) return "near";
+  const ratio = item.current / item.goal;
+  if (ratio >= 1) return "good";
+  if (ratio >= 0.9) return "near";
   return "low";
 }
 </script>
