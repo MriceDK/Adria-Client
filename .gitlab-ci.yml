@@ -1,4 +1,4 @@
-image: node:22-alpine
+image: registry.ci.infra.lan:5000/node:22-alpine
 
 stages:
   - qa
@@ -21,7 +21,7 @@ build_and_push:
   stage: deploy
   image: docker:latest
   services:
-    - docker:dind
+    - docker:dindS
   variables:
     DOCKER_TLS_CERTDIR: ""
   script:
