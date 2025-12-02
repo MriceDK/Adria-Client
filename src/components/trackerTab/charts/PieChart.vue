@@ -1,9 +1,10 @@
 <script setup>
-import {computed} from 'vue';
+import {computed, ref} from 'vue';
 import { Pie } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 
 const props = defineProps({
+  isEditing: Boolean,
   goals: {
     label: String,
     current: Number,
@@ -51,10 +52,16 @@ const chartOptions = {
     }
   }
 };
+
+const needsToBeHidden = ref(true);
+
 </script>
 <template>
-  <div class="card">
-    <h3>Macro Distribution</h3>
+  <div v-if="isEditing || (needsToBeHidden && !isEditing)" class="card" :class="{hidden : !needsToBeHidden}">
+    <div class="card-header">
+      <h3>Macro Distribution</h3>
+      <input v-model="needsToBeHidden" type="checkbox" v-if="isEditing" checked>
+    </div>
     <p class="subtitle">Grams of protein, carbs, and fat consumed</p>
 
     <div class="chart">
@@ -87,4 +94,15 @@ const chartOptions = {
   justify-content: center;
   align-items: center;
 }
+
+.card-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.hidden {
+  opacity: 50%;
+}
+
 </style>
