@@ -29,7 +29,7 @@ import { useStats } from "@/composables/useStats.js";
 const cholesterol = ref([]);
 
 function formattedGoal(item) {
-  if (item.label === "HDL Cholesterol") {
+  if (item.label.includes("HDL")) {
     return `≥${item.goal} ${item.unit}`;
   }
   return `<${item.goal} ${item.unit}`;
@@ -39,7 +39,7 @@ function cholesterolStatus(item) {
   const value = Number(item.current) || 0;
   const goal = Number(item.goal) || 0;
 
-  if (item.label === "HDL") {
+  if (item.label.includes("HDL")) {
     return value >= goal ? "good" : "low";
   }
   return value < goal ? "good" : "low";
@@ -69,19 +69,21 @@ onMounted(async () => {
   padding: 1rem;
 }
 
+/*noinspection CssUnusedSymbol*/
 .cholesterol-card.low {
   border-color: #fb2c36;
   background: #ffe9eb;
 }
 
-.cholesterol-card.low .cholesterol-label,
-.cholesterol-card.low .cholesterol-current {
-  color: #fb2c36;
-}
-
+/*noinspection CssUnusedSymbol*/
 .cholesterol-card.good {
   border-color: #22c55e;
   background: #dcfce7;
+}
+
+.cholesterol-card.low .cholesterol-label,
+.cholesterol-card.low .cholesterol-current {
+  color: #fb2c36;
 }
 
 .cholesterol-card.good .cholesterol-label,
