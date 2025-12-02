@@ -25,7 +25,8 @@ export function filterMinerals(data) {
             label: item.label,
             current: toNumber(item.current),
             goal: toNumber(item.goal),
-            unit: item.unit
+            unit: item.unit,
+            bodyStatId: item.bodyStatId
         }));
 }
 
@@ -49,14 +50,15 @@ export function filterBodyStats(data) {
     };
 
     return data
-        .filter(stat => needed.includes(stat.label))
+        .filter(item => needed.includes(item.label))
         .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
-        .map(stat => ({
-            label: stat.label,
-            current: toNumber(stat.current),
-            goal: toNumber(stat.goal),
-            unit: stat.unit,
-            targetMin: targetMin[stat.label]
+        .map(item => ({
+            label: item.label,
+            current: toNumber(item.current),
+            goal: toNumber(item.goal),
+            unit: item.unit,
+            targetMin: targetMin[item.label],
+            bodyStatId: item.bodyStatId
         }));
 }
 
@@ -77,7 +79,8 @@ export function filterCholesterol(data) {
                 .replace("Cholesterol ", ""),
             current: toNumber(item.current),
             goal: toNumber(item.goal),
-            unit: item.unit
+            unit: item.unit,
+            bodyStatId: item.bodyStatId
         }));
 }
 
