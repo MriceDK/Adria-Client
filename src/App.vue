@@ -6,6 +6,7 @@ import ShopTab from "@/components/shopTab/ShopTab.vue";
 import TrackerTab from "@/components/trackerTab/TrackerTab.vue";
 
 import {ref} from "vue";
+import Profile from "@/components/ProfileViewer.vue";
 
 
 
@@ -23,11 +24,12 @@ function handleNavigationClick(tab) {
 </script>
 
 <template>
+  <profile/>
   <header>
-    <TheHeader @navigation-click="handleNavigationClick" @logo-click="handleNavigationClick"></TheHeader>
+    <TheHeader @navigation-click="handleNavigationClick" @logo-click="handleNavigationClick"/>
   </header>
   <main>
-    <component :is="componentMap[selectedTab]"> </component>
+    <component :is="componentMap[selectedTab]"/>
   </main>
 </template>
 
