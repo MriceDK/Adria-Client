@@ -4,6 +4,7 @@ import { Bar } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 
 const props = defineProps({
+  isEditing: Boolean,
   goals: {
     label: String,
     current: Number,
@@ -54,11 +55,17 @@ const chartOptions = ref({
   }
 });
 
+const needsToBeHidden = ref(true);
+
+
 </script>
 
 <template>
-  <div class="card">
-    <h3>Current vs Goals</h3>
+  <div class="card" v-if="isEditing || (needsToBeHidden && !isEditing)" :class="{hidden : !needsToBeHidden}">
+    <div class="card-header">
+      <h3>Current vs Goals</h3>
+      <input v-model="needsToBeHidden" type="checkbox" v-if="isEditing" checked>
+    </div>
     <p class="subtitle">Compare your intake to daily targets</p>
     <div class="chart">
       <Bar v-if="chartDataReady"
@@ -90,5 +97,16 @@ const chartOptions = ref({
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hidden {
+  opacity: 50%;
 }
 </style>

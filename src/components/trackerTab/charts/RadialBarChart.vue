@@ -4,6 +4,7 @@ import ApexCharts from 'vue3-apexcharts';
 import {computed, ref} from "vue";
 
 const props = defineProps({
+  isEditing: Boolean,
   goals: {
     label: String,
     current: Number,
@@ -51,11 +52,17 @@ const chartOptions = ref({
   labels: labels,
   colors: ['#f87979', '#a3c3fa', '#78e58b', '#ffe082']
 });
+
+const needsToBeHidden = ref(true);
+
 </script>
 
 <template>
-  <div class="card">
-    <h3>Goals Progress</h3>
+  <div class="card" v-if="isEditing || (needsToBeHidden && !isEditing)" :class="{hidden : !needsToBeHidden}">
+    <div class="card-header">
+      <h3>Goals Progress</h3>
+      <input v-model="needsToBeHidden" type="checkbox" v-if="isEditing" checked>
+    </div>
     <p class="subtitle">Percentage of daily targets achieved</p>
 
     <div class="chart">
@@ -87,5 +94,16 @@ const chartOptions = ref({
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hidden {
+  opacity: 50%;
 }
 </style>

@@ -62,13 +62,13 @@ function saveGoals() {
       ></statistic>
     </div>
     <div class="goal-charts">
-      <pie-chart :goals="goals"/>
-      <radial-bar-chart :goals="goals"/>
-      <bar-chart :goals="goals"/>
+      <pie-chart :goals="goals" :is-editing="isEditing" />
+      <radial-bar-chart :goals="goals" :is-editing="isEditing"/>
+      <bar-chart :goals="goals" :is-editing="isEditing"/>
     </div>
     <div class="info-charts">
-      <line-chart-calories/>
-      <line-chart/>
+      <line-chart-calories :is-editing="isEditing"/>
+      <line-chart :is-editing="isEditing"/>
     </div>
   </div>
 </template>

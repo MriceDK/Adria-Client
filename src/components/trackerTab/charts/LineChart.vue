@@ -11,6 +11,11 @@ import {
   Legend,
   Filler
 } from 'chart.js'
+import {ref} from "vue";
+
+const props = defineProps({
+  isEditing: Boolean,
+});
 
 ChartJS.register(
     CategoryScale,
@@ -22,6 +27,8 @@ ChartJS.register(
     Legend,
     Filler
 );
+
+
 
 const chartData = {
     labels: ["13:46", "13:48", "13:52", "14:53"],
@@ -55,71 +62,6 @@ const chartData = {
       }
     ]
   }
-
-
-// const chartOptions = {
-//   responsive: true,
-//   maintainAspectRatio: false,
-//   elements: {
-//     point: {
-//       radius: 2,
-//       color: "#3b82f6"
-//     },
-//     line: {
-//       tension: 0.4,
-//       borderWidth: 2,
-//       borderColor: '#3b82f6'
-//     }
-//   },
-//   plugins: {
-//     legend: {
-//       display: false
-//     },
-//     title: {
-//       display: false
-//     },
-//     tooltip: {
-//       borderWidth: 1,
-//       padding: 10,
-//       displayColors: false,
-//       callbacks: {
-//         label: (context) => {
-//           return context.raw + " kcal";
-//         }
-//       }
-//     }
-//   },
-//   scales: {
-//     x: {
-//       grid: {
-//         display: false,
-//         drawBorder: false
-//       },
-//       ticks: {
-//         color: '#6b7280'
-//       }
-//     },
-//     y: {
-//       beginAtZero: true,
-//       grid: {
-//         color: '#e5e7eb',
-//         drawBorder: false
-//       },
-//       ticks: {
-//         color: '#6b7280',
-//         padding: 8
-//       }
-//     }
-//   },
-//   layout: {
-//     padding: {
-//       top: 10,
-//       right: 20,
-//       bottom: 10,
-//       left: 0
-//     }
-//   }
-// }
 
 const chartOptions = {
   responsive: true,
@@ -189,11 +131,17 @@ const chartOptions = {
     }
   }
 }
+
+const needsToBeHidden = ref(true);
+
 </script>
 
 <template>
-  <div class="card">
-    <h3>Macros Timeline</h3>
+  <div class="card" v-if="isEditing || (needsToBeHidden && !isEditing)" :class="{hidden : !needsToBeHidden}">
+    <div class="card-header">
+      <h3>Macros Timeline</h3>
+      <input v-model="needsToBeHidden" type="checkbox" v-if="isEditing" checked>
+    </div>
     <p class="subtitle">Cumulative protein, carbs, and fat over time</p>
 
     <div class="chart">
@@ -223,5 +171,16 @@ const chartOptions = {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hidden {
+  opacity: 50%;
 }
 </style>
