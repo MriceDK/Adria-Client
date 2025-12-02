@@ -1,15 +1,16 @@
 <script setup>
-
-import MainButton from "@/components/utilities/MainButton.vue";
 import {onMounted, ref} from "vue";
+import MainButton from "@/components/utilities/MainButton.vue";
 import Statistic from "@/components/statisticsTab/Statistic.vue";
 import BarChart from "@/components/trackerTab/charts/BarChart.vue";
 import PieChart from "@/components/trackerTab/charts/PieChart.vue";
 import RadialBarChart from "@/components/trackerTab/charts/RadialBarChart.vue";
+import LineChart from "@/components/trackerTab/charts/LineChart.vue";
+import LineChartCalories from "@/components/trackerTab/charts/LineChartCalories.vue";
 
-const isEditing = ref(false)
-const goals = ref([])
-const editableGoals = ref([])
+const isEditing = ref(false);
+const goals = ref([]);
+const editableGoals = ref([]);
 
 onMounted(() => {
   goals.value = [
@@ -19,11 +20,11 @@ onMounted(() => {
     { label: 'Water', current: 2500, goal: 2500, unit: 'ml' }
   ]
   editableGoals.value = goals.value
-})
+});
 
 function cancelEdit() {
-  editableGoals.value = goals.value
-  isEditing.value = false
+  editableGoals.value = goals.value;
+  isEditing.value = false;
 }
 
 function saveChanges() {
@@ -31,8 +32,8 @@ function saveChanges() {
 }
 
 function saveGoals() {
-  goals.value = editableGoals.value
-  isEditing.value = false
+  goals.value = editableGoals.value;
+  isEditing.value = false;
 }
 </script>
 
@@ -64,6 +65,10 @@ function saveGoals() {
       <pie-chart :goals="goals"/>
       <radial-bar-chart :goals="goals"/>
       <bar-chart :goals="goals"/>
+    </div>
+    <div class="info-charts">
+      <line-chart-calories/>
+      <line-chart/>
     </div>
   </div>
 </template>
