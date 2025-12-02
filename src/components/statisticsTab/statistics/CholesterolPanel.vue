@@ -11,7 +11,7 @@
       >
         <div class="cholesterol-top">
           <h4 class="cholesterol-label">{{ item.label }}</h4>
-          <p class="cholesterol-goal">{{ formatGoal(item.label, item.goal, item.unit) }}</p>
+          <p class="cholesterol-goal">{{ formattedGoal(item) }}</p>
         </div>
 
         <div class="cholesterol-current">
@@ -23,36 +23,34 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from "vue";
-import cholesterolData from "@/data/cholesterol.js";
+import { ref, onMounted } from "vue";
+import { useStats } from "@/composables/useStats.js";
 
 const cholesterol = ref([]);
 
-onMounted(() => {
-  cholesterol.value = cholesterolData;
-});
-
-function formatGoal(label, goal, unit) {
-  const numericGoal = parseFloat(goal);
-  if (label === "HDL") return `≥${numericGoal} ${unit}`;
-  return `<${numericGoal} ${unit}`;
+function formattedGoal(item) {
+  if (item.label === "HDL Cholesterol") {
+    return `≥${item.goal} ${item.unit}`;
+  }
+  return `<${item.goal} ${item.unit}`;
 }
 
 function cholesterolStatus(item) {
-  const {label, current, goal} = item;
-  const value = parseFloat(current);
-  const target = parseFloat(goal);
+  const value = Number(item.current) || 0;
+  const goal = Number(item.goal) || 0;
 
-  if (label === "HDL") {
-    return value >= target ? "good" : "low";
-  } else {
-    return value < target ? "good" : "low";
+  if (item.label === "HDL Cholesterol") {
+    return value >= goal ? "good" : "low";
   }
+  return value < goal ? "good" : "low";
 }
+
+onMounted(async () => {
+  cholesterol.value = await useStats("cholesterol");
+});
 </script>
 
 <style scoped>
-
 .panel-title {
   font-size: 1.5rem;
   color: #717182;
