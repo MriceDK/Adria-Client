@@ -56,6 +56,15 @@ function scan() {
 function startScan() {
   isScanning.value = true;
   emit('scan')
+  // TODO: Change this so that it sends the image to the server
+  takePhoto();
+}
+
+function takePhoto() {
+  const link = document.createElement('a');
+  link.download = `nutriscan-scan-${new Date().toISOString()}.png`;
+  link.href = canvas.value.toDataURL();
+  link.click();
 }
 
 </script>
