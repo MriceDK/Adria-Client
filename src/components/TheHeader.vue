@@ -67,7 +67,7 @@ ul{
 }
 
 .scanner {
-  background-image: url("../assets/icons/scan-svgrepo-com.svg");
+  background-image: url("../assets/icons/scanning-icon.svg");
 }
 .tracker {
   background-image: url("../assets/icons/trackerIcon.png");
