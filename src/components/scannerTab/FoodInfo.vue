@@ -8,16 +8,7 @@ import MainButton from "@/components/utilities/MainButton.vue";
   <div class="nutrition-grid">
     <p class="food-name">Grilled Chicken breast</p>
     <div class="cancel">
-      <svg class="cancel-btn" width="800px" height="800px" viewBox="0 0 512 512">
-        <title>cancel</title>
-        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g id="work-case" fill="#000000" transform="translate(91.520000, 91.520000)">
-            <polygon id="Close" points="328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48">
-
-            </polygon>
-          </g>
-        </g>
-      </svg>
+      <img src="../../assets/icons/cross-icon.svg" class="cancel-btn" alt="Cancel" />
     </div>
     <nutrient-info :nutrient-value="150" nutrient-unit="kcal" class="calories">Calories</nutrient-info>
     <nutrient-info :nutrient-value="150.1" nutrient-unit="g" class="protein">Protein</nutrient-info>
