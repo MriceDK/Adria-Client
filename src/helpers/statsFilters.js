@@ -1,7 +1,9 @@
 export function filterDailyGoals(data) {
     const needed = ["Protein", "Carbohydrates", "Fats", "Water"];
+
     return data
         .filter(item => needed.includes(item.label))
+        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
         .map(item => ({
             label: item.label,
             current: toNumber(item.current),
@@ -10,6 +12,7 @@ export function filterDailyGoals(data) {
         }));
 }
 
+
 export function filterMinerals(data) {
     const needed = [
         "Calcium", "Iron", "Magnesium", "Phosphorus", "Potassium",
@@ -17,6 +20,7 @@ export function filterMinerals(data) {
     ];
     return data
         .filter(item => needed.includes(item.label))
+        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
         .map(item => ({
             label: item.label,
             current: toNumber(item.current),
@@ -46,6 +50,7 @@ export function filterBodyStats(data) {
 
     return data
         .filter(stat => needed.includes(stat.label))
+        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
         .map(stat => ({
             label: stat.label,
             current: toNumber(stat.current),
@@ -57,16 +62,19 @@ export function filterBodyStats(data) {
 
 export function filterCholesterol(data) {
     const needed = [
+        "Cholesterol Total",
         "HDL Cholesterol",
         "LDL Cholesterol",
-        "Cholesterol Total",
         "Triglycerides"
     ];
 
     return data
         .filter(item => needed.includes(item.label))
+        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
         .map(item => ({
-            label: item.label.replace(" Cholesterol", ""),
+            label: item.label
+                .replace(" Cholesterol", "")
+                .replace("Cholesterol ", ""),
             current: toNumber(item.current),
             goal: toNumber(item.goal),
             unit: item.unit
