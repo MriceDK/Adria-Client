@@ -57,7 +57,14 @@ function openProfilePopup() {
       <p class="subscription-tag">Premium</p>
     </div>
     <div class="order-history">
-
+      <p class="section-title">Order History</p>
+      <div class="profile-card order-history">
+<!--        Overflow-y-->
+        <div class="order">
+<!--          TODO: make it so the orders become inserted dynamically (possible out of scope for POC)-->
+<!--          this is only 1 order should be like infinity possible-->
+        </div>
+      </div>
     </div>
   </div>
 </template>
