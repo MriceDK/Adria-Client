@@ -42,7 +42,7 @@ export function filterBodyStats(data) {
     const targetMin = {
         "Body Fat": 10,
         "BMI": 18.5,
-        "Blood Pressure": 0,
+        "Blood Pressure": 80,
         "Resting Heart Rate": 60,
         "Fasting Blood Glucose": 70,
         "Hydration": 100

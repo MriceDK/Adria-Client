@@ -39,7 +39,7 @@ function cholesterolStatus(item) {
   const value = Number(item.current) || 0;
   const goal = Number(item.goal) || 0;
 
-  if (item.label === "HDL Cholesterol") {
+  if (item.label === "HDL") {
     return value >= goal ? "good" : "low";
   }
   return value < goal ? "good" : "low";
