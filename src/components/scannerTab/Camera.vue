@@ -24,10 +24,7 @@ onMounted(async () => {
           {
             setStream(stream);
           })
-          .catch(e => {
-            console.error(e);
-            cameraEnabled.value = false;
-          });
+          .catch(() => cameraEnabled.value = false);
     }
   });
 
