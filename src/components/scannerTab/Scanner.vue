@@ -6,6 +6,28 @@ import {ref} from "vue";
 const scanning = ref(false);
 const scanned = ref(false);
 
+const food = ref(null);
+getData();
+
+function getData() {
+  // TODO: get data from server
+  food.value = {
+    foodName: "Grilled Chicken Breast",
+    nutrients: [
+      {name: "Calories", value: 150, unit: "kcal"},
+      {name: "Protein", value: 30, unit: "g"},
+      {name: "Carbs", value: 0, unit: "g"},
+      {name: "Fiber", value: 0, unit: "g"},
+      {name: "Fat", value: 3.5, unit: "g"},
+    ]
+  }
+}
+
+function startOver() {
+  scanning.value = false;
+  scanned.value = false;
+}
+
 </script>
 
 <template>
@@ -23,7 +45,7 @@ const scanned = ref(false);
         <p class="scan-description">Analyzing nutrition information</p>
       </div>
     </camera>
-    <food-info v-else></food-info>
+    <food-info @add-to-tracker="startOver" @cancel="startOver" :food-object="food" v-else></food-info>
    </div>
 
   <div hidden class="scanning">
