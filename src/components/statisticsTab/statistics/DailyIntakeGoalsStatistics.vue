@@ -66,6 +66,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useStats } from "@/composables/useStats.js";
+import { updateStatGoal } from "@/services/statsService.js";
 import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 import StatCard from "@/components/statisticsTab/common/StatCard.vue";
@@ -85,7 +86,11 @@ function cancelEdit() {
   isEditing.value = false;
 }
 
-function saveGoals() {
+async function saveGoals() {
+  for (const goal of editableGoals.value) {
+    await updateStatGoal(goal.bodyStatId, goal.goal);
+  }
+
   goals.value = JSON.parse(JSON.stringify(editableGoals.value));
   isEditing.value = false;
 }
