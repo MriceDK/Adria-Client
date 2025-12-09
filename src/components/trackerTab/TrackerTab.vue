@@ -28,84 +28,94 @@ function cancelEdit() {
 }
 
 function saveChanges() {
-  saveGoals();
-}
-
-function saveGoals() {
   goals.value = editableGoals.value;
   isEditing.value = false;
 }
 </script>
 
 <template>
-  <div class="tracker-component">
-    <div class="page-info">
-      <div class="page-head">
-        <h2>Today's Nutrition</h2>
-        <p>Track your daily intake and progress</p>
-      </div>
-      <main-button v-if="!isEditing" @click="isEditing=true" class="edit-charts">Edit Charts</main-button>
-      <div v-else>
-        <main-button @click="cancelEdit">Cancel</main-button>
-        <main-button @click="saveChanges" :black="true">Save</main-button>
-      </div>
-    </div>
-    <div class="goals-list">
-      <statistic
-          v-for="item in goals" :key="item.label"
-          class="goal-card"
-          :class="{ water: item.label === 'Water'}"
+  <section>
+    <main class="tracker-main">
+      <div class="tracker-component">
 
-          :is-editing="isEditing"
-          :item="item"
-          :use-progress-bar="true"
-      ></statistic>
-    </div>
-    <div class="goal-charts">
-      <pie-chart :goals="goals" :is-editing="isEditing" />
-      <radial-bar-chart :goals="goals" :is-editing="isEditing"/>
-      <bar-chart :goals="goals" :is-editing="isEditing"/>
-    </div>
-    <div class="info-charts">
-      <line-chart-calories :is-editing="isEditing"/>
-      <line-chart :is-editing="isEditing"/>
-    </div>
-  </div>
+        <div class="header-row">
+          <div class="page-head">
+            <h1>Today's Nutrition</h1>
+            <p>Track your daily intake and progress</p>
+          </div>
+
+          <div class="actions">
+            <MainButton
+                v-if="!isEditing"
+                @click="isEditing = true"
+            >
+              Edit Charts
+            </MainButton>
+
+            <div v-else class="edit-buttons">
+              <MainButton @click="cancelEdit">Cancel</MainButton>
+              <MainButton @click="saveChanges" :black="true">Save</MainButton>
+            </div>
+          </div>
+        </div>
+
+        <div class="goals-list">
+          <Statistic
+              v-for="item in goals"
+              :key="item.label"
+              class="goal-card"
+              :class="{ water: item.label === 'Water' }"
+              :is-editing="isEditing"
+              :item="item"
+              :use-progress-bar="true"
+          />
+        </div>
+
+        <div class="goal-charts">
+          <PieChart :goals="goals" :is-editing="isEditing" />
+          <RadialBarChart :goals="goals" :is-editing="isEditing" />
+          <BarChart :goals="goals" :is-editing="isEditing" />
+        </div>
+
+        <div class="info-charts">
+          <LineChartCalories :is-editing="isEditing" />
+          <LineChart :is-editing="isEditing" />
+        </div>
+
+      </div>
+    </main>
+  </section>
 </template>
 
 <style scoped>
-.tracker-component {
-  width: 60%;
-  margin: 0 auto;
+.tracker-main {
+  max-width: 80%;
+  margin: auto;
+  font-family: system-ui, sans-serif;
 }
 
-.page-info {
+.header-row {
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-
-  margin: 1.5rem 0;
+  margin-bottom: 2rem;
 }
 
-.page-head {
+.page-head h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.page-head p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+.actions, .edit-buttons {
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-}
-.edit-charts {
-  /* Added a class here for an icon later on */
-  flex-grow: 0;
-  align-self: flex-end;
-
-}
-
-h2 {
-  margin: 0;
-}
-
-p {
-  margin: 0;
+  gap: 0.5rem;
 }
 
 .goals-list {
@@ -116,10 +126,16 @@ p {
 
 .goal-charts{
   display: flex;
-  flex-flow: row nowrap;
   justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
   gap: 1rem;
+  margin-top: 1rem;
 }
+
+.info-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
 </style>
