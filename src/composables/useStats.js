@@ -1,8 +1,9 @@
 import { getUserStats } from "@/services/statsService.js";
 import { filterDailyGoals, filterMinerals, filterBodyStats, filterCholesterol } from "@/helpers/statsFilters.js";
+import {USER_ID} from "@/config/userConfig.js";
 
 export async function useStats(type) {
-    const data = await getUserStats("d4e5f6a7-b8c9-4d5e-1f2a-4b5c6d7e8f9a");
+    const data = await getUserStats(USER_ID);
 
     if (type === "daily") {
         return filterDailyGoals(data);
