@@ -1,0 +1,88 @@
+<script setup>
+import ProgressBar from "@/components/utilities/ProgressBar.vue";
+const props = defineProps({
+  isEditing: Boolean,
+  item: {
+    label: String,
+    current: Number,
+    goal: Number,
+    unit: String,
+  },
+  index: Number,
+  useProgressBar: Boolean,
+});
+</script>
+
+<template>
+  <div class="goal-card">
+    <div v-if="!props.isEditing">
+      <h4>{{ props.item.label }}</h4>
+      <p>{{ props.item.current }}{{ props.item.unit }} / {{ props.item.goal }}{{ props.item.unit }}</p>
+
+      <ProgressBar v-if="props.useProgressBar"
+                   :value="props.item.current"
+                   :max="props.item.goal"
+                   :color="props.item.label === 'Water' ? 'linear-gradient(90deg, #60a5fa, #3b82f6)' : null"/>
+
+      <p class="remaining">{{ (props.item.goal - props.item.current).toFixed(1) }}{{ props.item.unit }} remaining</p>
+    </div>
+
+    <div v-else class="goal-edit">
+      <label>{{ props.item.label }} ({{ props.item.unit }})</label>
+      <input type="number" v-model.number="props.item.goal" />
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.goal-card {
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background: white;
+}
+
+.goal-card h4, .goal-edit label {
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+.goal-card p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.remaining {
+  color: gray;
+}
+
+.goal-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+
+}
+
+.goal-edit input {
+  width: 4rem;
+  padding: 0.25rem;
+  border: 0.1rem solid lightgray;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.remaining {
+  color: var(--main-text-color);
+}
+
+.goal-card.water, .goal-card.water h4, .goal-card.water p {
+  color: deepskyblue;
+}
+
+.goal-card.water {
+  border-color: deepskyblue;
+}
+</style>
