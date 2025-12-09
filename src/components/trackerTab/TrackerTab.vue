@@ -90,8 +90,8 @@ function saveChanges() {
 <style scoped>
 .tracker-main {
   max-width: 80%;
-  margin: auto;
   font-family: system-ui, sans-serif;
+  margin: auto auto 5rem;
 }
 
 .header-row {

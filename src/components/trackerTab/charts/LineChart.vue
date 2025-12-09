@@ -182,6 +182,7 @@ const needsToBeHidden = ref(true);
 }
 
 .chart {
+  height: 20rem;
   width: 100%;
   display: flex;
   justify-content: center;
