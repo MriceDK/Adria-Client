@@ -61,10 +61,8 @@ function startScan() {
 }
 
 function takePhoto() {
-  const link = document.createElement('a');
-  link.download = `nutriscan-scan-${new Date().toISOString()}.png`;
-  link.href = canvas.value.toDataURL();
-  link.click();
+  const photoData = canvas.value.toDataURL();
+  console.log(photoData);
 }
 
 </script>
