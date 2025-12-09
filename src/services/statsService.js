@@ -22,7 +22,7 @@ export async function postUserStats(userId, stats) {
 }
 
 export async function updateStatGoal(bodyStatId, newGoal) {
-    const res = await fetch(`${API_BASE}/api/analyses/definitions/${bodyStatId}/goal`, {
+    await fetch(`${API_BASE}/api/analyses/definitions/${bodyStatId}/goal`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ goal: newGoal })
