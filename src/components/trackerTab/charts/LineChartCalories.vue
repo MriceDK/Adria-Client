@@ -146,21 +146,29 @@ const needsToBeHidden = ref(true);
   background: white;
 }
 
+.card-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25rem;
+
+}
+
+.card-header h3 {
+  margin: 0;
+}
+
 .subtitle {
   color: #6b7280;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .chart {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.card-header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
   align-items: center;
 }
 
