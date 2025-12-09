@@ -8,17 +8,9 @@
       <template #icon>
         <IconActivity />
       </template>
-
-      <template #actions>
-        <button v-if="!isEditingMinerals" @click="isEditingMinerals = true" class="btn">Edit</button>
-        <template v-else>
-          <button @click="cancelEdit" class="btn cancel">Cancel</button>
-          <button @click="saveMinerals" class="btn save">Save</button>
-        </template>
-      </template>
     </StatisticsHeader>
 
-    <div v-if="!isEditingMinerals" class="minerals-list">
+    <div class="minerals-list">
       <StatCard
           v-for="item in minerals"
           :key="item.label"
@@ -38,51 +30,22 @@
         </template>
       </StatCard>
     </div>
-
-    <div v-else class="minerals-edit">
-      <div v-for="(mineral, i) in editableMinerals" :key="mineral.label" class="mineral-edit">
-        <label>{{ mineral.label }} ({{ mineral.unit }})</label>
-        <input v-model.number="editableMinerals[i].current" type="number" />
-      </div>
-    </div>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import { useStats } from "@/composables/useStats.js";
-//import { postUserStats } from "@/services/statsService.js";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 import StatCard from "@/components/statisticsTab/common/StatCard.vue";
 import "@/components/statisticsTab/common/common.css";
 import IconActivity from "@/components/icons/statisticsIcons/IconActivity.vue";
 
 const minerals = ref([]);
-const editableMinerals = ref([]);
-const isEditingMinerals = ref(false);
 
 onMounted(async () => {
   minerals.value = await useStats("minerals");
-
-  //temp
-  editableMinerals.value = JSON.parse(JSON.stringify(minerals.value));
 });
-
-function cancelEdit() {
-  //temp
-  editableMinerals.value = JSON.parse(JSON.stringify(minerals.value));
-  isEditingMinerals.value = false;
-}
-
-async function saveMinerals() {
-  //could have
-  //const userId = "d4e5f6a7-b8c9-4d5e-1f2a-4b5c6d7e8f9a";
-  //await postUserStats(userId, editableMinerals.value);
-
-  //temp
-  minerals.value = JSON.parse(JSON.stringify(editableMinerals.value));
-  isEditingMinerals.value = false;
-}
 
 function mineralStatus(item) {
   const ratio = item.current / item.goal;
@@ -100,7 +63,7 @@ function mineralStatus(item) {
   padding: 2rem;
 }
 
-.minerals-list, .minerals-edit {
+.minerals-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
   gap: 1rem;
@@ -131,37 +94,17 @@ function mineralStatus(item) {
   margin-top: 1rem;
 }
 
-.mineral-edit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  border: 0.1rem solid lightgray;
-  border-radius: 1rem;
-}
-
-.mineral-edit input {
-  width: 4rem;
-  padding: 0.25rem;
-  border: 0.1rem solid lightgray;
-  border-radius: 0.5rem;
-  text-align: center;
-}
-
-/*noinspection CssUnusedSymbol*/
+/* Card color states */
 .mineral-card.low {
   border-color: #fb2c36;
   background: #ffe9eb;
 }
 
-/*noinspection CssUnusedSymbol*/
 .mineral-card.near {
   border-color: #d1d5db;
   background: #f9fafb;
 }
 
-/*noinspection CssUnusedSymbol*/
 .mineral-card.good {
   border-color: #22c55e;
   background: #dcfce7;
@@ -181,5 +124,4 @@ function mineralStatus(item) {
 .mineral-card.near .mineral-label {
   color: #6b7280;
 }
-
 </style>
