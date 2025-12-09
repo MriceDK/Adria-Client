@@ -19,7 +19,8 @@ function getData() {
       {name: "Carbs", value: 0, unit: "g"},
       {name: "Fiber", value: 0, unit: "g"},
       {name: "Fat", value: 3.5, unit: "g"},
-    ]
+    ],
+    time: Date.now(),
   }
 }
 
