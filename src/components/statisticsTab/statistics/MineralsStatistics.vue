@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useStats } from "@/composables/useStats.js";
 import { postUserStats } from "@/services/statsService.js";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
@@ -60,34 +60,27 @@ import IconActivity from "@/components/icons/statisticsIcons/IconActivity.vue";
 const minerals = ref([]);
 const editableMinerals = ref([]);
 const isEditingMinerals = ref(false);
-let intervalId = null;
-
-async function loadMinerals() {
-  const fresh = await useStats("minerals");
-
-  if (!isEditingMinerals.value) {
-    minerals.value = fresh;
-  }
-}
 
 onMounted(async () => {
-  await loadMinerals();
-  intervalId = setInterval(loadMinerals, 1000);
-});
+  minerals.value = await useStats("minerals");
 
-onUnmounted(() => {
-  clearInterval(intervalId);
+  //temp
+  editableMinerals.value = JSON.parse(JSON.stringify(minerals.value));
 });
 
 function cancelEdit() {
+  //temp
+  editableMinerals.value = JSON.parse(JSON.stringify(minerals.value));
   isEditingMinerals.value = false;
 }
 
 async function saveMinerals() {
-  //remove it later to other place
-  const userId = "d4e5f6a7-b8c9-4d5e-1f2a-4b5c6d7e8f9a";
+  //could have
+  //const userId = "d4e5f6a7-b8c9-4d5e-1f2a-4b5c6d7e8f9a";
+  //await postUserStats(userId, editableMinerals.value);
 
-  await postUserStats(userId, editableMinerals.value);
+  //temp
+  minerals.value = JSON.parse(JSON.stringify(editableMinerals.value));
   isEditingMinerals.value = false;
 }
 
