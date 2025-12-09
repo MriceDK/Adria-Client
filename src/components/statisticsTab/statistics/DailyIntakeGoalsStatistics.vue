@@ -87,8 +87,8 @@ function cancelEdit() {
 }
 
 async function saveGoals() {
-  for (const goal of editableGoals.value) {
-    await updateStatGoal(goal.bodyStatId, goal.goal);
+  for (const stat of editableGoals.value) {
+    await updateStatGoal(stat.bodyStatId, stat.goal);
   }
 
   goals.value = JSON.parse(JSON.stringify(editableGoals.value));
