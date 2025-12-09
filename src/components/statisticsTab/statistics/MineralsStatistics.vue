@@ -94,17 +94,19 @@ function mineralStatus(item) {
   margin-top: 1rem;
 }
 
-/* Card color states */
+/*noinspection CssUnusedSymbol*/
 .mineral-card.low {
   border-color: #fb2c36;
   background: #ffe9eb;
 }
 
+/*noinspection CssUnusedSymbol*/
 .mineral-card.near {
   border-color: #d1d5db;
   background: #f9fafb;
 }
 
+/*noinspection CssUnusedSymbol*/
 .mineral-card.good {
   border-color: #22c55e;
   background: #dcfce7;
