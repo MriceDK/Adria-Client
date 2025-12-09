@@ -1,3 +1,5 @@
+import {STAT_IDS} from "@/helpers/statIds.js";
+
 export function filterDailyGoals(data) {
     const needed = ["Protein", "Carbohydrates", "Fats", "Water"];
 
@@ -8,7 +10,8 @@ export function filterDailyGoals(data) {
             label: item.label,
             current: toNumber(item.current),
             goal: toNumber(item.goal),
-            unit: item.unit
+            unit: item.unit,
+            bodyStatId: STAT_IDS[item.label]
         }));
 }
 
@@ -26,7 +29,7 @@ export function filterMinerals(data) {
             current: toNumber(item.current),
             goal: toNumber(item.goal),
             unit: item.unit,
-            bodyStatId: item.bodyStatId
+            bodyStatId: STAT_IDS[item.label]
         }));
 }
 
@@ -58,7 +61,7 @@ export function filterBodyStats(data) {
             goal: toNumber(item.goal),
             unit: item.unit,
             targetMin: targetMin[item.label],
-            bodyStatId: item.bodyStatId
+            bodyStatId: STAT_IDS[item.label]
         }));
 }
 
@@ -80,7 +83,7 @@ export function filterCholesterol(data) {
             current: toNumber(item.current),
             goal: toNumber(item.goal),
             unit: item.unit,
-            bodyStatId: item.bodyStatId
+            bodyStatId: STAT_IDS[item.label]
         }));
 }
 
