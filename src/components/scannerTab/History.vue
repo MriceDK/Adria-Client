@@ -38,12 +38,12 @@ updateHistory();
 <template>
   <div class="history-screen">
     <p class="title">Recent Foods</p>
-    <div v-if="userHistory.length > 0" class="history-list">
-      <div v-for="item in userHistory" :key="item.scanId" class="history-item">
+    <ul v-if="userHistory.length > 0" class="history-list">
+      <li v-for="item in userHistory" :key="item.scanId" class="history-item">
         <p class="food-name">{{ item.foodName }}</p>
         <p class="date-tracked">{{ item.scanDateTime }}</p>
-      </div>
-    </div>
+      </li>
+    </ul>
     <div v-else class="no-history">
       <p>No foods tracked yet</p>
       <p>Scanned foods will appear here</p>
@@ -56,9 +56,13 @@ updateHistory();
   border: solid 2px var(--secondary-bg-color);
   border-radius: 1rem;
   padding: 1rem;
-  height: 100%;
+  height: 70vh;
   width: 25%;
   font-family: var(--main-font-family), sans-serif;
+
+  display: flex;
+  flex-direction: column;
+
 }
 
 .history-item {
@@ -89,6 +93,14 @@ updateHistory();
   background-position: left center;
   padding-left: 2rem;
   margin-bottom: 1rem;
+}
+
+.history-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  overflow-y: scroll;
 }
 
 </style>
