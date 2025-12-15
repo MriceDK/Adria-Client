@@ -1,6 +1,6 @@
 <script setup>
-import ShopContainer from "@/components/shopTab/ShopContainer.vue";
-import ShoppingCart from "@/components/shopTab/ShoppingCart.vue";
+import ShopContainer from "@/components/shoptab/ShopContainer.vue";
+import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
 import {ref} from "vue";
 import SearchBar from "@/components/utilities/SearchBar.vue";
 const cartItems = ref([]);
@@ -15,17 +15,20 @@ function handleAddToCart(item) {
     }
   }
   if (!found) {
-      item.count = 1;
-      cartItems.value.push(item);
+    item.count = 1;
+    cartItems.value.push(item);
   }
 }
 function handleSearch(input) {
   searchValue.value = input;
 }
+function handleClear() {
+  cartItems.value = [];
+}
 </script>
 
 <template>
-  <ShoppingCart :cart-items="cartItems" />
+  <ShoppingCart @clear-cart="handleClear" :cart-items="cartItems" />
   <search-bar @search-enter="handleSearch" />
   <ShopContainer @add-to-cart="handleAddToCart" :search-input="searchValue" />
 </template>

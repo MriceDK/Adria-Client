@@ -21,15 +21,12 @@ const emit = defineEmits(['add-to-cart'])
         <p class="title">{{ item.title }}</p>
         <p class="price">€{{ item.cost }}</p>
       </div>
-
       <!-- description -->
       <p class="description">{{ item.description }}</p>
 
       <!-- button -->
       <button @click="emit('add-to-cart',item)">add to cart</button>
-    </div>
-  </div>
-</template>
+    </div>  </div></template>
 
 <style scoped>
 .shopitem {

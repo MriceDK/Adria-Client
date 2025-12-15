@@ -55,22 +55,21 @@ function handleAddToCart(item) {
 <template>
   <div class="shop-container">
     <ShopItem v-for="(item) in dummydata" :item="item" @add-to-cart="handleAddToCart" v-show="item.title.includes(searchInput) || searchInput === ''" />
-  </div>
-</template>
+  </div></template>
 
 <style scoped>
-  .shop-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-  }
+.shop-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+}
 
-  ShopItem {
-    flex: 1 1 calc(33.333% - 1.5rem);
-    max-width: calc(33.333% - 1.5rem);
-  }
+ShopItem {
+  flex: 1 1 calc(33.333% - 1.5rem);
+  max-width: calc(33.333% - 1.5rem);
+}
 </style>

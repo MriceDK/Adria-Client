@@ -13,9 +13,8 @@ const props = defineProps({
 <template>
   <div class="checkoutitem">
     <p >{{props.item.title}} x {{props.item.count}}</p>
-    <p>€{{props.item.cost*props.item.count}}</p>
-  </div>
-</template>
+    <p>€{{(props.item.cost*props.item.count).toFixed(2)}}</p>
+  </div></template>
 
 <style scoped>
 .checkoutitem{

@@ -1,5 +1,6 @@
 <script setup>
 import CheckoutItem from './CheckoutItem.vue'
+import MainButton from "@/components/utilities/MainButton.vue";
 const props = defineProps({
   cartItems: Array,
   cartAmount: Number,
@@ -10,18 +11,15 @@ const emit = defineEmits(['close-checkout']);
 </script>
 
 <template>
+
   <div class="popup">
     <p class="title">Confirm Your Order</p>
     <p class="description">You are about to place an order for {{ cartAmount }} items totaling €{{ cartTotal }}.</p>
     <CheckoutItem v-for="item in props.cartItems" :item="item" />
-    <div class="bottom-row">
-      <button @click="emit('close-checkout')">Cancel</button>
-      <button>Confirm Order</button>
-    </div>
-  </div>
-  <div class="backgroundShadow" @click="emit('close-checkout')">
-  </div>
-</template>
+    <div>          <MainButton class="checkoutbutton" @click="emit('close-checkout')" :black="true">Cancel</MainButton>
+      <MainButton class="checkoutbutton">Confirm Order</MainButton>
+    </div>      </div>  <div class="backgroundShadow" @click="emit('close-checkout')">
+</div></template>
 
 <style scoped>
 .backgroundShadow {
@@ -36,11 +34,11 @@ const emit = defineEmits(['close-checkout']);
 }
 
 .popup {
+  position: fixed;
   background-color: white;
   padding: 1em;
   border-radius: 1rem;
   width: 35%;
-  position: absolute;
   z-index: 7;
   left: 50%;
   top: 50%;
@@ -55,7 +53,8 @@ const emit = defineEmits(['close-checkout']);
   color: gray;
   margin-top: 0.25rem;
 }
-.bottom-row {
-  /*style for buttons are component not yet on this branch*/
+.checkoutbutton{
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
 </style>

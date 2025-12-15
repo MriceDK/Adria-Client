@@ -22,13 +22,10 @@ defineProps({
         <p class="title">{{ item.title }}</p>
         <p class="price">€{{ item.cost }} x {{item.count}}</p>
       </div>
-
       <!-- description -->
       <p class="description">{{ item.description }}</p>
 
-    </div>
-  </div>
-</template>
+    </div>  </div></template>
 
 <style scoped>
 .cartitem {
