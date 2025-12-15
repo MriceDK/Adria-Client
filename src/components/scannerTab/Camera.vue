@@ -62,7 +62,6 @@ function startScan() {
 
 function takePhoto() {
   const photoData = canvas.value.toDataURL();
-  console.log(photoData);
 }
 
 </script>
