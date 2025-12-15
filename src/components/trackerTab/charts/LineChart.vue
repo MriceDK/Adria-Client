@@ -44,9 +44,17 @@ async function loadMacrosTimeline() {
   const carbs = []
   const fat = []
 
+  let totalProtein = 0
+  let totalCarbs = 0
+  let totalFat = 0
+
   history.forEach(item => {
     const getAmount = (type) =>
         item.nutrients.find(n => n.type === type)?.amount ?? 0
+
+    totalProtein += getAmount("Protein")
+    totalCarbs += getAmount("Carbohydrates")
+    totalFat += getAmount("Fat")
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
@@ -55,9 +63,9 @@ async function loadMacrosTimeline() {
         })
     )
 
-    protein.push(getAmount("Protein"))
-    carbs.push(getAmount("Carbohydrates"))
-    fat.push(getAmount("Fat"))
+    protein.push(totalProtein)
+    carbs.push(totalCarbs)
+    fat.push(totalFat)
   })
 
   chartData.value = {

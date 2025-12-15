@@ -39,9 +39,13 @@ async function loadCalorieTimeline() {
   const labels = []
   const calories = []
 
+  let totalCalories = 0
+
   history.forEach(item => {
     const calorie = item.nutrients.find(n => n.type === "Calories")
     if (!calorie) return
+
+    totalCalories += calorie.amount
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
@@ -50,7 +54,7 @@ async function loadCalorieTimeline() {
         })
     )
 
-    calories.push(calorie.amount)
+    calories.push(totalCalories)
   })
 
   chartData.value = {
