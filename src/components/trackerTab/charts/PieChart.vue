@@ -37,7 +37,14 @@ const chartOptions = {
   plugins: {
     legend: {
       position: "bottom",
-      labels: {boxWidth: 14, padding: 12},
+      labels: {
+        font: {
+          size: 15,
+          weight: 'bold'
+        },
+        boxWidth: 14,
+        padding: 12
+      },
       onClick: () => {}
     },
     tooltip: {
@@ -70,22 +77,40 @@ const needsToBeHidden = ref(true);
           :data="chartData"
           :options="chartOptions"
       />
-      <div v-else >Data loading...</div>    </div>
+      <div v-else >Data loading...</div>
+    </div>
 
   </div>
-
 </template>
 
 <style scoped>
 .card {
+  width: 33%;
   border: 0.1rem solid lightgray;
-  padding: 1.5rem;
+  padding: 2rem;
   border-radius: 1.5rem;
-  background: white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.card-header h3 {
+  margin: 0;
 }
 
 .subtitle {
   color: #6b7280;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  text-align: center;
 }
 
 .chart {
@@ -95,14 +120,7 @@ const needsToBeHidden = ref(true);
   align-items: center;
 }
 
-.card-header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
 .hidden {
-  opacity: 50%;
+  opacity: 0.5;
 }
-
 </style>
