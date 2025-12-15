@@ -1,50 +1,67 @@
 <script setup>
 import Camera from "@/components/scannerTab/Camera.vue";
 import FoodInfo from "@/components/scannerTab/FoodInfo.vue";
+import History from "@/components/scannerTab/History.vue";
 import {ref} from "vue";
+import {getRandomFood} from "@/services/api/scanner.js";
+import {USER_ID} from "@/services/api/config.js";
 
 const scanning = ref(false);
 const scanned = ref(false);
+const updateHistory = ref(false);
+
+const food = ref({
+  foodName: "Not available"
+});
+
+async function startScan() {
+  scanning.value = !scanning.value;
+  food.value = await getRandomFood(USER_ID);
+}
+
+function startOver() {
+  scanning.value = false;
+  scanned.value = false;
+  updateHistory.value = true;
+}
 
 </script>
 
 <template>
-  <div class="scan-start-screen">
-    <!--ScanCamera-->
-    <!--Text-->
-    <!--Scan button-->
-    <camera @scan="scanning = !scanning" @scanned="scanned = true" v-if="!scanned">
-      <div v-show="!scanning" class="start-scan">
-        <p class="scan-title">Start Scanning</p>
-        <p class="scan-description">Point your camera at any food item to instantly get detailed nutrition information</p>
-      </div>
-      <div v-show="scanning" class="scan">
-        <p class="scan-title">Scanning...</p>
-        <p class="scan-description">Analyzing nutrition information</p>
-      </div>
-    </camera>
-    <food-info v-else></food-info>
-   </div>
-
-  <div hidden class="scanning">
+  <div class="scanner-screen">
+    <div class="scan-start-screen">
+      <camera @scan="startScan" @scanned="scanned = true" v-if="!scanned">
+          <div v-show="!scanning" class="start-scan">
+            <p class="scan-title">Start Scanning</p>
+            <p class="scan-description">Point your camera at any food item to instantly get detailed nutrition information</p>
+          </div>
+          <div v-show="scanning" class="scan">
+            <p class="scan-title">Scanning...</p>
+            <p class="scan-description">Analyzing nutrition information</p>
+          </div>
+        </camera>
+      <food-info @add-to-tracker="startOver" @cancel="startOver" :food-object="food" v-else></food-info>
+    </div>
+    <history :update-history="updateHistory" @history-updated="updateHistory = false"></history>
   </div>
-
-
-
-
-<!--Open webcam sequence-->
-<!--"Analyze webcam"-->
-
-<!--Display Food info-->
-<!--Add tracker button-->
-<!--Scan again-->
-<!--Dismiss button-->
 </template>
+
 
 <style scoped>
 template {
   height: 100vh;
 }
+
+.scanner-screen {
+  display: flex;
+  gap: 2rem;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20%;
+  margin-right: 10%;
+}
+
 .scan-start-screen {
   font-family: var(--main-font-family),sans-serif;
   display: flex;
@@ -64,10 +81,14 @@ template {
 }
 
 .scan-description {
-  color: #989aa9;
+  color: var(--secondary-text-color);
   font-size: 1rem;
   margin-bottom: 2rem;
   text-align: center;
   max-width: 23rem;
+}
+
+.scanner {
+
 }
 </style>

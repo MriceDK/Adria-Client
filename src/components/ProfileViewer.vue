@@ -1,11 +1,17 @@
 <script setup>
 import User from "@/components/icons/User.vue";
 import {ref} from "vue";
+import {enablePushNotifications} from "@/services/push-notification-service.js";
+import MainButton from "@/components/utilities/MainButton.vue";
 
 let profileOpen = ref(false);
 function openProfilePopup() {
 //   TODO: Add network requests to server
   profileOpen.value = true;
+}
+
+function enablePush() {
+  enablePushNotifications();
 }
 </script>
 
@@ -32,6 +38,10 @@ function openProfilePopup() {
           Subscribed since <span class="subscription-start-date">Jan 15, 2024</span>
         </p>
       </div>
+    </div>
+    <div class="profile-card push-notis">
+      <p class="title">Push notifications</p>
+      <main-button @click="enablePush">Enable Notifications</main-button>
     </div>
     <div class="profile-card subscription">
       <div class="subscription-info">
@@ -116,6 +126,22 @@ function openProfilePopup() {
   max-width: 25rem;
   font-family: var(--main-font-family), sans-serif;
   margin-bottom: 1.5rem;
+}
+
+.title {
+  font-family: var(--main-font-family), sans-serif;
+  color: var(--main-text-color);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1rem 0 0.25rem;
+}
+
+.subtitle {
+  font-family: var(--main-font-family), sans-serif;
+  color: var(--secondary-text-color);
+  font-size: 1rem;
+  margin: 0 0 1.5rem;
+
 }
 
 .profile-avatar {
@@ -213,6 +239,14 @@ function openProfilePopup() {
 
 .close:hover {
   color: var(--secondary-text-color);
+}
+
+.push-notis {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
 </style>

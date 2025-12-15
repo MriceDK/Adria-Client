@@ -61,10 +61,7 @@ function startScan() {
 }
 
 function takePhoto() {
-  const link = document.createElement('a');
-  link.download = `nutriscan-scan-${new Date().toISOString()}.png`;
-  link.href = canvas.value.toDataURL();
-  link.click();
+  const photoData = canvas.value.toDataURL();
 }
 
 </script>
@@ -90,8 +87,8 @@ function takePhoto() {
   padding: 0.25rem;
   margin-top: 3rem;
   align-content: center;
-  height: 50vh;
-  max-width: 50%;
+  max-height: 40vh;
+  max-width: 40vh;
   border-radius: 10%;
 }
 

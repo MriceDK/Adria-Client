@@ -2,21 +2,56 @@
 
 import NutrientInfo from "@/components/scannerTab/NutrientInfo.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
+
+const emit = defineEmits(['cancel', 'addToTracker']);
+const props = defineProps({
+  foodObject : {
+    scanId : String,
+    adrianId : String,
+    foodId : String,
+    foodName : String,
+    foodType : String,
+    foodEdible : Boolean,
+    nutrients : [
+      {
+        nutrientId : String,
+        type: String,
+        amount: Number,
+        unit: String
+      }
+    ],
+    scanDateTime : Date,
+  }
+});
+
+function addToTracker() {
+  emit('addToTracker');
+  // TODO: send data to server
+}
+
+function cancel() {
+  emit('cancel');
+}
+
 </script>
 
 <template>
   <div class="nutrition-grid">
-    <p class="food-name">Grilled Chicken breast</p>
-    <div class="cancel">
+    <p class="food-name">{{ props.foodObject.foodName }}</p>
+    <div class="cancel" @click="cancel">
       <img src="../../assets/icons/cross-icon.svg" class="cancel-btn" alt="Cancel" />
     </div>
-    <nutrient-info :nutrient-value="150" nutrient-unit="kcal" class="calories">Calories</nutrient-info>
-    <nutrient-info :nutrient-value="150.1" nutrient-unit="g" class="protein">Protein</nutrient-info>
-    <nutrient-info :nutrient-value="150" nutrient-unit="g" class="carbs">Carbs</nutrient-info>
-    <nutrient-info :nutrient-value="150" nutrient-unit="g" class="fiber">Fiber</nutrient-info>
-    <nutrient-info :nutrient-value="150" nutrient-unit="g" class="fat">Fat</nutrient-info>
-    <main-button class="add-to-tracker" :black="true">Add To Tracker</main-button>
-    <main-button class="scan-again" >Scan again</main-button>
+    <nutrient-info
+        v-for="item in props.foodObject.nutrients"
+        :nutrient-value="item.amount"
+        :nutrient-unit="item.unit"
+        :class="item.type.toLowerCase()"
+    >
+      {{item.type}}
+    </nutrient-info>
+
+    <main-button class="add-to-tracker" :black="true" @click="addToTracker">Add To Tracker</main-button>
+    <main-button class="scan-again" @click="cancel" >Scan again</main-button>
   </div>
 </template>
 
@@ -76,7 +111,7 @@ import MainButton from "@/components/utilities/MainButton.vue";
   border: solid 0.1rem var(--secondary-bg-color);
   border-radius: 1rem;
   padding: 1rem;
-  width: 40%;
+  width: 100%;
   gap: 1rem;
 }
 
