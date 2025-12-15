@@ -1,5 +1,11 @@
 import { getUserStats } from "@/services/statsService.js";
-import { filterDailyGoals, filterMinerals, filterBodyStats, filterCholesterol } from "@/helpers/statsFilters.js";
+import {
+    filterDailyGoals,
+    filterMinerals,
+    filterBodyStats,
+    filterCholesterol,
+    filterTrackerData
+} from "@/helpers/statsFilters.js";
 import {USER_ID} from "@/config/userConfig.js";
 
 export async function useStats(type) {
@@ -19,6 +25,10 @@ export async function useStats(type) {
 
     if (type === "cholesterol") {
         return filterCholesterol(data);
+    }
+
+    if (type === "tracker-data") {
+        return filterTrackerData(data);
     }
 
     return data;

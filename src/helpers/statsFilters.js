@@ -91,3 +91,25 @@ function toNumber(value) {
     const cleaned = String(value).replace(/[^0-9.]/g, "");
     return parseFloat(cleaned);
 }
+
+
+export function filterTrackerData(data) {
+    const needed = [
+        "Calories",
+        "Protein",
+        "Carbohydrates",
+        "Water"
+    ];
+
+    return data
+        .filter(item => needed.includes(item.label))
+        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
+        .map(item => ({
+            label: item.label,
+            current: toNumber(item.current),
+            goal: toNumber(item.goal),
+            unit: item.unit,
+            bodyStatId: STAT_IDS[item.label]
+        }));
+}
+

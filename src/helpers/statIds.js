@@ -4,6 +4,7 @@ export const STAT_IDS = {
     "Carbohydrates": "bd1-carb-0002",
     "Fats": "bd1-fats-0003",
     "Water": "bd1-watr-0004",
+    "Calories": "bd1-cali-0005",
 
     // Minerals
     "Calcium": "bd2-calc-0001",
