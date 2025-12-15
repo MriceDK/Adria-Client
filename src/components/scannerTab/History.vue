@@ -3,6 +3,8 @@
 import {getHistory} from "@/services/api/history.js";
 import {USER_ID} from "@/services/api/config.js";
 import {ref, watch} from "vue";
+import MainButton from "@/components/utilities/MainButton.vue";
+import {deleteScan} from "@/services/api/scanner.js";
 
 const props = defineProps({
   updateHistory: Boolean
@@ -17,6 +19,8 @@ const updateOnChange = watch(() => props.updateHistory, (newVal) => {
 
 
 const userHistory = ref([]);
+const displayPopup = ref(false);
+const scanIdToDelete = ref(null);
 
 async function updateHistory() {
   userHistory.value = await getHistory(USER_ID);
@@ -32,6 +36,21 @@ async function updateHistory() {
   emit('history-updated');
 }
 
+function closePopup() {
+  displayPopup.value = false;
+}
+
+function openPopup(e) {
+  scanIdToDelete.value = e.currentTarget.closest('li').getAttribute('data-scan-id');
+  displayPopup.value = true;
+}
+
+function confirmDelete() {
+  deleteScan(scanIdToDelete.value).then(updateHistory);
+  scanIdToDelete.value = null;
+  closePopup();
+}
+
 updateHistory();
 </script>
 
@@ -39,9 +58,14 @@ updateHistory();
   <div class="history-screen">
     <p class="title">Recent Foods</p>
     <ul v-if="userHistory.length > 0" class="history-list">
-      <li v-for="item in userHistory" :key="item.scanId" class="history-item">
-         <p class="food-name">{{ item.foodName }}</p>
-        <p class="date-tracked">{{ item.scanDateTime }}</p>
+      <li v-for="item in userHistory" :key="item.scanId" class="history-item" :data-scan-id="item.scanId">
+        <div class="top-row">
+          <div class="food-info">
+            <p class="food-name">{{ item.foodName }}</p>
+            <p class="date-tracked">{{ item.scanDateTime }}</p>
+          </div>
+          <img src="../../assets/icons/trash-icon.svg" alt="Delete Icon" class="delete-icon"  @click="openPopup"/>
+        </div>
         <ul class="nutrients">
           <li class="nutrient" v-for="nutrient in item.nutrients" :key="nutrient.nutrientId">
             {{ nutrient.type }}: {{ nutrient.amount }} {{ nutrient.unit }}
@@ -52,6 +76,13 @@ updateHistory();
     <div v-else class="no-history">
       <p>No foods tracked yet</p>
       <p>Scanned foods will appear here</p>
+    </div>
+  </div>
+  <div class="confirmation popup" v-if="displayPopup">
+    <p>Are you sure you want to delete this scan?</p>
+    <div class="button-row">
+      <main-button :black="false" @click="closePopup">Cancel</main-button>
+      <main-button :black="true" @click="confirmDelete">Confirm</main-button>
     </div>
   </div>
 </template>
@@ -132,6 +163,46 @@ updateHistory();
   margin: 0;
 
   overflow-y: scroll;
+}
+
+.confirmation.popup {
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: var(--main-font-family), sans-serif;
+  position: absolute;
+  z-index: 2;
+  gap: 0.5rem;
+  background-color: var(--main-bg-color);
+  padding: 1.25rem;
+  border: solid 0.1rem var(--secondary-bg-color);
+  border-radius: 1rem;
+  top: 35%;
+  left: 37.5%;
+}
+
+.confirmation.popup p {
+  font-size: 1rem;
+  text-align: center;
+  margin-left: 0.25rem;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+}
+
+.delete-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  float: right;
+  cursor: pointer;
+}
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 </style>

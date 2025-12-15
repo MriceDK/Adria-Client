@@ -6,4 +6,10 @@ async function getRandomFood(adrianId) {
     }).then(response => response.json());
 }
 
-export { getRandomFood };
+async function deleteScan(scanId) {
+    return await fetch(`${API_BASE}Scanner/scanfood/scan/${scanId}`, {
+        method: 'DELETE',
+    });
+}
+
+export { getRandomFood, deleteScan };
