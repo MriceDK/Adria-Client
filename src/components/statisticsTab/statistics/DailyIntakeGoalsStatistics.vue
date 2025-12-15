@@ -1,25 +1,21 @@
 <template>
   <section class="goals-section">
-
-    <div class="row">
-      <div class="header-left">
-        <div class="icon-circle goals-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round"
-               class="lucide lucide-droplet">
-            <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>
-          </svg>
-        </div>
-
-        <div class="text-block">
-          <h2>Daily Intake Goals</h2>
-          <p>Macronutrient targets</p>
-        </div>
-      </div>
+    <div class="header-row">
+      <StatisticsHeader
+          title="Daily Intake Goals"
+          subtitle="Macronutrient targets"
+          iconClass="goals-icon"
+      >
+        <template #icon>
+          <IconDroplet />
+        </template>
+      </StatisticsHeader>
 
       <div class="actions">
-        <main-button v-if="!isEditing" @click="isEditing=true" class="edit-charts">Change Goals</main-button>
+        <main-button v-if="!isEditing" @click="isEditing = true" class="edit-charts">
+          Change Goals
+        </main-button>
+
         <div v-else>
           <main-button @click="cancelEdit">Cancel</main-button>
           <main-button @click="saveGoals" :black="true">Save</main-button>
@@ -49,6 +45,9 @@ import { useStats } from "@/composables/useStats.js";
 import { updateStatGoal } from "@/services/statsService.js";
 import Statistic from "@/components/statisticsTab/Statistic.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
+import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
+import IconHeart from "@/components/icons/statisticsIcons/IconHeart.vue";
+import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 
 const isEditing = ref(false);
 const goals = ref([]);
@@ -76,8 +75,8 @@ async function saveGoals() {
 
 <style scoped>
 .goals-section {
-  background: white;
-  border: 0.1rem solid lightgray;
+  background: var(--main-bg-color);
+  border: var(--border);
   border-radius: 1rem;
   padding: 2rem;
 }
@@ -98,32 +97,16 @@ async function saveGoals() {
   gap: 1rem;
 }
 
-.icon-circle.goals-icon {
-  background-color: #dbeafe;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-circle.goals-icon svg {
-  width: 2rem;
-  height: 2rem;
-  stroke: #2563eb;
-}
-
 .text-block h2 {
   font-size: 1.7rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--main-text-color);
   margin: 0;
 }
 
 .text-block p {
   font-size: 1rem;
-  color: #6b7280;
+  color: var(--secondary-text-color);
   margin: 0.25rem 0 0;
 }
 
@@ -140,4 +123,11 @@ async function saveGoals() {
   gap: 1rem;
 }
 
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
 </style>

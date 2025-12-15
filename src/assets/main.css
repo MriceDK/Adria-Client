@@ -8,5 +8,7 @@
 
     --main-blue-color: #3b82f6;
 
+    --border: 0.1rem solid lightgray;
+
     --main-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

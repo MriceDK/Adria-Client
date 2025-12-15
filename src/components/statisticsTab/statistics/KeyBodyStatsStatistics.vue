@@ -3,7 +3,7 @@
     <StatisticsHeader
         title="Key Body Stats"
         subtitle="Health measurements and vitals"
-        iconClass="stats-icon"
+        iconClass="intake-icon"
     >
       <template #icon>
         <IconHeart />
