@@ -6,7 +6,7 @@ import {
     filterCholesterol,
     filterTrackerData
 } from "@/helpers/statsFilters.js";
-import {USER_ID} from "@/config/userConfig.js";
+import {USER_ID} from "@/services/api/config.js";
 
 export async function useStats(type) {
     const data = await getUserStats(USER_ID);
