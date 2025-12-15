@@ -17,7 +17,11 @@ const props = defineProps({
   <div class="goal-card">
     <div v-if="!props.isEditing">
       <h4>{{ props.item.label }}</h4>
-      <p>{{ props.item.current }}{{ props.item.unit }} / {{ props.item.goal }}{{ props.item.unit }}</p>
+      <p>
+        {{ Number(props.item.current).toFixed(1) }}{{ props.item.unit }}
+        /
+        {{ Number(props.item.goal).toFixed(1) }}{{ props.item.unit }}
+      </p>
 
       <ProgressBar v-if="props.useProgressBar"
                    :value="props.item.current"
