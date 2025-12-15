@@ -30,7 +30,7 @@ function addToTracker() {
 }
 
 function cancel() {
-  emit('cancel');
+  emit('cancel', props.foodObject.scanId);
 }
 
 </script>
