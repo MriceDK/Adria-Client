@@ -46,7 +46,6 @@ import { updateStatGoal } from "@/services/statsService.js";
 import Statistic from "@/components/statisticsTab/Statistic.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
 import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
-import IconHeart from "@/components/icons/statisticsIcons/IconHeart.vue";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 
 const isEditing = ref(false);
@@ -76,25 +75,9 @@ async function saveGoals() {
 <style scoped>
 .goals-section {
   background: var(--main-bg-color);
-  border: var(--border);
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 2rem;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .text-block h2 {

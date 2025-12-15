@@ -7,8 +7,20 @@
     --hover-black-color: #535353;
 
     --main-blue-color: #3b82f6;
+    --main-red-color: #fb2c36;
+    --main-green-color: #22c55e;
+    --main-yellow-color: #f0b100;
 
-    --border: 0.1rem solid lightgray;
+    --red-bg-color: #ffe9eb;
+    --green-bg-color: #dcfce7;
+    --gray-bg-color: #f8f8f8;
+
+    --main-light-blue-color: #00bfffff;
+
+    --border-default: 0.1rem solid #d3d3d3ff;
+
+    --progress-bar-bg-color: #f1f1f1;
+    --progress-bar-default-color: linear-gradient(90deg, darkgray, dimgray);
 
     --main-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

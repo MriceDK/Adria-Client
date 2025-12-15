@@ -57,8 +57,8 @@ function mineralStatus(item) {
 
 <style scoped>
 .minerals-section {
-  background: white;
-  border: 0.1rem solid #E5E5E5;
+  background: var(--main-bg-color);
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 2rem;
 }
@@ -77,53 +77,53 @@ function mineralStatus(item) {
 
 .mineral-label {
   font-size: 1.25rem;
-  color: #FB2C36;
+  color: var(--main-red-color);
   font-weight: normal;
   margin: 0;
 }
 
 .mineral-goal {
-  color: gray;
+  color: var(--secondary-text-color);
   font-size: 0.85rem;
   margin: 0;
 }
 
 .mineral-current {
-  color: #FB2C36;
+  color: var(--main-red-color);
   font-size: 1.25rem;
   margin-top: 1rem;
 }
 
 /*noinspection CssUnusedSymbol*/
 .mineral-card.low {
-  border-color: #fb2c36;
-  background: #ffe9eb;
+  border-color: var(--main-red-color);
+  background: var(--red-bg-color);
 }
 
 /*noinspection CssUnusedSymbol*/
 .mineral-card.near {
-  border-color: #d1d5db;
-  background: #f9fafb;
+  border-color: var(--secondary-text-color);
+  background: var(--gray-bg-color);
 }
 
 /*noinspection CssUnusedSymbol*/
 .mineral-card.good {
-  border-color: #22c55e;
-  background: #dcfce7;
+  border-color: var(--main-green-color);
+  background: var(--green-bg-color);
 }
 
 .mineral-card.low .mineral-current,
 .mineral-card.low .mineral-label {
-  color: #fb2c36;
+  color: var(--main-red-color);
 }
 
 .mineral-card.good .mineral-current,
 .mineral-card.good .mineral-label {
-  color: #22c55e;
+  color: var(--main-green-color);
 }
 
 .mineral-card.near .mineral-current,
 .mineral-card.near .mineral-label {
-  color: #6b7280;
+  color: var(--secondary-text-color);
 }
 </style>

@@ -53,7 +53,7 @@ onMounted(async () => {
 <style scoped>
 .panel-title {
   font-size: 1.5rem;
-  color: #717182;
+  color: var(--secondary-text-color);
   margin-bottom: 1rem;
 }
 
@@ -64,31 +64,31 @@ onMounted(async () => {
 }
 
 .cholesterol-card {
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 1rem;
 }
 
 /*noinspection CssUnusedSymbol*/
 .cholesterol-card.low {
-  border-color: #fb2c36;
-  background: #ffe9eb;
+  border-color: var(--main-red-color);
+  background: var(--red-bg-color);
 }
 
 /*noinspection CssUnusedSymbol*/
 .cholesterol-card.good {
-  border-color: #22c55e;
-  background: #dcfce7;
+  border-color: var(--main-green-color);
+  background: var(--green-bg-color);
 }
 
 .cholesterol-card.low .cholesterol-label,
 .cholesterol-card.low .cholesterol-current {
-  color: #fb2c36;
+  color: var(--main-red-color);
 }
 
 .cholesterol-card.good .cholesterol-label,
 .cholesterol-card.good .cholesterol-current {
-  color: #22c55e;
+  color: var(--main-green-color);
 }
 
 .cholesterol-top {

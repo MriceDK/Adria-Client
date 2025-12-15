@@ -3,7 +3,7 @@
     <StatisticsHeader
         title="Key Body Stats"
         subtitle="Health measurements and vitals"
-        iconClass="intake-icon"
+        iconClass="stats-icon"
     >
       <template #icon>
         <IconHeart />
@@ -89,8 +89,8 @@ onMounted(async () => {
 
 <style scoped>
 .body-stats-section {
-  background: white;
-  border: 0.1rem solid #E5E5E5;
+  background: var(--main-bg-color);
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 2rem;
 }
@@ -107,7 +107,7 @@ onMounted(async () => {
 }
 
 .stat-header p {
-  color: #717182;
+  color: var(--secondary-text-color);
   margin: 0;
 }
 
@@ -118,15 +118,15 @@ onMounted(async () => {
 }
 
 .red h4 {
-  color: #FB2C36;
+  color: var(--main-red-color);
 }
 
 .gray h4 {
-  color: #717182;
+  color: var(--secondary-text-color);
 }
 
 .blue h4 {
-  color: #2B7FFF;
+  color: var(--main-blue-color);
 }
 
 .stat-value {

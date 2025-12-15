@@ -41,11 +41,11 @@ section {
 
 #profile-header h1 {
   font-size: 2rem;
-  color: #000;
+  color: var(--main-text-color);
   margin: 0;
 }
 #profile-header p {
-  color: #717182;
+  color: var(--secondary-text-color);
   margin: 0;
   font-size: 1.25rem;
 }
