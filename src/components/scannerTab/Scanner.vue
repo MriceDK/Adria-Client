@@ -3,7 +3,7 @@ import Camera from "@/components/scannerTab/Camera.vue";
 import FoodInfo from "@/components/scannerTab/FoodInfo.vue";
 import History from "@/components/scannerTab/History.vue";
 import {ref} from "vue";
-import {getRandomFood} from "@/services/api/scanner.js";
+import {deleteScan, getRandomFood} from "@/services/api/scanner.js";
 import {USER_ID} from "@/services/api/config.js";
 
 const scanning = ref(false);
@@ -19,10 +19,17 @@ async function startScan() {
   food.value = await getRandomFood(USER_ID);
 }
 
-function startOver() {
+function startOver(scanId) {
   scanning.value = false;
   scanned.value = false;
+  deleteScan(scanId).then(() => updateHistory.value = true);
+}
+
+function addToTracker() {
+  scanned.value = false;
+  scanning.value = false;
   updateHistory.value = true;
+
 }
 
 </script>
@@ -40,7 +47,7 @@ function startOver() {
             <p class="scan-description">Analyzing nutrition information</p>
           </div>
         </camera>
-      <food-info @add-to-tracker="startOver" @cancel="startOver" :food-object="food" v-else></food-info>
+      <food-info @add-to-tracker="addToTracker" @cancel="startOver" :food-object="food" v-else></food-info>
     </div>
     <history :update-history="updateHistory" @history-updated="updateHistory = false"></history>
   </div>

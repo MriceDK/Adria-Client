@@ -30,7 +30,7 @@ function addToTracker() {
 }
 
 function cancel() {
-  emit('cancel');
+  emit('cancel', props.foodObject.scanId);
 }
 
 </script>
@@ -38,9 +38,7 @@ function cancel() {
 <template>
   <div class="nutrition-grid">
     <p class="food-name">{{ props.foodObject.foodName }}</p>
-    <div class="cancel" @click="cancel">
-      <img src="../../assets/icons/cross-icon.svg" class="cancel-btn" alt="Cancel" />
-    </div>
+    <p class="cancel" @click="cancel">X</p>
     <nutrient-info
         v-for="item in props.foodObject.nutrients"
         :nutrient-value="item.amount"
@@ -59,6 +57,8 @@ function cancel() {
 .food-name {
   grid-area: food-name;
   font-weight: 600;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 .cancel {
   grid-area: cancel-button;
@@ -66,12 +66,10 @@ function cancel() {
   justify-content: flex-end;
   align-items: center;
 }
-.cancel-btn{
-  height: 30%;
-  width: 30%;
-}
-.cancel-btn:hover{
-  filter: invert(32%) sepia(0%) saturate(809%) hue-rotate(218deg) brightness(98%) contrast(92%);
+
+.cancel:hover{
+  cursor: pointer;
+  color: var(--secondary-text-color);
 }
 .calories {
   grid-area: calories;

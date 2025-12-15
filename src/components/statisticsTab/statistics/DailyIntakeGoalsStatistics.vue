@@ -42,7 +42,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useStats } from "@/services/api/useStats.js";
-import { updateStatGoal } from "@/services/statsService.js";
+import { updateStatGoal } from "@/services/api/stats.js";
 import Statistic from "@/components/statisticsTab/Statistic.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
 import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
