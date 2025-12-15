@@ -9,6 +9,7 @@ import LineChart from "@/components/trackerTab/charts/LineChart.vue";
 import LineChartCalories from "@/components/trackerTab/charts/LineChartCalories.vue";
 import {useStats} from "@/composables/useStats.js";
 import {updateStatGoal} from "@/services/statsService.js";
+import TarckerHistory from "@/components/trackerTab/TarckerHistory.vue";
 
 const isEditing = ref(false);
 const goals = ref([]);
@@ -62,7 +63,7 @@ async function saveChanges() {
 
         <div class="goals-list">
           <Statistic
-              v-for="item in goals"
+              v-for="item in (isEditing ? editableGoals : goals)"
               :key="item.label"
               class="goal-card"
               :class="{ water: item.label === 'Water' }"
@@ -84,6 +85,7 @@ async function saveChanges() {
         </div>
 
       </div>
+      <TarckerHistory/>
     </main>
   </section>
 </template>
@@ -137,6 +139,7 @@ async function saveChanges() {
   flex-direction: column;
   gap: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 </style>
