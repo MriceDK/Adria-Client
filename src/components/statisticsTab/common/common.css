@@ -16,13 +16,13 @@
 .text-block h2 {
     font-size: 1.7rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--main-text-color);
     margin: 0;
 }
 
 .text-block p {
     font-size: 1rem;
-    color: #6b7280;
+    color: var(--secondary-text-color);
     margin: 0.25rem 0 0;
 }
 
@@ -31,56 +31,30 @@
     gap: 0.5rem;
 }
 
-.btn {
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border: 0.1rem solid lightgray;
-    border-radius: 0.5rem;
-    background: white;
-    cursor: pointer;
-    transition: 0.2s;
-    font-size: 0.9rem;
-}
-
-.btn:hover {
-    background: lightgray;
-}
-
-.btn.save {
-    background: black;
-    color: white;
-}
-
-.btn.save:hover {
-    background: darkslategray;
-}
-
 .stat-card.red {
-    border-color: #fb2c36;
-    background: #ffe9eb;
+    border-color: var(--main-red-color);
+    background: var(--red-bg-color);
 }
 .stat-card.blue {
-    border-color: #D5E5FF;
-    background: #f5f7ff;
+    border-color: var(--main-blue-color);
 }
 .stat-card.green {
-    border-color: #22c55e;
-    background: #dcfce7;
+    border-color: var(--main-green-color);
 }
 
 .value-highlight.good {
-    color: #37D477;
+    color: var(--main-green-color);
 }
 
 .value-highlight.warning {
-    color: #F0B100;
+    color: var(--main-yellow-color);
 }
 
 .value-highlight.blueText {
-    color: #2b7fff;
+    color: var(--main-blue-color);
 }
 
 .stats-list .stat-card {
-    background: white;
+    background: var(--main-bg-color);
     padding: 2rem;
 }

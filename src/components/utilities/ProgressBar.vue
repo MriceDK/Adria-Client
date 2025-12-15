@@ -20,14 +20,14 @@ const props = defineProps({
 })
 
 const bar = computed(() => Math.min((props.value / props.max) * 100, 100))
-const defaultColor = 'linear-gradient(90deg, darkgray, dimgray)'
+const defaultColor = 'var(--progress-bar-default-color)'
 </script>
 
 <style scoped>
 .progress-bar {
   width: 100%;
   height: 0.5rem;
-  background: lightgray;
+  background: var(--progress-bar-bg-color);
   border-radius: 1rem;
 }
 

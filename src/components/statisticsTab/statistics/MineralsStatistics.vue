@@ -8,17 +8,9 @@
       <template #icon>
         <IconActivity />
       </template>
-
-      <template #actions>
-        <button v-if="!isEditingMinerals" @click="isEditingMinerals = true" class="btn">Edit</button>
-        <template v-else>
-          <button @click="cancelEdit" class="btn cancel">Cancel</button>
-          <button @click="saveMinerals" class="btn save">Save</button>
-        </template>
-      </template>
     </StatisticsHeader>
 
-    <div v-if="!isEditingMinerals" class="minerals-list">
+    <div class="minerals-list">
       <StatCard
           v-for="item in minerals"
           :key="item.label"
@@ -38,60 +30,40 @@
         </template>
       </StatCard>
     </div>
-
-    <div v-else class="minerals-edit">
-      <div v-for="(mineral, i) in editableMinerals" :key="mineral.label" class="mineral-edit">
-        <label>{{ mineral.label }} ({{ mineral.unit }})</label>
-        <input v-model.number="editableMinerals[i].current" type="number" />
-      </div>
-    </div>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useStats } from "@/composables/useStats.js";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 import StatCard from "@/components/statisticsTab/common/StatCard.vue";
-import mineralsData from "@/data/minerals.js";
 import "@/components/statisticsTab/common/common.css";
 import IconActivity from "@/components/icons/statisticsIcons/IconActivity.vue";
 
-const isEditingMinerals = ref(false);
 const minerals = ref([]);
-const editableMinerals = ref([]);
 
-onMounted(() => {
-  minerals.value = mineralsData;
-  editableMinerals.value = mineralsData;
+onMounted(async () => {
+  minerals.value = await useStats("minerals");
 });
 
-function cancelEdit() {
-  editableMinerals.value = minerals.value;
-  isEditingMinerals.value = false;
-}
-
-function saveMinerals() {
-  minerals.value = editableMinerals.value;
-  isEditingMinerals.value = false;
-}
-
 function mineralStatus(item) {
-  const progress = item.current / item.goal;
-  if (progress >= 1) return "good";
-  if (progress >= 0.9) return "near";
+  const ratio = item.current / item.goal;
+  if (ratio >= 1) return "good";
+  if (ratio >= 0.9) return "near";
   return "low";
 }
 </script>
 
 <style scoped>
 .minerals-section {
-  background: white;
-  border: 0.1rem solid #E5E5E5;
+  background: var(--main-bg-color);
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 2rem;
 }
 
-.minerals-list, .minerals-edit {
+.minerals-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
   gap: 1rem;
@@ -105,69 +77,53 @@ function mineralStatus(item) {
 
 .mineral-label {
   font-size: 1.25rem;
-  color: #FB2C36;
+  color: var(--main-red-color);
   font-weight: normal;
   margin: 0;
 }
 
 .mineral-goal {
-  color: gray;
+  color: var(--secondary-text-color);
   font-size: 0.85rem;
   margin: 0;
 }
 
 .mineral-current {
-  color: #FB2C36;
+  color: var(--main-red-color);
   font-size: 1.25rem;
   margin-top: 1rem;
 }
 
-.mineral-edit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  border: 0.1rem solid lightgray;
-  border-radius: 1rem;
-}
-
-.mineral-edit input {
-  width: 4rem;
-  padding: 0.25rem;
-  border: 0.1rem solid lightgray;
-  border-radius: 0.5rem;
-  text-align: center;
-}
-
+/*noinspection CssUnusedSymbol*/
 .mineral-card.low {
-  border-color: #fb2c36;
-  background: #ffe9eb;
+  border-color: var(--main-red-color);
+  background: var(--red-bg-color);
 }
 
+/*noinspection CssUnusedSymbol*/
 .mineral-card.near {
-  border-color: #d1d5db;
-  background: #f9fafb;
+  border-color: var(--secondary-text-color);
+  background: var(--gray-bg-color);
 }
 
+/*noinspection CssUnusedSymbol*/
 .mineral-card.good {
-  border-color: #22c55e;
-  background: #dcfce7;
+  border-color: var(--main-green-color);
+  background: var(--green-bg-color);
 }
 
 .mineral-card.low .mineral-current,
 .mineral-card.low .mineral-label {
-  color: #fb2c36;
+  color: var(--main-red-color);
 }
 
 .mineral-card.good .mineral-current,
 .mineral-card.good .mineral-label {
-  color: #22c55e;
+  color: var(--main-green-color);
 }
 
 .mineral-card.near .mineral-current,
 .mineral-card.near .mineral-label {
-  color: #6b7280;
+  color: var(--secondary-text-color);
 }
-
 </style>

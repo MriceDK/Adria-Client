@@ -11,7 +11,7 @@
       >
         <div class="cholesterol-top">
           <h4 class="cholesterol-label">{{ item.label }}</h4>
-          <p class="cholesterol-goal">{{ formatGoal(item.label, item.goal, item.unit) }}</p>
+          <p class="cholesterol-goal">{{ formattedGoal(item) }}</p>
         </div>
 
         <div class="cholesterol-current">
@@ -23,39 +23,37 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from "vue";
-import cholesterolData from "@/data/cholesterol.js";
+import { ref, onMounted } from "vue";
+import { useStats } from "@/composables/useStats.js";
 
 const cholesterol = ref([]);
 
-onMounted(() => {
-  cholesterol.value = cholesterolData;
-});
-
-function formatGoal(label, goal, unit) {
-  const numericGoal = parseFloat(goal);
-  if (label === "HDL") return `≥${numericGoal} ${unit}`;
-  return `<${numericGoal} ${unit}`;
+function formattedGoal(item) {
+  if (item.label.includes("HDL")) {
+    return `≥${item.goal} ${item.unit}`;
+  }
+  return `<${item.goal} ${item.unit}`;
 }
 
 function cholesterolStatus(item) {
-  const {label, current, goal} = item;
-  const value = parseFloat(current);
-  const target = parseFloat(goal);
+  const value = Number(item.current) || 0;
+  const goal = Number(item.goal) || 0;
 
-  if (label === "HDL") {
-    return value >= target ? "good" : "low";
-  } else {
-    return value < target ? "good" : "low";
+  if (item.label.includes("HDL")) {
+    return value >= goal ? "good" : "low";
   }
+  return value < goal ? "good" : "low";
 }
+
+onMounted(async () => {
+  cholesterol.value = await useStats("cholesterol");
+});
 </script>
 
 <style scoped>
-
 .panel-title {
   font-size: 1.5rem;
-  color: #717182;
+  color: var(--secondary-text-color);
   margin-bottom: 1rem;
 }
 
@@ -66,29 +64,31 @@ function cholesterolStatus(item) {
 }
 
 .cholesterol-card {
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 1rem;
 }
 
+/*noinspection CssUnusedSymbol*/
 .cholesterol-card.low {
-  border-color: #fb2c36;
-  background: #ffe9eb;
+  border-color: var(--main-red-color);
+  background: var(--red-bg-color);
+}
+
+/*noinspection CssUnusedSymbol*/
+.cholesterol-card.good {
+  border-color: var(--main-green-color);
+  background: var(--green-bg-color);
 }
 
 .cholesterol-card.low .cholesterol-label,
 .cholesterol-card.low .cholesterol-current {
-  color: #fb2c36;
-}
-
-.cholesterol-card.good {
-  border-color: #22c55e;
-  background: #dcfce7;
+  color: var(--main-red-color);
 }
 
 .cholesterol-card.good .cholesterol-label,
 .cholesterol-card.good .cholesterol-current {
-  color: #22c55e;
+  color: var(--main-green-color);
 }
 
 .cholesterol-top {

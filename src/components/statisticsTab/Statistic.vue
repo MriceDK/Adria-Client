@@ -36,11 +36,11 @@ const props = defineProps({
 
 <style scoped>
 .goal-card {
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 1rem;
   text-align: center;
-  background: white;
+  background: var(--main-bg-color);
 }
 
 .goal-card h4, .goal-edit label {
@@ -54,7 +54,7 @@ const props = defineProps({
 }
 
 .remaining {
-  color: gray;
+  color: var(--secondary-text-color);
 }
 
 .goal-edit {
@@ -69,7 +69,7 @@ const props = defineProps({
 .goal-edit input {
   width: 4rem;
   padding: 0.25rem;
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
   border-radius: 0.5rem;
   text-align: center;
 }
@@ -78,11 +78,13 @@ const props = defineProps({
   color: var(--main-text-color);
 }
 
+/*noinspection CssUnusedSymbol*/
 .goal-card.water, .goal-card.water h4, .goal-card.water p {
-  color: deepskyblue;
+  color: var(--main-light-blue-color);
 }
 
+/*noinspection CssUnusedSymbol*/
 .goal-card.water {
-  border-color: deepskyblue;
+  border-color: var(--main-light-blue-color);
 }
 </style>

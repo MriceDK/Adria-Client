@@ -16,9 +16,9 @@ defineProps({
 
 <style scoped>
 .stat-card {
-  border: 0.1rem solid #E5E5E5;
+  border: var(--border-default);
   border-radius: 1rem;
   padding: 1.5rem;
-  background: #f8f8f8;
+  background: var(--gray-bg-color);
 }
 </style>
