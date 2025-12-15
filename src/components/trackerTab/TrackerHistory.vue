@@ -130,7 +130,7 @@ async function clearHistory() {
 }
 
 .clear-btn:hover {
-  background: #f3f4f6;
+  background: var(--gray-bg-color);
 }
 
 .history-list {
@@ -174,7 +174,7 @@ async function clearHistory() {
 
 .macros {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: var(--secondary-text-color);
   margin: 0.25rem 0 0;
 }
 
