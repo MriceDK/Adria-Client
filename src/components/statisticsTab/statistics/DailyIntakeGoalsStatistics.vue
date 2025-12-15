@@ -29,7 +29,8 @@
 
     <div class="goals-list">
       <statistic
-          v-for="item in goals" :key="item.label"
+          v-for="item in (isEditing ? editableGoals : goals)"
+          :key="item.label"
           class="goal-card"
           :class="{ water: item.label === 'Water'}"
 
@@ -46,10 +47,7 @@
 import { ref, onMounted } from "vue";
 import { useStats } from "@/composables/useStats.js";
 import { updateStatGoal } from "@/services/statsService.js";
-import IconDroplet from "@/components/icons/statisticsIcons/IconDroplet.vue";
-import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
-import StatCard from "@/components/statisticsTab/common/StatCard.vue";
-import ProgressBar from "@/components/utilities/ProgressBar.vue";
+import Statistic from "@/components/statisticsTab/Statistic.vue";
 
 const isEditing = ref(false);
 const goals = ref([]);
@@ -135,18 +133,17 @@ async function saveGoals() {
   margin-bottom: 1rem;
 }
 .btn {
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border: 0.1rem solid lightgray;
-  border-radius: 0.5rem;
-  background: white;
   cursor: pointer;
-  transition: 0.2s;
-  font-size: 0.9rem;
+  font-family: var(--main-font-family),sans-serif;
+  background-color: var(--main-bg-color);
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  border: solid 0.075rem var(--secondary-bg-color);
+  border-radius: 0.35rem;
 }
 
 .btn:hover {
-  background: lightgray;
+  background-color: var(--secondary-bg-color);
 }
 
 .btn.save {
