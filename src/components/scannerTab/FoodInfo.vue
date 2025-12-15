@@ -33,7 +33,6 @@ function cancel() {
   emit('cancel');
 }
 
-console.log(props.foodObject);
 </script>
 
 <template>
@@ -112,7 +111,7 @@ console.log(props.foodObject);
   border: solid 0.1rem var(--secondary-bg-color);
   border-radius: 1rem;
   padding: 1rem;
-  width: 40%;
+  width: 100%;
   gap: 1rem;
 }
 

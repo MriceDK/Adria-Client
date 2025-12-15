@@ -87,8 +87,8 @@ function takePhoto() {
   padding: 0.25rem;
   margin-top: 3rem;
   align-content: center;
-  height: 50vh;
-  max-width: 50%;
+  max-height: 40vh;
+  max-width: 40vh;
   border-radius: 10%;
 }
 
