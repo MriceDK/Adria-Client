@@ -203,10 +203,10 @@ const chartOptions = {
 
 <style scoped>
 .card {
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
   padding: 1.5rem;
   border-radius: 1.5rem;
-  background: white;
+  background: var(--main-bg-color);
 }
 
 .card-header {
@@ -221,7 +221,7 @@ const chartOptions = {
 }
 
 .subtitle {
-  color: #6b7280;
+  color: var(--secondary-text-color);
   margin-bottom: 1.5rem;
   margin-top: 0.5rem;
 }
