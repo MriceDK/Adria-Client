@@ -19,11 +19,11 @@
       </div>
 
       <div class="actions">
-        <button v-if="!isEditing" @click="isEditing = true" class="btn">Change Goals</button>
-        <template v-else>
-          <button @click="cancelEdit" class="btn cancel">Cancel</button>
-          <button @click="saveGoals" class="btn save">Save</button>
-        </template>
+        <main-button v-if="!isEditing" @click="isEditing=true" class="edit-charts">Change Goals</main-button>
+        <div v-else>
+          <main-button @click="cancelEdit">Cancel</main-button>
+          <main-button @click="saveGoals" :black="true">Save</main-button>
+        </div>
       </div>
     </div>
 
@@ -48,6 +48,7 @@ import { ref, onMounted } from "vue";
 import { useStats } from "@/composables/useStats.js";
 import { updateStatGoal } from "@/services/statsService.js";
 import Statistic from "@/components/statisticsTab/Statistic.vue";
+import MainButton from "@/components/utilities/MainButton.vue";
 
 const isEditing = ref(false);
 const goals = ref([]);
@@ -131,28 +132,6 @@ async function saveGoals() {
   justify-content: flex-end;
   gap: 0.5rem;
   margin-bottom: 1rem;
-}
-.btn {
-  cursor: pointer;
-  font-family: var(--main-font-family),sans-serif;
-  background-color: var(--main-bg-color);
-  padding: 0.5rem 2rem;
-  font-size: 1rem;
-  border: solid 0.075rem var(--secondary-bg-color);
-  border-radius: 0.35rem;
-}
-
-.btn:hover {
-  background-color: var(--secondary-bg-color);
-}
-
-.btn.save {
-  background: black;
-  color: white;
-}
-
-.btn.save:hover {
-  background: darkslategray;
 }
 
 .goals-list {

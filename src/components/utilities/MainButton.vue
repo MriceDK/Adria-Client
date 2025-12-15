@@ -18,6 +18,7 @@ button {
   font-size: 1rem;
   border: solid 0.075rem var(--secondary-bg-color);
   border-radius: 0.35rem;
+  margin-left: 0.5rem;
 }
 button:hover {
   background-color: var(--secondary-bg-color);
