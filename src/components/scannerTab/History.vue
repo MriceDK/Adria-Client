@@ -40,8 +40,13 @@ updateHistory();
     <p class="title">Recent Foods</p>
     <ul v-if="userHistory.length > 0" class="history-list">
       <li v-for="item in userHistory" :key="item.scanId" class="history-item">
-        <p class="food-name">{{ item.foodName }}</p>
+         <p class="food-name">{{ item.foodName }}</p>
         <p class="date-tracked">{{ item.scanDateTime }}</p>
+        <ul class="nutrients">
+          <li class="nutrient" v-for="nutrient in item.nutrients" :key="nutrient.nutrientId">
+            {{ nutrient.type }}: {{ nutrient.amount }} {{ nutrient.unit }}
+          </li>
+        </ul>
       </li>
     </ul>
     <div v-else class="no-history">
@@ -65,12 +70,38 @@ updateHistory();
 
 }
 
+.food-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.date-tracked {
+  font-size: 0.8rem;
+  color: var(--secondary-text-color);
+  margin-top: -1rem;
+}
+
 .history-item {
-  background-color: var(--secondary-bg-color);
   border: solid 1px var(--secondary-bg-color);
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.nutrients {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.nutrient {
+  background-color: var(--secondary-bg-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .no-history {

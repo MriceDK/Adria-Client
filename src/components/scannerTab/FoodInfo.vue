@@ -57,17 +57,14 @@ function cancel() {
 .food-name {
   grid-area: food-name;
   font-weight: 600;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 .cancel {
   grid-area: cancel-button;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
-
-.food-name {
-  font-size: 1.2rem;
-  margin-left: 0.5rem;
 }
 
 .cancel:hover{
