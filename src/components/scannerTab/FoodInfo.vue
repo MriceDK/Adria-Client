@@ -6,15 +6,21 @@ import MainButton from "@/components/utilities/MainButton.vue";
 const emit = defineEmits(['cancel', 'addToTracker']);
 const props = defineProps({
   foodObject : {
+    scanId : String,
+    adrianId : String,
+    foodId : String,
     foodName : String,
+    foodType : String,
+    foodEdible : Boolean,
     nutrients : [
       {
-        name: String,
-        value: Number,
+        nutrientId : String,
+        type: String,
+        amount: Number,
         unit: String
       }
     ],
-    time : Date,
+    scanDateTime : Date,
   }
 });
 
@@ -27,21 +33,22 @@ function cancel() {
   emit('cancel');
 }
 
+console.log(props.foodObject);
 </script>
 
 <template>
   <div class="nutrition-grid">
-    <p class="food-name">Grilled Chicken breast</p>
+    <p class="food-name">{{ props.foodObject.foodName }}</p>
     <div class="cancel" @click="cancel">
       <img src="../../assets/icons/cross-icon.svg" class="cancel-btn" alt="Cancel" />
     </div>
     <nutrient-info
         v-for="item in props.foodObject.nutrients"
-        :nutrient-value="item.value"
+        :nutrient-value="item.amount"
         :nutrient-unit="item.unit"
-        :class="item.name.toLowerCase()"
+        :class="item.type.toLowerCase()"
     >
-      {{item.name}}
+      {{item.type}}
     </nutrient-info>
 
     <main-button class="add-to-tracker" :black="true" @click="addToTracker">Add To Tracker</main-button>

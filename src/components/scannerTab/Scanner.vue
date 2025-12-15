@@ -2,26 +2,19 @@
 import Camera from "@/components/scannerTab/Camera.vue";
 import FoodInfo from "@/components/scannerTab/FoodInfo.vue";
 import {ref} from "vue";
+import {getRandomFood} from "@/services/api/scanner.js";
+import {USER_ID} from "@/services/api/config.js";
 
 const scanning = ref(false);
 const scanned = ref(false);
 
-const food = ref(null);
-getData();
+const food = ref({
+  foodName: "Not available"
+});
 
-function getData() {
-  // TODO: get data from server
-  food.value = {
-    foodName: "Grilled Chicken Breast",
-    nutrients: [
-      {name: "Calories", value: 150, unit: "kcal"},
-      {name: "Protein", value: 30, unit: "g"},
-      {name: "Carbs", value: 0, unit: "g"},
-      {name: "Fiber", value: 0, unit: "g"},
-      {name: "Fat", value: 3.5, unit: "g"},
-    ],
-    time: Date.now(),
-  }
+async function startScan() {
+  scanning.value = !scanning.value;
+  food.value = await getRandomFood(USER_ID);
 }
 
 function startOver() {
@@ -33,10 +26,7 @@ function startOver() {
 
 <template>
   <div class="scan-start-screen">
-    <!--ScanCamera-->
-    <!--Text-->
-    <!--Scan button-->
-    <camera @scan="scanning = !scanning" @scanned="scanned = true" v-if="!scanned">
+    <camera @scan="startScan" @scanned="scanned = true" v-if="!scanned">
       <div v-show="!scanning" class="start-scan">
         <p class="scan-title">Start Scanning</p>
         <p class="scan-description">Point your camera at any food item to instantly get detailed nutrition information</p>
