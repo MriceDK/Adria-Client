@@ -11,11 +11,12 @@ import {
   Legend,
   Filler
 } from 'chart.js'
-import {ref} from "vue";
 
-const props = defineProps({
-  isEditing: Boolean,
-});
+import { ref, onMounted } from "vue"
+import { getHistory } from "@/services/api/history.js"
+import { USER_ID } from "@/services/api/config.js"
+
+const props = defineProps({isEditing: Boolean});
 
 ChartJS.register(
     CategoryScale,
@@ -26,16 +27,45 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-);
+)
 
+const chartData = ref(null)
+const needsToBeHidden = ref(true)
 
+async function loadMacrosTimeline() {
+  const history = await getHistory(USER_ID)
 
-const chartData = {
-    labels: ["13:46", "13:48", "13:52", "14:53"],
+  history.sort(
+      (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
+  )
+
+  const labels = []
+  const protein = []
+  const carbs = []
+  const fat = []
+
+  history.forEach(item => {
+    const getAmount = (type) =>
+        item.nutrients.find(n => n.type === type)?.amount ?? 0
+
+    labels.push(
+        new Date(item.scanDateTime).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        })
+    )
+
+    protein.push(getAmount("Protein"))
+    carbs.push(getAmount("Carbohydrates"))
+    fat.push(getAmount("Fat"))
+  })
+
+  chartData.value = {
+    labels,
     datasets: [
       {
         label: "Carbs (g)",
-        data: [20, 45, 57, 57],
+        data: carbs,
         borderColor: "#22c55e",
         backgroundColor: "#22c55e",
         tension: 0.4,
@@ -44,7 +74,7 @@ const chartData = {
       },
       {
         label: "Fat (g)",
-        data: [2, 3, 6, 27],
+        data: fat,
         borderColor: "#f59e0b",
         backgroundColor: "#f59e0b",
         tension: 0.4,
@@ -53,7 +83,7 @@ const chartData = {
       },
       {
         label: "Protein (g)",
-        data: [15, 16, 46, 73],
+        data: protein,
         borderColor: "#3b82f6",
         backgroundColor: "#3b82f6",
         tension: 0.4,
@@ -62,6 +92,9 @@ const chartData = {
       }
     ]
   }
+}
+
+onMounted(loadMacrosTimeline)
 
 const chartOptions = {
   responsive: true,
@@ -87,9 +120,6 @@ const chartOptions = {
         boxWidth: 8,
         color: "#374151"
       }
-    },
-    title: {
-      display: false
     },
     tooltip: {
       borderWidth: 1,
@@ -131,27 +161,36 @@ const chartOptions = {
     }
   }
 }
-
-const needsToBeHidden = ref(true);
-
 </script>
 
 <template>
-  <div class="card" v-if="isEditing || (needsToBeHidden && !isEditing)" :class="{hidden : !needsToBeHidden}">
+  <div
+      class="card"
+      v-if="isEditing || (needsToBeHidden && !isEditing)"
+      :class="{ hidden: !needsToBeHidden }"
+  >
     <div class="card-header">
       <h3>Macros Timeline</h3>
-      <input v-model="needsToBeHidden" type="checkbox" v-if="isEditing" checked>
+      <input
+          v-if="isEditing"
+          v-model="needsToBeHidden"
+          type="checkbox"
+      />
     </div>
-    <p class="subtitle">Cumulative protein, carbs, and fat over time</p>
+
+    <p class="subtitle">
+      Cumulative protein, carbs, and fat over time
+    </p>
 
     <div class="chart">
-      <Line v-if="!chartData.empty" :data="chartData" :options="chartOptions"></Line>
-      <div v-else >Data loading...</div>
+      <Line
+          v-if="chartData"
+          :data="chartData"
+          :options="chartOptions"
+      />
+      <div v-else>Data loading...</div>
     </div>
-
   </div>
-
-
 </template>
 
 <style scoped>
@@ -164,11 +203,9 @@ const needsToBeHidden = ref(true);
 
 .card-header {
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   font-size: 1.25rem;
-
 }
 
 .card-header h3 {
@@ -190,6 +227,6 @@ const needsToBeHidden = ref(true);
 }
 
 .hidden {
-  opacity: 50%;
+  opacity: 0.5;
 }
 </style>
