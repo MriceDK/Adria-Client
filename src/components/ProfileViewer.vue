@@ -81,7 +81,7 @@ function enablePush() {
   float: right;
   margin-right: .25%;
   top: 1%;
-  z-index: 10;
+  z-index: 4;
 
   width: 2%;
   height: 2%;

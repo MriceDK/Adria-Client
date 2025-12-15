@@ -1,5 +1,5 @@
-import { getUserStats } from "@/services/statsService.js";
-import { filterDailyGoals, filterMinerals, filterBodyStats, filterCholesterol } from "@/helpers/statsFilters.js";
+import { getUserStats } from "@/services/api/stats.js";
+import { filterDailyGoals, filterMinerals, filterBodyStats, filterCholesterol } from "@/services/api/helpers/statsFilters.js";
 import {USER_ID} from "@/config/userConfig.js";
 
 export async function useStats(type) {
