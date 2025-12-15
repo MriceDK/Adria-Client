@@ -35,7 +35,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useStats } from "@/composables/useStats.js";
+import { useStats } from "@/services/api/useStats.js";
 import StatisticsHeader from "@/components/statisticsTab/common/StatisticsHeader.vue";
 import StatCard from "@/components/statisticsTab/common/StatCard.vue";
 import "@/components/statisticsTab/common/common.css";

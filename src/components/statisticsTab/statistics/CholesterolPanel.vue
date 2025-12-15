@@ -24,7 +24,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useStats } from "@/composables/useStats.js";
+import { useStats } from "@/services/api/useStats.js";
 
 const cholesterol = ref([]);
 

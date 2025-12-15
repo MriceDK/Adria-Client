@@ -1,4 +1,4 @@
-import {STAT_IDS} from "@/helpers/statIds.js";
+import {STAT_IDS} from "@/services/api/helpers/statIds.js";
 
 export function filterDailyGoals(data) {
     const needed = ["Protein", "Carbohydrates", "Fats", "Water"];
