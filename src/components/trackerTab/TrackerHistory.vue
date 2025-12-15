@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue"
-import { getHistory } from "@/services/api/history.js"
+import {deleteScan, getHistory} from "@/services/api/history.js"
 import { USER_ID } from "@/services/api/config.js"
 import TrashIcon from "@/components/icons/TrashIcon.vue"
 
@@ -23,15 +23,23 @@ async function updateHistory() {
   emit("history-updated")
 }
 
-function deleteItem(id) {
-  // TODO: backend delete
-  userHistory.value = userHistory.value.filter(item => item.scanId !== id)
+async function deleteItem(scanId) {
+  await deleteScan(scanId)
+
+  userHistory.value = userHistory.value.filter(
+      item => item.scanId !== scanId
+  )
 }
 
-function clearHistory() {
-  // TODO: backend clear
+async function clearHistory() {
+  await Promise.all(
+      userHistory.value.map(item => deleteScan(item.scanId))
+  )
+
   userHistory.value = []
 }
+
+
 </script>
 
 <template>
