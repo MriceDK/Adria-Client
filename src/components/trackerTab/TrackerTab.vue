@@ -9,7 +9,7 @@ import LineChart from "@/components/trackerTab/charts/LineChart.vue";
 import LineChartCalories from "@/components/trackerTab/charts/LineChartCalories.vue";
 import {useStats} from "@/composables/useStats.js";
 import {updateStatGoal} from "@/services/statsService.js";
-import TarckerHistory from "@/components/trackerTab/TarckerHistory.vue";
+import TarckerHistory from "@/components/trackerTab/TrackerHistory.vue";
 
 const isEditing = ref(false);
 const goals = ref([]);
