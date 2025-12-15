@@ -7,7 +7,7 @@ import PieChart from "@/components/trackerTab/charts/PieChart.vue";
 import RadialBarChart from "@/components/trackerTab/charts/RadialBarChart.vue";
 import LineChart from "@/components/trackerTab/charts/LineChart.vue";
 import LineChartCalories from "@/components/trackerTab/charts/LineChartCalories.vue";
-import {useStats} from "@/composables/useStats.js";
+import {useStats} from "@/services/api/useStats.js";
 import {updateStatGoal} from "@/services/statsService.js";
 import TarckerHistory from "@/components/trackerTab/TrackerHistory.vue";
 

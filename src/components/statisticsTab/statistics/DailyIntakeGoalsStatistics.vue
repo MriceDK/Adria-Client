@@ -41,7 +41,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useStats } from "@/composables/useStats.js";
+import { useStats } from "@/services/api/useStats.js";
 import { updateStatGoal } from "@/services/statsService.js";
 import Statistic from "@/components/statisticsTab/Statistic.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
