@@ -12,7 +12,7 @@
 }
 
 .icon-circle.goals-icon {
-    background-color: var(--main-bg-color);
+    background-color: var(--goals-icon-bg-color);
 }
 
 .icon-circle.goals-icon svg {
@@ -22,7 +22,7 @@
 }
 
 .icon-circle.minerals-icon {
-    background-color: var(--main-bg-color);
+    background-color: var(--minerals-icon-bg-color);
 }
 
 .icon-circle.minerals-icon svg {
@@ -32,7 +32,7 @@
 }
 
 .icon-circle.stats-icon {
-    background-color: var(--main-bg-color);
+    background-color: var(--stats-icon-bg-color);
 }
 
 .icon-circle.stats-icon svg {
