@@ -76,7 +76,7 @@ template {
   align-items: center;
   justify-content: center;
   min-height: 70vh;
-  background: #fff;
+  background: var(--main-bg-color);
 }
 
 .scan-title {

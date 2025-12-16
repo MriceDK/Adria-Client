@@ -12,31 +12,31 @@
 }
 
 .icon-circle.goals-icon {
-    background-color: #dbeafe;
+    background-color: var(--main-bg-color);
 }
 
 .icon-circle.goals-icon svg {
     width: 2rem;
     height: 2rem;
-    stroke: #2563eb;
+    stroke: var(--main-blue-color);
 }
 
 .icon-circle.minerals-icon {
-    background-color: #dcfce7;
+    background-color: var(--main-bg-color);
 }
 
 .icon-circle.minerals-icon svg {
     width: 2rem;
     height: 2rem;
-    stroke: #22c55e;
+    stroke: var(--main-green-color);
 }
 
 .icon-circle.stats-icon {
-    background-color: #fee2e2;
+    background-color: var(--main-bg-color);
 }
 
 .icon-circle.stats-icon svg {
     width: 2rem;
     height: 2rem;
-    stroke: #ef4444;
+    stroke: var(--main-red-color);
 }

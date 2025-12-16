@@ -14,7 +14,7 @@ const props = defineProps({
 
 <style scoped>
 .nutrient-container {
-  background-color: #f3f3f6;
+  background-color: var(--main-bg-color);
   border-radius: 0.65rem;
   padding: 1rem 1.25rem;
   text-align: center;
@@ -28,7 +28,7 @@ const props = defineProps({
 .nutrient-label {
   font-size: 1rem;
   font-weight: 600;
-  color: #6b7280; /* gray-500 */
+  color: var(--secondary-text-color);
   margin-bottom: 0.25rem;
 }
 
@@ -36,7 +36,7 @@ const props = defineProps({
 
   font-size: 0.9rem;
   font-weight: 600;
-  color: #111827; /* gray-900 */
+  color: var(--main-text-color);
   margin: 0;
 }
 </style>
