@@ -55,7 +55,8 @@ function handleAddToCart(item) {
 <template>
   <div class="shop-container">
     <ShopItem v-for="(item) in dummydata" :item="item" @add-to-cart="handleAddToCart" v-show="item.title.includes(searchInput) || searchInput === ''" />
-  </div></template>
+  </div>
+</template>
 
 <style scoped>
 .shop-container {

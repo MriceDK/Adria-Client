@@ -98,4 +98,9 @@ button {
 button:hover {
   background-color: #237232;
 }
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(43, 138, 62, 0.5);
+}
 </style>

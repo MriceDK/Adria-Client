@@ -82,7 +82,7 @@ function handleClear() {
   display: flex;
   flex-flow: column nowrap;
   font-family: var(--main-font-family), sans-serif;
-  position: absolute;
+  position: fixed;
   z-index: 15;
   gap: 0.5rem;
   background-color: var(--main-bg-color);

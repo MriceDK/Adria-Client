@@ -28,7 +28,7 @@ const cartTotalPrice = computed(() => {
   return props.cartItems.reduce((total, item) => total + item.cost * item.count, 0).toFixed(2);
 });
 const amountOfItems = computed(() => {
-  return props.cartItems.reduce((total) => total + 1, 0);
+  return props.cartItems.reduce((total, item) => total + (item.count || 0), 0);
 });
 
 function handleOpenCart() {
@@ -42,11 +42,7 @@ function handleChangeAmount(SupplementObject) {
 </script>
 
 <template>
-  <div class="cartIcon-pointer">
-    <div class="cartIcon" @click="handleOpenCart" v-show="!cartEnabled">
-      <img src="../../assets/icons/shopping-cart-outline-svgrepo-com.svg" alt="">
-    </div>
-  </div>
+  <img src="../../assets/icons/shopping-cart-outline-svgrepo-com.svg" alt="Shopping Cart" class="cartIcon" @click="handleOpenCart" v-show="!cartEnabled">
   <div v-show="cartEnabled">
     <div class="cartcontainer">
       <div class="top-row">
@@ -79,27 +75,22 @@ function handleChangeAmount(SupplementObject) {
 
 <style scoped>
 .cartIcon {
-  position: fixed;
-  width: 4rem;
-  height: 4rem;
-  right: 1%;
+  position: sticky;
+  float: right;
+  margin-right: .25%;
   top: 10%;
-  background-color: lightgray;
-  border-radius: 4rem;
+  z-index: 4;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 3%;
+  height: 3%;
+  border: 2px solid var(--secondary-bg-color);
+  border-radius: 0.35rem;
+  box-shadow: 0.1rem 0.1rem 0.1rem var(--secondary-bg-color);
+  padding: 0.25rem;
 }
 
 .cartIcon-pointer :hover {
   cursor: pointer;
-}
-
-.cartIcon img {
-  width: 60%;
-  height: 60%;
-  object-fit: contain;
 }
 
 .cartcontainer {

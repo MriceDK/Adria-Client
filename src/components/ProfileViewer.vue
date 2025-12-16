@@ -83,11 +83,13 @@ function enablePush() {
   top: 1%;
   z-index: 4;
 
-  width: 2%;
-  height: 2%;
+  width: 3%;
+  height: 3%;
   border: 2px solid var(--secondary-bg-color);
   border-radius: 0.35rem;
   box-shadow: 0.1rem 0.1rem 0.1rem var(--secondary-bg-color);
+  padding: 0.25rem;
+
 }
 
 .popup {

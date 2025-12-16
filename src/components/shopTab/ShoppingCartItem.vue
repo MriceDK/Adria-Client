@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
   image: String,
@@ -14,13 +14,14 @@ const props = defineProps({
 
 const emit = defineEmits(['update-amount']);
 
-const dynamicAmount = ref(props.item.count);
-
-function updateAmount() {
-  emit('update-amount', {SupplementId: props.item.SupplementId, newAmount: dynamicAmount.value});
-  dynamicAmount.value = props.item.count;
-}
-
+const dynamicAmount = computed({
+  get() {
+    return props.item.count;
+  },
+  set(val) {
+      emit('update-amount', {SupplementId: props.item.SupplementId, newAmount: Number(val)});
+    }
+});
 </script>
 
 <template>
@@ -32,7 +33,7 @@ function updateAmount() {
       <!-- Title + Price -->
       <div class="top-row">
         <p class="title">{{ props.item.title }}</p>
-        <p class="price">€{{ props.item.cost }} x <input class="amount" type="number" min="0" v-model="dynamicAmount" @change="updateAmount"></p>
+        <p class="price">€{{ props.item.cost }} x <input class="amount" type="number" min="0" v-model="dynamicAmount"></p>
       </div>
       <!-- description -->
       <p class="description">{{ props.item.description }}</p>
@@ -47,9 +48,9 @@ function updateAmount() {
   width: 90%;
   padding: 1rem;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
   margin-bottom: 1rem;
-  border: 1px solid lightgray;
+  border: 1px solid var(--secondary-text-color);
 }
 
 .cartitem:hover {
@@ -78,25 +79,26 @@ function updateAmount() {
 .title {
   font-size: 1rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--main-text-color);
 }
 
 .price {
   font-size: 1rem;
   font-weight: 600;
-  color: #16a34a;
+  color: var(--main-green-color);
 }
 
 .description {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--secondary-text-color);
 }
 
 .price .amount {
   width: 3rem;
   margin-left: 0.5rem;
   padding: 0.25rem;
-  border: 1px solid #d1d5db;
+  border: 0px solid var(--secondary-text-color);
+  border-bottom: 1px solid var(--secondary-text-color);
   border-radius: 4px;
   font-size: 1rem;
 }
