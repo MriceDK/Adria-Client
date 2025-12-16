@@ -24,6 +24,10 @@ button:hover {
   background-color: var(--secondary-bg-color);
 }
 
+button:active {
+  transform: scale(0.97);
+}
+
 .black {
   background: var(--main-text-color);
   color: var(--main-bg-color);
