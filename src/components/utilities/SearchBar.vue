@@ -64,6 +64,6 @@ const value = ref("");
 .icon {
   width: 1.5em;
   height: 1.5em;
-  color: #888;
+  color: var(--secondary-text-color);
 }
 </style>

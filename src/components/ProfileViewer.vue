@@ -228,7 +228,7 @@ function enablePush() {
   margin: 0;
   padding: 0.125rem 0.625rem;
   border-radius: 999px;
-  background-color: #2563eb;
+  background-color: var(--main-blue-color);
   color: var(--main-bg-color);
   font-size: 0.75rem;
   font-weight: 500;

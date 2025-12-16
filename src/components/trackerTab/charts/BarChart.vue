@@ -102,7 +102,7 @@ const needsToBeHidden = ref(true);
 }
 
 .subtitle {
-  color: #6b7280;
+  color: var(--secondary-text-color);
   margin-bottom: 1.5rem;
   margin-top: 0.5rem;
   text-align: center;

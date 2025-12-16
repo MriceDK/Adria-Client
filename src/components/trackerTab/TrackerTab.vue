@@ -109,7 +109,7 @@ function saveChanges() {
 
 .page-head p {
   margin: 0;
-  color: #6b7280;
+  color: var(--secondary-text-color);
   font-size: 1.1rem;
 }
 
