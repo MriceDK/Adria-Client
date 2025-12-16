@@ -11,12 +11,11 @@ import {
   Legend,
   Filler
 } from 'chart.js'
-import {ref} from "vue";
+import { ref, onMounted } from "vue"
+import { getHistory } from "@/services/api/history.js"
+import { USER_ID } from "@/services/api/config.js"
 
-
-const props = defineProps({
-  isEditing: Boolean,
-});
+const props = defineProps({isEditing: Boolean});
 
 ChartJS.register(
     CategoryScale,
@@ -27,29 +26,69 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-);
+)
 
+const chartData = ref(null)
+const needsToBeHidden = ref(true)
 
+async function loadCalorieTimeline() {
+  const history = await getHistory(USER_ID)
 
-const chartData = {
-  labels: ["13:46", "13:48", "13:52", "14:53"],
-  datasets: [
-    {
-      data: [180, 300, 450, 1500],
-      fill: true,
-      backgroundColor: (context) => {
-        const ctx = context.chart.ctx
-        const chartArea = context.chart.chartArea
-        if (!chartArea) return null
-        const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom)
-        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.4)')
-        gradient.addColorStop(1, 'rgba(59, 130, 246, 0)')
-        return gradient
-      },
-      borderColor: '#3b82f6'
-    }
-  ],
-};
+  history.sort((a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime))
+
+  const labels = []
+  const calories = []
+
+  let totalCalories = 0
+
+  history.forEach(item => {
+    const calorie = item.nutrients.find(n => n.type === "Calories")
+    if (!calorie) return
+
+    totalCalories += calorie.amount
+
+    labels.push(
+        new Date(item.scanDateTime).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        })
+    )
+
+    calories.push(totalCalories)
+  })
+
+  chartData.value = {
+    labels,
+    datasets: [
+      {
+        data: calories,
+        fill: true,
+        backgroundColor: (context) => {
+          const ctx = context.chart.ctx
+          const chartArea = context.chart.chartArea
+          if (!chartArea) return null
+
+          const gradient = ctx.createLinearGradient(
+              0,
+              chartArea.top,
+              0,
+              chartArea.bottom
+          )
+
+          gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)")
+          gradient.addColorStop(1, "rgba(59, 130, 246, 0)")
+
+          return gradient
+        },
+        borderColor: "#3b82f6",
+        borderWidth: 2,
+        tension: 0.4
+      }
+    ]
+  }
+}
+
+onMounted(loadCalorieTimeline)
 
 
 const chartOptions = {
@@ -57,20 +96,11 @@ const chartOptions = {
   maintainAspectRatio: false,
   elements: {
     point: {
-      radius: 2,
-      color: "#3b82f6"
-    },
-    line: {
-      tension: 0.4,
-      borderWidth: 2,
-      borderColor: '#3b82f6'
+      radius: 2
     }
   },
   plugins: {
     legend: {
-      display: false
-    },
-    title: {
       display: false
     },
     tooltip: {
@@ -78,9 +108,7 @@ const chartOptions = {
       padding: 10,
       displayColors: false,
       callbacks: {
-        label: (context) => {
-          return context.raw + " kcal";
-        }
+        label: (context) => `${context.raw} kcal`
       }
     }
   },
@@ -91,17 +119,17 @@ const chartOptions = {
         drawBorder: false
       },
       ticks: {
-        color: '#6b7280'
+        color: "#6b7280"
       }
     },
     y: {
       beginAtZero: true,
       grid: {
-        color: '#e5e7eb',
+        color: "#e5e7eb",
         drawBorder: false
       },
       ticks: {
-        color: '#6b7280',
+        color: "#6b7280",
         padding: 8
       }
     }
@@ -115,44 +143,51 @@ const chartOptions = {
     }
   }
 }
-
-const needsToBeHidden = ref(true);
-
 </script>
 
 <template>
-  <div class="card" v-if="isEditing || (needsToBeHidden && !isEditing)" :class="{hidden : !needsToBeHidden}">
+  <div
+      class="card"
+      v-if="isEditing || (needsToBeHidden && !isEditing)"
+      :class="{ hidden: !needsToBeHidden }"
+  >
     <div class="card-header">
       <h3>Caloric Timeline</h3>
-      <input v-model="needsToBeHidden" type="checkbox" v-if="isEditing" checked>
+      <input
+          v-if="isEditing"
+          v-model="needsToBeHidden"
+          type="checkbox"
+      />
     </div>
-    <p class="subtitle">Cumulative caloric intake throughout the day</p>
+
+    <p class="subtitle">
+      Cumulative caloric intake throughout the day
+    </p>
 
     <div class="chart">
-      <Line v-if="!chartData.empty" :data="chartData" :options="chartOptions"></Line>
-      <div v-else >Data loading...</div>
+      <Line
+          v-if="chartData"
+          :data="chartData"
+          :options="chartOptions"
+      />
+      <div v-else>Data loading...</div>
     </div>
-
   </div>
-
-
 </template>
 
 <style scoped>
 .card {
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
   padding: 1.5rem;
   border-radius: 1.5rem;
-  background: white;
+  background: var(--main-bg-color);
 }
 
 .card-header {
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   font-size: 1.25rem;
-
 }
 
 .card-header h3 {
@@ -160,7 +195,7 @@ const needsToBeHidden = ref(true);
 }
 
 .subtitle {
-  color: #6b7280;
+  color: var(--secondary-text-color);
   margin-bottom: 1.5rem;
   margin-top: 0.5rem;
 }
@@ -174,6 +209,6 @@ const needsToBeHidden = ref(true);
 }
 
 .hidden {
-  opacity: 50%;
+  opacity: 0.5;
 }
 </style>

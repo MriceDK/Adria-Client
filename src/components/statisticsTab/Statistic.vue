@@ -17,14 +17,21 @@ const props = defineProps({
   <div class="goal-card">
     <div v-if="!props.isEditing">
       <h4>{{ props.item.label }}</h4>
-      <p>{{ props.item.current }}{{ props.item.unit }} / {{ props.item.goal }}{{ props.item.unit }}</p>
+      <p>
+        {{ Number(props.item.current).toFixed(1) }}{{ props.item.unit }}
+        /
+        {{ Number(props.item.goal).toFixed(1) }}{{ props.item.unit }}
+      </p>
 
       <ProgressBar v-if="props.useProgressBar"
                    :value="props.item.current"
                    :max="props.item.goal"
                    :color="props.item.label === 'Water' ? 'linear-gradient(90deg, #60a5fa, #3b82f6)' : null"/>
 
-      <p class="remaining">{{ (props.item.goal - props.item.current).toFixed(1) }}{{ props.item.unit }} remaining</p>
+      <p class="remaining" v-if="props.item.goal - props.item.current > 0">
+        {{ (props.item.goal - props.item.current).toFixed(1) }}{{ props.item.unit }} remaining
+      </p>
+      <p class="remaining goal-reached" v-else>Goal reached!</p>
     </div>
 
     <div v-else class="goal-edit">

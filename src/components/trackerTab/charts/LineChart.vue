@@ -11,11 +11,12 @@ import {
   Legend,
   Filler
 } from 'chart.js'
-import {ref} from "vue";
 
-const props = defineProps({
-  isEditing: Boolean,
-});
+import { ref, onMounted } from "vue"
+import { getHistory } from "@/services/api/history.js"
+import { USER_ID } from "@/services/api/config.js"
+
+const props = defineProps({isEditing: Boolean});
 
 ChartJS.register(
     CategoryScale,
@@ -26,16 +27,53 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-);
+)
 
+const chartData = ref(null)
+const needsToBeHidden = ref(true)
 
+async function loadMacrosTimeline() {
+  const history = await getHistory(USER_ID)
 
-const chartData = {
-    labels: ["13:46", "13:48", "13:52", "14:53"],
+  history.sort(
+      (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
+  )
+
+  const labels = []
+  const protein = []
+  const carbs = []
+  const fat = []
+
+  let totalProtein = 0
+  let totalCarbs = 0
+  let totalFat = 0
+
+  history.forEach(item => {
+    const getAmount = (type) =>
+        item.nutrients.find(n => n.type === type)?.amount ?? 0
+
+    totalProtein += getAmount("Protein")
+    totalCarbs += getAmount("Carbohydrates")
+    totalFat += getAmount("Fat")
+
+    labels.push(
+        new Date(item.scanDateTime).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        })
+    )
+
+    protein.push(totalProtein)
+    carbs.push(totalCarbs)
+    fat.push(totalFat)
+  })
+
+  chartData.value = {
+    labels,
     datasets: [
       {
         label: "Carbs (g)",
-        data: [20, 45, 57, 57],
+        data: carbs,
         borderColor: "#22c55e",
         backgroundColor: "#22c55e",
         tension: 0.4,
@@ -44,7 +82,7 @@ const chartData = {
       },
       {
         label: "Fat (g)",
-        data: [2, 3, 6, 27],
+        data: fat,
         borderColor: "#f59e0b",
         backgroundColor: "#f59e0b",
         tension: 0.4,
@@ -53,7 +91,7 @@ const chartData = {
       },
       {
         label: "Protein (g)",
-        data: [15, 16, 46, 73],
+        data: protein,
         borderColor: "#3b82f6",
         backgroundColor: "#3b82f6",
         tension: 0.4,
@@ -62,6 +100,9 @@ const chartData = {
       }
     ]
   }
+}
+
+onMounted(loadMacrosTimeline)
 
 const chartOptions = {
   responsive: true,
@@ -87,9 +128,6 @@ const chartOptions = {
         boxWidth: 8,
         color: "#374151"
       }
-    },
-    title: {
-      display: false
     },
     tooltip: {
       borderWidth: 1,
@@ -131,44 +169,51 @@ const chartOptions = {
     }
   }
 }
-
-const needsToBeHidden = ref(true);
-
 </script>
 
 <template>
-  <div class="card" v-if="isEditing || (needsToBeHidden && !isEditing)" :class="{hidden : !needsToBeHidden}">
+  <div
+      class="card"
+      v-if="isEditing || (needsToBeHidden && !isEditing)"
+      :class="{ hidden: !needsToBeHidden }"
+  >
     <div class="card-header">
       <h3>Macros Timeline</h3>
-      <input v-model="needsToBeHidden" type="checkbox" v-if="isEditing" checked>
+      <input
+          v-if="isEditing"
+          v-model="needsToBeHidden"
+          type="checkbox"
+      />
     </div>
-    <p class="subtitle">Cumulative protein, carbs, and fat over time</p>
+
+    <p class="subtitle">
+      Cumulative protein, carbs, and fat over time
+    </p>
 
     <div class="chart">
-      <Line v-if="!chartData.empty" :data="chartData" :options="chartOptions"></Line>
-      <div v-else >Data loading...</div>
+      <Line
+          v-if="chartData"
+          :data="chartData"
+          :options="chartOptions"
+      />
+      <div v-else>Data loading...</div>
     </div>
-
   </div>
-
-
 </template>
 
 <style scoped>
 .card {
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
   padding: 1.5rem;
   border-radius: 1.5rem;
-  background: white;
+  background: var(--main-bg-color);
 }
 
 .card-header {
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   font-size: 1.25rem;
-
 }
 
 .card-header h3 {
@@ -176,7 +221,7 @@ const needsToBeHidden = ref(true);
 }
 
 .subtitle {
-  color: #6b7280;
+  color: var(--secondary-text-color);
   margin-bottom: 1.5rem;
   margin-top: 0.5rem;
 }
@@ -190,6 +235,6 @@ const needsToBeHidden = ref(true);
 }
 
 .hidden {
-  opacity: 50%;
+  opacity: 0.5;
 }
 </style>

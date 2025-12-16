@@ -6,4 +6,11 @@ async function getHistory(adrianId) {
     }).then(response => response.json());
 }
 
-export { getHistory };
+async function deleteScan(scanId) {
+    await fetch(
+        `${API_BASE}Scanner/ScanFood/scan/${scanId}`,
+        {method: "DELETE"}
+    );
+}
+
+export { getHistory, deleteScan };

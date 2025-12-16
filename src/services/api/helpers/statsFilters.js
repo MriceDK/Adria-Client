@@ -8,8 +8,8 @@ export function filterDailyGoals(data) {
         .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
         .map(item => ({
             label: item.label,
-            current: toNumber(item.current),
-            goal: toNumber(item.goal),
+            current: item.current,
+            goal: item.goal,
             unit: item.unit,
             bodyStatId: STAT_IDS[item.label]
         }));
@@ -26,8 +26,8 @@ export function filterMinerals(data) {
         .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
         .map(item => ({
             label: item.label,
-            current: toNumber(item.current),
-            goal: toNumber(item.goal),
+            current: item.current,
+            goal: item.goal,
             unit: item.unit,
             bodyStatId: STAT_IDS[item.label]
         }));
@@ -57,8 +57,8 @@ export function filterBodyStats(data) {
         .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
         .map(item => ({
             label: item.label,
-            current: toNumber(item.current),
-            goal: toNumber(item.goal),
+            current: item.current,
+            goal: item.goal,
             unit: item.unit,
             targetMin: targetMin[item.label],
             bodyStatId: STAT_IDS[item.label]
@@ -80,14 +80,30 @@ export function filterCholesterol(data) {
             label: item.label
                 .replace(" Cholesterol", "")
                 .replace("Cholesterol ", ""),
-            current: toNumber(item.current),
-            goal: toNumber(item.goal),
+            current: item.current,
+            goal: item.goal,
             unit: item.unit,
             bodyStatId: STAT_IDS[item.label]
         }));
 }
 
-function toNumber(value) {
-    const cleaned = String(value).replace(/[^0-9.]/g, "");
-    return parseFloat(cleaned);
+export function filterTrackerData(data) {
+    const needed = [
+        "Calories",
+        "Protein",
+        "Carbohydrates",
+        "Water"
+    ];
+
+    return data
+        .filter(item => needed.includes(item.label))
+        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
+        .map(item => ({
+            label: item.label,
+            current: item.current,
+            goal: item.goal,
+            unit: item.unit,
+            bodyStatId: STAT_IDS[item.label]
+        }));
 }
+

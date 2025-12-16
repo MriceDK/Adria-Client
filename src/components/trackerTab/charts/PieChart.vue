@@ -86,7 +86,8 @@ const needsToBeHidden = ref(true);
 <style scoped>
 .card {
   width: 33%;
-  border: 0.1rem solid lightgray;
+  border: var(--border-default);
+  background: var(--main-bg-color);
   padding: 2rem;
   border-radius: 1.5rem;
   justify-content: center;
@@ -107,7 +108,7 @@ const needsToBeHidden = ref(true);
 }
 
 .subtitle {
-  color: #6b7280;
+  color: var(--secondary-text-color);
   margin-bottom: 1.5rem;
   margin-top: 0.5rem;
   text-align: center;

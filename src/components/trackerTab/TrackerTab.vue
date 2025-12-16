@@ -7,28 +7,30 @@ import PieChart from "@/components/trackerTab/charts/PieChart.vue";
 import RadialBarChart from "@/components/trackerTab/charts/RadialBarChart.vue";
 import LineChart from "@/components/trackerTab/charts/LineChart.vue";
 import LineChartCalories from "@/components/trackerTab/charts/LineChartCalories.vue";
+import {useStats} from "@/services/api/useStats.js";
+import TarckerHistory from "@/components/trackerTab/TrackerHistory.vue";
+import {updateStatGoal} from "@/services/api/stats.js";
 
 const isEditing = ref(false);
 const goals = ref([]);
 const editableGoals = ref([]);
 
-onMounted(() => {
-  goals.value = [
-    { label: 'Calories', current: 800, goal: 2000, unit: 'kcal' },
-    { label: 'Protein', current: 50.7, goal: 150, unit: 'g' },
-    { label: 'Carbs', current: 120.9, goal: 250, unit: 'g'  },
-    { label: 'Water', current: 2500, goal: 2500, unit: 'ml' }
-  ]
-  editableGoals.value = goals.value
+onMounted(async () => {
+  goals.value = await useStats("tracker-data");
+  editableGoals.value = JSON.parse(JSON.stringify(goals.value));
 });
 
 function cancelEdit() {
-  editableGoals.value = goals.value;
+  editableGoals.value = JSON.parse(JSON.stringify(goals.value));
   isEditing.value = false;
 }
 
-function saveChanges() {
-  goals.value = editableGoals.value;
+async function saveChanges() {
+  for (const stat of editableGoals.value) {
+    await updateStatGoal(stat.bodyStatId, stat.goal);
+  }
+
+  goals.value = JSON.parse(JSON.stringify(editableGoals.value));
   isEditing.value = false;
 }
 </script>
@@ -61,7 +63,7 @@ function saveChanges() {
 
         <div class="goals-list">
           <Statistic
-              v-for="item in goals"
+              v-for="item in (isEditing ? editableGoals : goals)"
               :key="item.label"
               class="goal-card"
               :class="{ water: item.label === 'Water' }"
@@ -83,6 +85,7 @@ function saveChanges() {
         </div>
 
       </div>
+      <TarckerHistory/>
     </main>
   </section>
 </template>
@@ -109,7 +112,7 @@ function saveChanges() {
 
 .page-head p {
   margin: 0;
-  color: #6b7280;
+  color: var(--secondary-text-color);
   font-size: 1.1rem;
 }
 
@@ -136,6 +139,7 @@ function saveChanges() {
   flex-direction: column;
   gap: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 </style>
