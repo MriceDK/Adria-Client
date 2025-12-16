@@ -9,7 +9,7 @@ const props = defineProps({
   cartTotal: Number,
 });
 
-const emit = defineEmits(['close-checkout']);
+const emit = defineEmits(['close-checkout', 'order-created']);
 
 function handleConfirmOrder() {
   const toSupplementAmounts = (items) =>
@@ -18,7 +18,7 @@ function handleConfirmOrder() {
         amount: item.count,
       }));
   createOrder(USER_ID, toSupplementAmounts(props.cartItems)).then(() => {
-    emit('close-checkout');
+    emit('order-created');
   });
 }
 </script>
