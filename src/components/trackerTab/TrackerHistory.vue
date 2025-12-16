@@ -1,12 +1,19 @@
 <script setup>
 import { ref, onMounted } from "vue"
-import {deleteScan, getHistory} from "@/services/api/history.js"
+import { deleteScan, getHistory } from "@/services/api/history.js"
 import { USER_ID } from "@/services/api/config.js"
 import TrashIcon from "@/components/icons/TrashIcon.vue"
+import MainButton from "@/components/utilities/MainButton.vue"
 
 const emit = defineEmits(["history-updated"])
 
 const userHistory = ref([])
+
+const displayPopup = ref(false)
+const scanIdToDelete = ref(null)
+const deleteAll = ref(false)
+const scanNameToDelete = ref(null)
+
 
 onMounted(updateHistory)
 
@@ -23,23 +30,37 @@ async function updateHistory() {
   emit("history-updated")
 }
 
-async function deleteItem(scanId) {
-  await deleteScan(scanId)
 
-  userHistory.value = userHistory.value.filter(
-      item => item.scanId !== scanId
-  )
+function openDeleteOnePopup(item) {
+  scanIdToDelete.value = item.scanId
+  scanNameToDelete.value = item.foodName
+  deleteAll.value = false
+  displayPopup.value = true
 }
 
-async function clearHistory() {
-  await Promise.all(
-      userHistory.value.map(item => deleteScan(item.scanId))
-  )
-
-  userHistory.value = []
+function openDeleteAllPopup() {
+  deleteAll.value = true
+  scanIdToDelete.value = null
+  displayPopup.value = true
 }
 
+function closePopup() {
+  displayPopup.value = false
+  scanIdToDelete.value = null
+  deleteAll.value = false
+}
 
+async function confirmDelete() {
+  if (deleteAll.value) {
+    await Promise.all(userHistory.value.map(item => deleteScan(item.scanId)))
+    userHistory.value = []
+  }
+  else if (scanIdToDelete.value) {
+    await deleteScan(scanIdToDelete.value)
+    userHistory.value = userHistory.value.filter(item => item.scanId !== scanIdToDelete.value)
+  }
+  closePopup()
+}
 </script>
 
 <template>
@@ -47,7 +68,7 @@ async function clearHistory() {
     <div class="history-header">
       <h3>Food History</h3>
 
-      <button v-if="userHistory.length" class="clear-btn" @click="clearHistory">
+      <button v-if="userHistory.length" class="clear-btn" @click="openDeleteAllPopup">
         <TrashIcon/> Clear History
       </button>
     </div>
@@ -79,7 +100,7 @@ async function clearHistory() {
 
         <button
             class="icon-button"
-            @click="deleteItem(item.scanId)"
+            @click="openDeleteOnePopup(item)"
             title="Delete"
         >
           <TrashIcon />
@@ -92,6 +113,31 @@ async function clearHistory() {
       <p>Scanned foods will appear here</p>
     </div>
   </section>
+
+  <div class="confirmation popup" v-if="displayPopup">
+    <p>
+      <template v-if="deleteAll">
+        Are you sure you want to delete <span class="danger-text">ALL</span> scans?
+      </template>
+
+      <template v-else>
+        Are you sure you want to delete this
+        <span class="scan-name">"{{ scanNameToDelete }}"</span>
+        scan?
+      </template>
+    </p>
+
+
+
+    <div class="button-row">
+      <MainButton :black="false" @click="closePopup">
+        Cancel
+      </MainButton>
+      <MainButton :black="true" @click="confirmDelete">
+        Confirm
+      </MainButton>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -189,9 +235,27 @@ async function clearHistory() {
   opacity: 0.7;
 }
 
-.empty-state {
-  text-align: center;
-  color: var(--secondary-text-color);
-  padding: 0;
+.confirmation.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background-color: var(--main-bg-color);
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: solid 0.1rem var(--secondary-bg-color);
 }
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.danger-text, .scan-name {
+  color: var(--main-red-color);
+  font-weight: bold;
+}
+
 </style>

@@ -103,4 +103,9 @@ button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(43, 138, 62, 0.5);
 }
+
+button:active {
+  background-color: var(--main-text-color);
+  transform: scale(0.97);
+}
 </style>
