@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import {ref} from "vue";
+
+const props = defineProps({
   image: String,
   item: {
     SupplementId: String,
@@ -8,22 +10,32 @@ defineProps({
     cost: Number,
     count: Number
   }
-})
+});
+
+const emit = defineEmits(['update-amount']);
+
+const dynamicAmount = ref(props.item.count);
+
+function updateAmount() {
+  emit('update-amount', {SupplementId: props.item.SupplementId, newAmount: dynamicAmount.value});
+  dynamicAmount.value = props.item.count;
+}
+
 </script>
 
 <template>
   <div class="cartitem">
     <!-- image -->
-    <img :src="image" :alt="item.title" class="image" />
+    <img :src="image" :alt="props.item.title" class="image" />
 
     <div class="info">
       <!-- Title + Price -->
       <div class="top-row">
-        <p class="title">{{ item.title }}</p>
-        <p class="price">€{{ item.cost }} x {{item.count}}</p>
+        <p class="title">{{ props.item.title }}</p>
+        <p class="price">€{{ props.item.cost }} x <input class="amount" type="number" min="0" v-model="dynamicAmount" @change="updateAmount"></p>
       </div>
       <!-- description -->
-      <p class="description">{{ item.description }}</p>
+      <p class="description">{{ props.item.description }}</p>
 
     </div>  </div></template>
 
@@ -78,6 +90,15 @@ defineProps({
 .description {
   font-size: 0.875rem;
   color: #6b7280;
+}
+
+.price .amount {
+  width: 3rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
 </style>

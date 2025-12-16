@@ -5,12 +5,24 @@ import CheckoutPopup from "./CheckoutPopup.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
 
 const props = defineProps({
-  cartItems: Array
+  cartItems: [
+    {
+      image: String,
+      item: {
+        SupplementId: String,
+        title: String,
+        description: String,
+        cost: Number,
+        count: Number
+      },
+    }
+  ]
 });
-defineEmits(["clear-cart"]);
+const emit = defineEmits(["clear-cart", "update-amount"]);
 
 const cartEnabled = ref(false)
 const checkoutEnable = ref(false)
+
 
 const cartTotalPrice = computed(() => {
   return props.cartItems.reduce((total, item) => total + item.cost * item.count, 0).toFixed(2);
@@ -21,6 +33,10 @@ const amountOfItems = computed(() => {
 
 function handleOpenCart() {
   cartEnabled.value = !cartEnabled.value
+}
+
+function handleChangeAmount(SupplementObject) {
+  emit("update-amount", SupplementObject);
 }
 
 </script>
@@ -39,7 +55,11 @@ function handleOpenCart() {
       </div>
       <p class="amount"> total items in cart {{ amountOfItems }}</p>
       <div class="cartitems">
-        <ShoppingCartItem v-for="(item) in props.cartItems" :item="item"/>
+        <ShoppingCartItem
+            v-for="(item) in props.cartItems"
+            :key="item.SupplementId"
+            :item="item"
+            @update-amount="handleChangeAmount"/>
       </div>
       <div class="bottom-row">
         <p>total</p>
@@ -55,7 +75,6 @@ function handleOpenCart() {
   </div>
   <CheckoutPopup v-if="checkoutEnable" :cart-items="cartItems" :cart-total="cartTotalPrice" :cart-amount="amountOfItems"
                  @close-checkout="checkoutEnable = false"></CheckoutPopup>
-
 </template>
 
 <style scoped>
