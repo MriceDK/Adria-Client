@@ -1,9 +1,11 @@
 <script setup>
-import ShopContainer from "@/components/shoptab/ShopContainer.vue";
-import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
+import ShopContainer from "@/components/shopTab/ShopContainer.vue";
+import ShoppingCart from "@/components/shopTab/ShoppingCart.vue";
 import {ref} from "vue";
-import SearchBar from "@/components/utilities/SearchBar.vue";
-import MainButton from "@/components/utilities/MainButton.vue";
+import SearchBar from "../utilities/SearchBar.vue";
+import MainButton from "../utilities/MainButton.vue";
+
+
 const cartItems = ref([]);
 const searchValue = ref("");
 

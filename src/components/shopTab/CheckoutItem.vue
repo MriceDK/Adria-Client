@@ -2,8 +2,8 @@
 const props = defineProps({
   item: {
     SupplementId: String,
-    title: String,
-    description: String,
+    name: String,
+    type: String,
     cost: Number,
     count: Number
   }
@@ -12,8 +12,8 @@ const props = defineProps({
 
 <template>
   <div class="checkoutitem">
-    <p >{{props.item.title}} x {{props.item.count}}</p>
-    <p>€{{(props.item.cost*props.item.count).toFixed(2)}}</p>
+    <p >{{props.item.name}} x {{props.item.count}}</p>
+    <p>€{{(props.item.price*props.item.count).toFixed(2)}}</p>
   </div></template>
 
 <style scoped>

@@ -1,31 +1,32 @@
 <script setup>
-defineProps({
-  image: String,
-  item: {
-    title: String,
-    description: String,
-    cost: Number
+const props = defineProps({
+  item : {
+    supplementId: String,
+    name : String,
+    type: String,
+    price: Number,
+    stock: Number,
   }
 })
-const emit = defineEmits(['add-to-cart'])
+const emit = defineEmits(['add-to-cart'], props.item)
 </script>
 
 <template>
   <div class="shopitem">
     <!-- image -->
-    <img src="../../assets/icons/statsicon.png" :alt="item.title" class="image" />
+    <img src="../../assets/icons/statsicon.png" :alt="props.item.name" class="image" />
 
     <div class="info">
       <!-- Title + Price in One Line -->
       <div class="top-row">
-        <p class="title">{{ item.title }}</p>
-        <p class="price">€{{ item.cost }}</p>
+        <p class="title">{{ props.item.name }}</p>
+        <p class="price">€{{ props.item.price }}</p>
       </div>
       <!-- description -->
-      <p class="description">{{ item.description }}</p>
+      <p class="description">{{ props.item.type }}</p>
 
       <!-- button -->
-      <button @click="emit('add-to-cart',item)">add to cart</button>
+      <button @click="emit('add-to-cart', props.item)">add to cart</button>
     </div>  </div></template>
 
 <style scoped>
