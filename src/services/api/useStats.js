@@ -1,4 +1,4 @@
-import { getUserStats } from "@/services/api/stats.js";
+import { getUserStats } from "./stats.js";
 import {
     filterDailyGoals,
     filterMinerals,
@@ -6,7 +6,7 @@ import {
     filterCholesterol,
     filterTrackerData
 } from "@/services/api/helpers/statsFilters.js";
-import {USER_ID} from "@/services/api/config.js";
+import {USER_ID} from "./config.js";
 
 export async function useStats(type) {
     const data = await getUserStats(USER_ID);

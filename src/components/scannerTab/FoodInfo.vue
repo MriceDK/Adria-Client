@@ -1,7 +1,7 @@
 <script setup>
 
-import NutrientInfo from "@/components/scannerTab/NutrientInfo.vue";
-import MainButton from "@/components/utilities/MainButton.vue";
+import NutrientInfo from "./NutrientInfo.vue";
+import MainButton from "../utilities/MainButton.vue";
 
 const emit = defineEmits(['cancel', 'addToTracker']);
 const props = defineProps({

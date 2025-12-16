@@ -1,6 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import MainButton from "@/components/utilities/MainButton.vue";
+import MainButton from "../utilities/MainButton.vue";
 
 let isScanning = ref(false);
 let cameraEnabled = ref(false);

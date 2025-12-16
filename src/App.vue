@@ -1,12 +1,12 @@
 <script setup>
-import TheHeader from "@/components/TheHeader.vue";
-import HealthProfile from "@/components/statisticsTab/HealthProfile.vue";
-import Scanner from "@/components/scannerTab/Scanner.vue";
-import ShopTab from "@/components/shopTab/ShopTab.vue";
-import TrackerTab from "@/components/trackerTab/TrackerTab.vue";
+import TheHeader from "./components/TheHeader.vue";
+import HealthProfile from "./components/statisticsTab/HealthProfile.vue";
+import Scanner from "./components/scannerTab/Scanner.vue";
+import ShopTab from "./components/shopTab/ShopTab.vue";
+import TrackerTab from "./components/trackerTab/TrackerTab.vue";
 
 import {ref} from "vue";
-import Profile from "@/components/ProfileViewer.vue";
+import Profile from "./components/ProfileViewer.vue";
 
 
 

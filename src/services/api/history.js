@@ -1,4 +1,4 @@
-import {API_BASE} from "@/services/api/config.js";
+import {API_BASE} from "./config.js";
 
 async function getHistory(adrianId) {
     return await fetch(`${API_BASE}Scanner/history/${adrianId}`, {
