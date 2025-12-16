@@ -3,7 +3,7 @@ import {computed, ref} from "vue";
 
 const props = defineProps({
   item: {
-    SupplementId: String,
+    supplementId: String,
     name: String,
     type: String,
     price: Number,
@@ -19,7 +19,7 @@ const dynamicAmount = computed({
     return props.item.count;
   },
   set(val) {
-      emit('update-amount', {SupplementId: props.item.SupplementId, newAmount: Number(val)});
+      emit('update-amount', {supplementId: props.item.supplementId, newAmount: Number(val)});
     }
 });
 </script>

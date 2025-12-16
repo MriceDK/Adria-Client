@@ -1,14 +1,18 @@
 <script setup>
 const props = defineProps({
   item : {
-    supplementId: String,
     name : String,
-    type: String,
     price: Number,
     stock: Number,
+    supplementId: String,
+    type: String,
   }
 })
-const emit = defineEmits(['add-to-cart'], props.item)
+const emit = defineEmits(['add-to-cart']);
+
+function handleAddToCart() {
+  emit('add-to-cart', props.item);
+}
 </script>
 
 <template>
@@ -26,7 +30,7 @@ const emit = defineEmits(['add-to-cart'], props.item)
       <p class="description">{{ props.item.type }}</p>
 
       <!-- button -->
-      <button @click="emit('add-to-cart', props.item)">add to cart</button>
+      <button @click="handleAddToCart">add to cart</button>
     </div>  </div></template>
 
 <style scoped>

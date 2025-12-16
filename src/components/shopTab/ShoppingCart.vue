@@ -8,7 +8,7 @@ const props = defineProps({
   cartItems: [
     {
       item: {
-        SupplementId: String,
+        supplementId: String,
         name: String,
         type: String,
         price: Number,
@@ -53,7 +53,7 @@ function handleChangeAmount(SupplementObject) {
       <div class="cartitems">
         <ShoppingCartItem
             v-for="(item) in props.cartItems"
-            :key="item.SupplementId"
+            :key="item.supplementId"
             :item="item"
             @update-amount="handleChangeAmount"/>
       </div>
@@ -70,7 +70,7 @@ function handleChangeAmount(SupplementObject) {
     </div>
   </div>
   <CheckoutPopup v-if="checkoutEnable" :cart-items="cartItems" :cart-total="cartTotalPrice" :cart-amount="amountOfItems"
-                 @close-checkout="checkoutEnable = false"></CheckoutPopup>
+                 @close-checkout="checkoutEnable = false"/>
 </template>
 
 <style scoped>

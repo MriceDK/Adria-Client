@@ -15,8 +15,8 @@ const itemIndexToDelete = ref(null);
 
 function handleAddToCart(item) {
   let found = false;
-  for (let currentItem of cartItems.value) {
-    if (currentItem.SupplementId === item.SupplementId) {
+  for (const currentItem of cartItems.value) {
+    if (currentItem.supplementId === item.supplementId) {
       currentItem.count++;
       found = true;
     }
@@ -44,10 +44,10 @@ function confirmDelete() {
   closePopup();
 }
 
-function handleUpdateAmount({SupplementId, newAmount}) {
+function handleUpdateAmount({supplementId, newAmount}) {
   for (let i = 0; i < cartItems.value.length; i++) {
 
-    if (cartItems.value[i].SupplementId === SupplementId) {
+    if (cartItems.value[i].supplementId === supplementId) {
       if (newAmount <= 0) {
         openPopup(i);
       } else {

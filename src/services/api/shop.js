@@ -6,4 +6,19 @@ async function getShopItems() {
     }).then(response => response.json());
 }
 
-export { getShopItems };
+async function createOrder(adrianId, orderData) {
+    const body =  {
+        adrianId: adrianId,
+        supplements: orderData,
+    };
+    return await fetch(`${API_BASE}OrderSupplement`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+}
+
+export { getShopItems, createOrder };

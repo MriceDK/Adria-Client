@@ -1,6 +1,8 @@
 <script setup>
 import CheckoutItem from './CheckoutItem.vue'
 import MainButton from "@/components/utilities/MainButton.vue";
+import {createOrder} from "@/services/api/shop.js";
+import {USER_ID} from "@/services/api/config.js";
 const props = defineProps({
   cartItems: Array,
   cartAmount: Number,
@@ -8,6 +10,17 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close-checkout']);
+
+function handleConfirmOrder() {
+  const toSupplementAmounts = (items) =>
+      items.map(item => ({
+        supplementId: item.supplementId,
+        amount: item.count,
+      }));
+  createOrder(USER_ID, toSupplementAmounts(props.cartItems)).then(() => {
+    emit('close-checkout');
+  });
+}
 </script>
 
 <template>
@@ -16,10 +29,13 @@ const emit = defineEmits(['close-checkout']);
     <p class="title">Confirm Your Order</p>
     <p class="description">You are about to place an order for {{ cartAmount }} items totaling €{{ cartTotal }}.</p>
     <CheckoutItem v-for="item in props.cartItems" :item="item" />
-    <div>          <MainButton class="checkoutbutton" @click="emit('close-checkout')" :black="true">Cancel</MainButton>
-      <MainButton class="checkoutbutton">Confirm Order</MainButton>
-    </div>      </div>  <div class="backgroundShadow" @click="emit('close-checkout')">
-</div></template>
+    <div>
+      <MainButton class="checkoutbutton" @click="emit('close-checkout')" :black="true">Cancel</MainButton>
+      <MainButton class="checkoutbutton" @click="handleConfirmOrder">Confirm Order</MainButton>
+    </div>
+  </div>
+  <div class="backgroundShadow" @click="emit('close-checkout')"></div>
+</template>
 
 <style scoped>
 .backgroundShadow {

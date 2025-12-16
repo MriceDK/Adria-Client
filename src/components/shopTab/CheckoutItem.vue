@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   item: {
-    SupplementId: String,
+    supplementId: String,
     name: String,
     type: String,
     cost: Number,
