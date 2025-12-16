@@ -101,4 +101,9 @@ button {
 button:hover {
   background-color: #237232;
 }
+
+button:active {
+  background-color: var(--main-text-color);
+  transform: scale(0.97);
+}
 </style>
