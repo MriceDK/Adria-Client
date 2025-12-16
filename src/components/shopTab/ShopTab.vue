@@ -1,6 +1,6 @@
 <script setup>
-import ShopContainer from "@/components/shoptab/ShopContainer.vue";
-import ShoppingCart from "@/components/shoptab/ShoppingCart.vue";
+import ShopContainer from "/src/components/shopTab/ShopContainer.vue";
+import ShoppingCart from "/src/components/shopTab/ShoppingCart.vue";
 import {ref} from "vue";
 import SearchBar from "@/components/utilities/SearchBar.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
