@@ -1,8 +1,8 @@
 <script setup>
-import User from "@/components/icons/User.vue";
+import User from "../components/icons/User.vue";
 import {ref} from "vue";
-import {enablePushNotifications} from "@/services/push-notification-service.js";
-import MainButton from "@/components/utilities/MainButton.vue";
+import {enablePushNotifications} from "../services/push-notification-service.js";
+import MainButton from "../components/utilities/MainButton.vue";
 
 let profileOpen = ref(false);
 function openProfilePopup() {

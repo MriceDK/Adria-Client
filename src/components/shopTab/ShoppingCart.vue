@@ -7,14 +7,14 @@ import MainButton from "@/components/utilities/MainButton.vue";
 const props = defineProps({
   cartItems: [
     {
-      image: String,
       item: {
-        SupplementId: String,
-        title: String,
-        description: String,
-        cost: Number,
+        supplementId: String,
+        name: String,
+        type: String,
+        price: Number,
+        stock: Number,
         count: Number
-      },
+      }
     }
   ]
 });
@@ -25,7 +25,7 @@ const checkoutEnable = ref(false)
 
 
 const cartTotalPrice = computed(() => {
-  return props.cartItems.reduce((total, item) => total + item.cost * item.count, 0).toFixed(2);
+  return props.cartItems.reduce((total, item) => total + item.price * item.count, 0).toFixed(2);
 });
 const amountOfItems = computed(() => {
   return props.cartItems.reduce((total, item) => total + (item.count || 0), 0);
@@ -53,7 +53,7 @@ function handleChangeAmount(SupplementObject) {
       <div class="cartitems">
         <ShoppingCartItem
             v-for="(item) in props.cartItems"
-            :key="item.SupplementId"
+            :key="item.supplementId"
             :item="item"
             @update-amount="handleChangeAmount"/>
       </div>
@@ -70,7 +70,7 @@ function handleChangeAmount(SupplementObject) {
     </div>
   </div>
   <CheckoutPopup v-if="checkoutEnable" :cart-items="cartItems" :cart-total="cartTotalPrice" :cart-amount="amountOfItems"
-                 @close-checkout="checkoutEnable = false"></CheckoutPopup>
+                 @close-checkout="checkoutEnable = false"/>
 </template>
 
 <style scoped>
