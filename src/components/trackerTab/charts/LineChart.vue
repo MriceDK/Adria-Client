@@ -54,7 +54,7 @@ async function loadMacrosTimeline() {
 
     totalProtein += getAmount("Protein")
     totalCarbs += getAmount("Carbohydrates")
-    totalFat += getAmount("Fat")
+    totalFat += getAmount("Fats")
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
