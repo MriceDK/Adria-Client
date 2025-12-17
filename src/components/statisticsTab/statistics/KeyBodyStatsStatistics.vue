@@ -14,7 +14,11 @@
       <StatCard
           v-for="stat in bodyStats"
           :key="stat.label"
-          :color="cardColor(stat.label)"
+          :class="{
+                good: isNormal(stat) && stat.label !== 'Hydration',
+                warning: !isNormal(stat) && stat.label !== 'Hydration',
+                blueText: stat.label === 'Hydration'
+              }"
       >
         <template #header>
           <div class="stat-header">
@@ -136,4 +140,18 @@ onMounted(async () => {
   align-items: center;
   gap: 0.25rem;
 }
+
+.stat-card.good {
+  border-color: var(--main-green-color);
+}
+
+.stat-card.warning {
+  border-color: var(--main-red-color);
+}
+
+.stat-card.blueText {
+  border-color: var(--main-blue-color);
+}
+
+
 </style>
