@@ -24,5 +24,9 @@
     --progress-bar-bg-color: #f1f1f1;
     --progress-bar-default-color: linear-gradient(90deg, darkgray, dimgray);
 
+    --goals-icon-bg-color: #dbeafe;
+    --minerals-icon-bg-color: #dcfce7;
+    --stats-icon-bg-color: #fee2e2;
+
     --main-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
