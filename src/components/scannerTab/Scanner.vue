@@ -63,7 +63,7 @@ template {
   display: flex;
   gap: 2rem;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-left: 20%;
   margin-right: 10%;
