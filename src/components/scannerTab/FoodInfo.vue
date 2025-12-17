@@ -37,8 +37,13 @@ function cancel() {
 
 <template>
   <div class="nutrition-grid">
-    <p class="food-name">{{ props.foodObject.foodName }}</p>
+    <div class="top-row">
+      <p class="food-name">{{ props.foodObject.foodName }}</p>
+      <p v-if="props.foodObject.foodEdible" class="food-info edible">Edible</p>
+      <p v-else class="food-info not-edible">Not Edible</p>
+    </div>
     <p class="cancel" @click="cancel">X</p>
+
     <nutrient-info
         v-for="item in props.foodObject.nutrients"
         :nutrient-value="item.amount"
@@ -54,12 +59,38 @@ function cancel() {
 </template>
 
 <style scoped>
-.food-name {
+.top-row {
   grid-area: food-name;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.food-name {
   font-weight: 600;
   font-size: 1.2rem;
   margin-left: 0.5rem;
 }
+
+.food-info {
+  max-width: fit-content;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.food-info.edible {
+  color: var(--main-bg-color);
+  background-color: var(--main-green-color);
+}
+.food-info.not-edible {
+  color: var(--main-bg-color);
+  background-color: var(--main-red-color);
+}
+
 .cancel {
   grid-area: cancel-button;
   display: flex;
