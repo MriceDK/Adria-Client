@@ -1,3 +1,5 @@
+import {USER_ID} from "@/services/api/config.js";
+
 const VAPID_PUBLIC_KEY = "BL2jmCKm9V1LvSdLaBx6xd37IjmFgEQBmvo-VIUz4RoDilAAokOPb8n6IcRdFb8V6sTNMz-2UFMHJ2FxUFhLO7g\n";
 // private key QWwQ7eF5KpuS5z_JP7JSBRyxAaoLa3ubpJPTNwvnGa0
 
@@ -37,7 +39,6 @@ async function renewPushNotification() {
     postSubscriptionToServer(subscription);
 }
 function postSubscriptionToServer(subscription) {
-    const userId = "d4e5f6a7-b8c9-4d5e-1f2a-4b5c6d7e8f9a";
 
     fetch("http://localhost:8000/subscribe", {
         method: "POST",
@@ -45,7 +46,7 @@ function postSubscriptionToServer(subscription) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            userId: userId,
+            userId: USER_ID,
             subscription: subscription
         })
     });
