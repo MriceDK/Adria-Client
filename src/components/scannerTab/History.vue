@@ -61,7 +61,10 @@ updateHistory();
       <li v-for="item in userHistory" :key="item.scanId" class="history-item" :data-scan-id="item.scanId">
         <div class="top-row">
           <div class="food-info">
-            <p class="food-name">{{ item.foodName }}</p>
+            <div class="general-info">
+              <p class="edibility" :class="{ 'edible' : item.foodEdible, 'not-edible' : !item.foodEdible}">.</p>
+              <p class="food-name">{{ item.foodName }}</p>
+            </div>
             <p class="date-tracked">{{ item.scanDateTime }}</p>
           </div>
           <img src="../../assets/icons/trash-icon.svg" alt="Delete Icon" class="delete-icon"  @click="openPopup"/>
@@ -203,6 +206,33 @@ updateHistory();
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.general-info {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+.edibility {
+  font-size: 0;
+  width: 0.2rem;
+  height: 0.2rem;
+  padding: 0.2rem 0.2rem;
+  border-radius: 100%;
+
+}
+
+.edible {
+  background-color: var(--main-green-color);
+  color: var(--main-green-color);
+}
+
+.not-edible {
+  background-color: var(--main-red-color);
+  color: var(--main-red-color);
 }
 
 </style>

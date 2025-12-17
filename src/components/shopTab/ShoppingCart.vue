@@ -39,6 +39,12 @@ function handleChangeAmount(SupplementObject) {
   emit("update-amount", SupplementObject);
 }
 
+function handleOrderCreated() {
+  checkoutEnable.value = false;
+  cartEnabled.value = false;
+  emit("clear-cart");
+}
+
 </script>
 
 <template>
@@ -70,7 +76,7 @@ function handleChangeAmount(SupplementObject) {
     </div>
   </div>
   <CheckoutPopup v-if="checkoutEnable" :cart-items="cartItems" :cart-total="cartTotalPrice" :cart-amount="amountOfItems"
-                 @close-checkout="checkoutEnable = false"/>
+                 @close-checkout="checkoutEnable = false" @order-created="handleOrderCreated"/>
 </template>
 
 <style scoped>

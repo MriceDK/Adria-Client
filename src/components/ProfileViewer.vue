@@ -3,10 +3,18 @@ import User from "../components/icons/User.vue";
 import {ref} from "vue";
 import {enablePushNotifications} from "../services/push-notification-service.js";
 import MainButton from "../components/utilities/MainButton.vue";
+import {getOrderHistory, getProfile} from "@/services/api/profile.js";
+import {USER_ID} from "@/services/api/config.js";
+import Order from "@/components/Order.vue";
 
-let profileOpen = ref(false);
-function openProfilePopup() {
-//   TODO: Add network requests to server
+const profileOpen = ref(false);
+const userData = ref(null);
+const userOrderHistory = ref(null);
+
+async function openProfilePopup() {
+  userData.value = await getProfile(USER_ID);
+  userOrderHistory.value = await getOrderHistory(USER_ID);
+  console.log(userOrderHistory.value);
   profileOpen.value = true;
 }
 
@@ -28,8 +36,8 @@ function enablePush() {
     <div class="profile-card">
       <user class="profile-avatar" alt="User avatar"/>
       <div class="profile-info">
-        <p class="profile-name">Sarah Johnson</p>
-        <p class="profile-email">sarah.johnson@email.com</p>
+        <p class="profile-name">{{ userData.name }}</p>
+        <p class="profile-id">{{ userData.id }}</p>
         <p class="profile-date">
           <svg class="calendar-icon" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!--Keep Here Because color change-->
@@ -48,7 +56,7 @@ function enablePush() {
         <p>Subscription plan</p>
         <div class="subscription-type">
           <img src="../assets/icons/crown-icon.svg" class="subscription-icon" alt="crown-icon">
-          <p class="subscription-plan">Premium</p>
+          <p class="subscription-plan">{{ userData.subscriptionType}}</p>
 
         </div>
       </div>
@@ -56,13 +64,9 @@ function enablePush() {
     </div>
     <div class="order-history">
       <p class="section-title">Order History</p>
-      <div class="profile-card order-history">
-<!--        Overflow-y-->
-        <div class="order">
-<!--          TODO: make it so the orders become inserted dynamically (possible out of scope for POC)-->
-<!--          this is only 1 order should be like infinity possible-->
-        </div>
-      </div>
+      <ul class="profile-card order-history">
+        <Order class="order-history-item" v-for="order in userOrderHistory" :key="order.id" :order="order"/>
+      </ul>
     </div>
   </div>
 </template>
@@ -167,7 +171,12 @@ function enablePush() {
   margin: 0;
 }
 
-.profile-email {
+.profile-id {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 70%;
+
   font-size: 1rem;
   color: var(--secondary-text-color);
   margin: 0;
@@ -249,6 +258,35 @@ function enablePush() {
   justify-content: space-between;
   align-items: center;
 
+}
+
+.order-history {
+  display: flex;
+  flex-flow: column nowrap;
+
+  border-radius: 0.75rem;
+  list-style: none;
+  margin: 0;
+  gap: 0.75rem;
+}
+
+.profile-card.order-history {
+  overflow: scroll;
+  max-height: 10rem;
+}
+
+.order-history-item {
+  border-radius: 0.35rem;
+  box-shadow: 0.1rem 0.1rem 0.1rem var(--secondary-bg-color);
+  padding: 1rem;
+}
+
+.order-history .section-title {
+  font-family: var(--main-font-family), sans-serif;
+  color: var(--main-text-color);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1rem 0 0.75rem;
 }
 
 </style>
