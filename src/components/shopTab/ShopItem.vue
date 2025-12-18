@@ -1,4 +1,6 @@
 <script setup>
+import {ref} from "vue";
+
 const props = defineProps({
   item : {
     name : String,
@@ -9,6 +11,7 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['add-to-cart']);
+const fixedSource =  ref("/src/assets/images/" + props.item.name.toLowerCase().replaceAll(' ', '') + ".png");
 
 function handleAddToCart() {
   emit('add-to-cart', props.item);
@@ -18,7 +21,8 @@ function handleAddToCart() {
 <template>
   <div class="shopitem">
     <!-- image -->
-    <img src="../../assets/icons/statsicon.png" :alt="props.item.name" class="image" />
+    <img :src="fixedSource" :alt="fixedName" class="image" />
+
 
     <div class="info">
       <!-- Title + Price in One Line -->
