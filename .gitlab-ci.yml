@@ -21,7 +21,7 @@ SonarQube:
 # Take an example from the server .gitlab-ci.yml file.
 
 create-image:
-  image: registry.ci.infra.lan:5000/ad-project:server-DEPLOY
+  image: registry.ci.infra.lan:5000/ad-project:client-DEPLOY
   only:
     - main
   stage: build
