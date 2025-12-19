@@ -59,12 +59,12 @@ function buildCalorieTimeline(history) {
     calories.push(totalCalories);
   });
 
-  return {labels, calories}
+  return {labels, calories};
 }
 
 function createCaloriesGradient(context) {
   const {ctx, chartArea} = context.chart;
-  if (!chartArea) return null
+  if (!chartArea) return null;
 
   const gradient = ctx.createLinearGradient(
       0,
@@ -73,8 +73,8 @@ function createCaloriesGradient(context) {
       chartArea.bottom
   );
 
-  gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)")
-  gradient.addColorStop(1, "rgba(59, 130, 246, 0)")
+  gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)");
+  gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
 
   return gradient
 }
@@ -89,7 +89,7 @@ function buildCalorieDataset(calories) {
       borderWidth: 2,
       tension: 0.4
     }
-  ]
+  ];
 }
 
 async function loadCalorieTimeline() {
@@ -99,7 +99,7 @@ async function loadCalorieTimeline() {
   chartData.value = {
     labels,
     datasets: buildCalorieDataset(calories)
-  }
+  };
 }
 
 onMounted(loadCalorieTimeline);

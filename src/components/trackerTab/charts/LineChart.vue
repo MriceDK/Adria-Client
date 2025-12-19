@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
   Filler
-} from 'chart.js'
+} from 'chart.js';
 
 import { ref, onMounted } from "vue";
 import { getHistory } from "@/services/api/history.js";
@@ -36,11 +36,11 @@ async function fetchSortedHistory(userId) {
   const history = await getHistory(userId);
   return history.sort(
       (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
-  )
+  );
 }
 
 function getNutrientAmount(item, type) {
-  return item.nutrients.find(n => n.type === type)?.amount ?? 0
+  return item.nutrients.find(n => n.type === type)?.amount ?? 0;
 }
 
 function buildMacroTimeline(history) {
@@ -70,7 +70,7 @@ function buildMacroTimeline(history) {
     fat.push(totalFat);
   });
 
-  return { labels, protein, carbs, fat }
+  return { labels, protein, carbs, fat };
 }
 
 function buildMacroDatasets({ protein, carbs, fat }) {
@@ -102,7 +102,7 @@ function buildMacroDatasets({ protein, carbs, fat }) {
       pointRadius: 3,
       fill: false
     }
-  ]
+  ];
 }
 
 async function loadMacrosTimeline() {
@@ -112,7 +112,7 @@ async function loadMacrosTimeline() {
   chartData.value = {
     labels: timeline.labels,
     datasets: buildMacroDatasets(timeline)
-  }
+  };
 }
 
 onMounted(loadMacrosTimeline);

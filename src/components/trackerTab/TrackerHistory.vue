@@ -60,9 +60,9 @@ async function confirmDelete() {
     userHistory.value = userHistory.value.filter(item => item.scanId !== scanIdToDelete.value);
   }
   else {
-    throw new Error("confirmDelete called without deleteAll or scanIdToDelete")
+    throw new Error("confirmDelete called without deleteAll or scanIdToDelete");
   }
-  closePopup()
+  closePopup();
 }
 </script>
 
