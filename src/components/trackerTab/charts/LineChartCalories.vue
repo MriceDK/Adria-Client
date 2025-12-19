@@ -1,5 +1,5 @@
 <script setup>
-import {Line} from 'vue-chartjs'
+import {Line} from 'vue-chartjs';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,10 +10,10 @@ import {
   Tooltip,
   Legend,
   Filler
-} from 'chart.js'
-import { ref, onMounted } from "vue"
-import { getHistory } from "@/services/api/history.js"
-import { USER_ID } from "@/services/api/config.js"
+} from 'chart.js';
+import { ref, onMounted } from "vue";
+import { getHistory } from "@/services/api/history.js";
+import { USER_ID } from "@/services/api/config.js";
 
 const props = defineProps({isEditing: Boolean});
 
@@ -26,10 +26,10 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-)
+);
 
-const chartData = ref(null)
-const needsToBeHidden = ref(true)
+const chartData = ref(null);
+const needsToBeHidden = ref(true);
 
 async function fetchSortedHistory(userId) {
   const history = await getHistory(userId)
@@ -44,20 +44,20 @@ function buildCalorieTimeline(history) {
   let totalCalories = 0
 
   history.forEach(item => {
-    const calorie = item.nutrients.find(n => n.type === "Calories")
-    if (!calorie) return
+    const calorie = item.nutrients.find(n => n.type === "Calories");
+    if (!calorie) return;
 
-    totalCalories += calorie.amount
+    totalCalories += calorie.amount;
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit"
         })
-    )
+    );
 
-    calories.push(totalCalories)
-  })
+    calories.push(totalCalories);
+  });
 
   return {labels, calories}
 }
@@ -102,7 +102,7 @@ async function loadCalorieTimeline() {
   }
 }
 
-onMounted(loadCalorieTimeline)
+onMounted(loadCalorieTimeline);
 
 const chartOptions = {
   responsive: true,
@@ -155,7 +155,7 @@ const chartOptions = {
       left: 0
     }
   }
-}
+};
 </script>
 
 <template>

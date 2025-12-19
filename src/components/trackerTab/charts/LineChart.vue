@@ -1,5 +1,5 @@
 <script setup>
-import {Line} from 'vue-chartjs'
+import {Line} from 'vue-chartjs';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,9 +12,9 @@ import {
   Filler
 } from 'chart.js'
 
-import { ref, onMounted } from "vue"
-import { getHistory } from "@/services/api/history.js"
-import { USER_ID } from "@/services/api/config.js"
+import { ref, onMounted } from "vue";
+import { getHistory } from "@/services/api/history.js";
+import { USER_ID } from "@/services/api/config.js";
 
 const props = defineProps({isEditing: Boolean});
 
@@ -27,10 +27,10 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-)
+);
 
-const chartData = ref(null)
-const needsToBeHidden = ref(true)
+const chartData = ref(null);
+const needsToBeHidden = ref(true);
 
 async function fetchSortedHistory(userId) {
   const history = await getHistory(userId)
@@ -49,9 +49,9 @@ function buildMacroTimeline(history) {
   const carbs = []
   const fat = []
 
-  let totalProtein = 0
-  let totalCarbs = 0
-  let totalFat = 0
+  let totalProtein = 0;
+  let totalCarbs = 0;
+  let totalFat = 0;
 
   history.forEach(item => {
     totalProtein += getNutrientAmount(item, "Protein")
@@ -63,12 +63,12 @@ function buildMacroTimeline(history) {
           hour: "2-digit",
           minute: "2-digit"
         })
-    )
+    );
 
-    protein.push(totalProtein)
-    carbs.push(totalCarbs)
-    fat.push(totalFat)
-  })
+    protein.push(totalProtein);
+    carbs.push(totalCarbs);
+    fat.push(totalFat);
+  });
 
   return { labels, protein, carbs, fat }
 }
@@ -115,7 +115,7 @@ async function loadMacrosTimeline() {
   }
 }
 
-onMounted(loadMacrosTimeline)
+onMounted(loadMacrosTimeline);
 
 const chartOptions = {
   responsive: true,
@@ -181,7 +181,7 @@ const chartOptions = {
       left: 0
     }
   }
-}
+};
 </script>
 
 <template>
