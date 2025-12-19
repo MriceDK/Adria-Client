@@ -1,5 +1,5 @@
 <script setup>
-import {Line} from 'vue-chartjs'
+import {Line} from 'vue-chartjs';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,10 +10,10 @@ import {
   Tooltip,
   Legend,
   Filler
-} from 'chart.js'
-import { ref, onMounted } from "vue"
-import { getHistory } from "@/services/api/history.js"
-import { USER_ID } from "@/services/api/config.js"
+} from 'chart.js';
+import { ref, onMounted } from "vue";
+import { getHistory } from "@/services/api/history.js";
+import { USER_ID } from "@/services/api/config.js";
 
 const props = defineProps({isEditing: Boolean});
 
@@ -26,36 +26,36 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-)
+);
 
-const chartData = ref(null)
-const needsToBeHidden = ref(true)
+const chartData = ref(null);
+const needsToBeHidden = ref(true);
 
 async function loadCalorieTimeline() {
-  const history = await getHistory(USER_ID)
+  const history = await getHistory(USER_ID);
 
-  history.sort((a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime))
+  history.sort((a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime));
 
-  const labels = []
-  const calories = []
+  const labels = [];
+  const calories = [];
 
-  let totalCalories = 0
+  let totalCalories = 0;
 
   history.forEach(item => {
-    const calorie = item.nutrients.find(n => n.type === "Calories")
-    if (!calorie) return
+    const calorie = item.nutrients.find(n => n.type === "Calories");
+    if (!calorie) return;
 
-    totalCalories += calorie.amount
+    totalCalories += calorie.amount;
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit"
         })
-    )
+    );
 
-    calories.push(totalCalories)
-  })
+    calories.push(totalCalories);
+  });
 
   chartData.value = {
     labels,
@@ -64,31 +64,31 @@ async function loadCalorieTimeline() {
         data: calories,
         fill: true,
         backgroundColor: (context) => {
-          const ctx = context.chart.ctx
-          const chartArea = context.chart.chartArea
-          if (!chartArea) return null
+          const ctx = context.chart.ctx;
+          const chartArea = context.chart.chartArea;
+          if (!chartArea) return null;
 
           const gradient = ctx.createLinearGradient(
               0,
               chartArea.top,
               0,
               chartArea.bottom
-          )
+          );
 
-          gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)")
-          gradient.addColorStop(1, "rgba(59, 130, 246, 0)")
+          gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)");
+          gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
 
-          return gradient
+          return gradient;
         },
         borderColor: "#3b82f6",
         borderWidth: 2,
         tension: 0.4
       }
     ]
-  }
+  };
 }
 
-onMounted(loadCalorieTimeline)
+onMounted(loadCalorieTimeline);
 
 
 const chartOptions = {
@@ -142,7 +142,7 @@ const chartOptions = {
       left: 0
     }
   }
-}
+};
 </script>
 
 <template>
