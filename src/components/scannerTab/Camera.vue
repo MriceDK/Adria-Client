@@ -51,8 +51,7 @@ function draw() {
 }
 
 function scan() {
-  setTimeout(function () {emit('scanned')}, delay);
-
+  setTimeout(function () {emit('scanned');}, delay);
 }
 
 function startScan() {

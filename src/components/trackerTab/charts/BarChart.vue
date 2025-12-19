@@ -48,7 +48,9 @@ const chartOptions = ref({
       displayColors: false,
       callbacks: {
         label: (context) => {
-          return context.raw + " " + props.goals.filter((nutrient) => nutrient.label === context.label)[0].unit;
+          return `${context.raw} ${
+              props.goals.find(nutrient => nutrient.label === context.label)?.unit
+          }`;
         }
       }
     }

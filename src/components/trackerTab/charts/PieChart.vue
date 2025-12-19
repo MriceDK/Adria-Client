@@ -53,7 +53,11 @@ const chartOptions = {
       displayColors: false,
       callbacks: {
         label: (context) => {
-          return context.parsed + " " + goalsFiltered.value.filter((nutrient) => nutrient.label === context.label)[0].unit;
+          return `${context.parsed} ${
+              goalsFiltered.value.find(
+                  nutrient => nutrient.label === context.label
+              )?.unit
+          }`;
         }
       }
     }
