@@ -59,8 +59,8 @@ async function confirmDelete() {
     await deleteScan(scanIdToDelete.value);
     userHistory.value = userHistory.value.filter(item => item.scanId !== scanIdToDelete.value);
   }
-  else{
-    null;
+  else {
+    throw new Error("confirmDelete called without deleteAll or scanIdToDelete");
   }
   closePopup();
 }

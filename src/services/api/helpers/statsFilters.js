@@ -1,11 +1,17 @@
-import {STAT_IDS} from "@/services/api/helpers/statIds.js";
+import { STAT_IDS } from "@/services/api/helpers/statIds.js";
+import {
+    BODY_STAT_TARGET_MIN,
+    BODY_STATS,
+    CHOLESTEROL,
+    DAILY_GOALS,
+    MINERALS,
+    TRACKER
+} from "@/services/api/helpers/stats.js";
 
 export function filterDailyGoals(data) {
-    const needed = ["Protein", "Carbohydrates", "Fats", "Water"];
-
     return data
-        .filter(item => needed.includes(item.label))
-        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
+        .filter(item => DAILY_GOALS.includes(item.label))
+        .sort((a, b) => DAILY_GOALS.indexOf(a.label) - DAILY_GOALS.indexOf(b.label))
         .map(item => ({
             label: item.label,
             current: item.current,
@@ -16,14 +22,9 @@ export function filterDailyGoals(data) {
 }
 
 export function filterMinerals(data) {
-    const needed = [
-        "Calcium", "Iron", "Magnesium", "Phosphorus", "Potassium",
-        "Sodium", "Zinc", "Copper", "Manganese", "Selenium", "Iodine"
-    ];
-
     return data
-        .filter(item => needed.includes(item.label))
-        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
+        .filter(item => MINERALS.includes(item.label))
+        .sort((a, b) => MINERALS.indexOf(a.label) - MINERALS.indexOf(b.label))
         .map(item => ({
             label: item.label,
             current: item.current,
@@ -34,48 +35,23 @@ export function filterMinerals(data) {
 }
 
 export function filterBodyStats(data) {
-    const needed = [
-        "Body Fat",
-        "BMI",
-        "Blood Pressure",
-        "Resting Heart Rate",
-        "Fasting Blood Glucose",
-        "Hydration"
-    ];
-
-    const targetMin = {
-        "Body Fat": 10,
-        "BMI": 18.5,
-        "Blood Pressure": 80,
-        "Resting Heart Rate": 60,
-        "Fasting Blood Glucose": 70,
-        "Hydration": 100
-    };
-
     return data
-        .filter(item => needed.includes(item.label))
-        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
+        .filter(item => BODY_STATS.includes(item.label))
+        .sort((a, b) => BODY_STATS.indexOf(a.label) - BODY_STATS.indexOf(b.label))
         .map(item => ({
             label: item.label,
             current: item.current,
             goal: item.goal,
             unit: item.unit,
-            targetMin: targetMin[item.label],
+            targetMin: BODY_STAT_TARGET_MIN[item.label],
             bodyStatId: STAT_IDS[item.label]
         }));
 }
 
 export function filterCholesterol(data) {
-    const needed = [
-        "Cholesterol Total",
-        "HDL Cholesterol",
-        "LDL Cholesterol",
-        "Triglycerides"
-    ];
-
     return data
-        .filter(item => needed.includes(item.label))
-        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
+        .filter(item => CHOLESTEROL.includes(item.label))
+        .sort((a, b) => CHOLESTEROL.indexOf(a.label) - CHOLESTEROL.indexOf(b.label))
         .map(item => ({
             label: item.label
                 .replace(" Cholesterol", "")
@@ -88,16 +64,9 @@ export function filterCholesterol(data) {
 }
 
 export function filterTrackerData(data) {
-    const needed = [
-        "Calories",
-        "Protein",
-        "Carbohydrates",
-        "Water"
-    ];
-
     return data
-        .filter(item => needed.includes(item.label))
-        .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
+        .filter(item => TRACKER.includes(item.label))
+        .sort((a, b) => TRACKER.indexOf(a.label) - TRACKER.indexOf(b.label))
         .map(item => ({
             label: item.label,
             current: item.current,
@@ -106,4 +75,3 @@ export function filterTrackerData(data) {
             bodyStatId: STAT_IDS[item.label]
         }));
 }
-
