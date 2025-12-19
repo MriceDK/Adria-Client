@@ -7,11 +7,11 @@ const supplements = ref([{
   name: "Not available",
 }]);
 
-const props = defineProps(['searchInput'])
-const emit = defineEmits(['add-to-cart'])
+const props = defineProps(['searchInput']);
+const emit = defineEmits(['add-to-cart']);
 
 function handleAddToCart(item) {
-  emit("add-to-cart", item)
+  emit("add-to-cart", item);
 }
 
 async function getSupplements() {

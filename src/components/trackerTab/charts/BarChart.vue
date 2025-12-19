@@ -17,8 +17,8 @@ const props = defineProps({
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const chartDataReady = computed(() => {
-  return props.goals && props.goals.length > 0
-})
+  return props.goals && props.goals.length > 0;
+});
 
 const chartData = computed(() => ({
   labels: props.goals.map(g => g.label),
@@ -34,7 +34,7 @@ const chartData = computed(() => ({
       data: props.goals.map(g => g.goal)
     }
   ]
-}))
+}));
 const chartOptions = ref({
   responsive: true,
   plugins: {
@@ -48,7 +48,7 @@ const chartOptions = ref({
       displayColors: false,
       callbacks: {
         label: (context) => {
-          return context.raw + " " + props.goals.filter((nutrient) => nutrient.label === context.label)[0].unit
+          return context.raw + " " + props.goals.filter((nutrient) => nutrient.label === context.label)[0].unit;
         }
       }
     }

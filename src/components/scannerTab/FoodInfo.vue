@@ -26,7 +26,6 @@ const props = defineProps({
 
 function addToTracker() {
   emit('addToTracker');
-  // TODO: send data to server
 }
 
 function cancel() {

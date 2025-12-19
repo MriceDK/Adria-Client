@@ -1,5 +1,5 @@
 <script setup>
-import ShoppingCartItem from './ShoppingCartItem.vue'
+import ShoppingCartItem from './ShoppingCartItem.vue';
 import {computed, ref} from "vue";
 import CheckoutPopup from "./CheckoutPopup.vue";
 import MainButton from "@/components/utilities/MainButton.vue";
@@ -20,8 +20,8 @@ const props = defineProps({
 });
 const emit = defineEmits(["clear-cart", "update-amount"]);
 
-const cartEnabled = ref(false)
-const checkoutEnable = ref(false)
+const cartEnabled = ref(false);
+const checkoutEnable = ref(false);
 
 
 const cartTotalPrice = computed(() => {
@@ -32,7 +32,7 @@ const amountOfItems = computed(() => {
 });
 
 function handleOpenCart() {
-  cartEnabled.value = !cartEnabled.value
+  cartEnabled.value = !cartEnabled.value;
 }
 
 function handleChangeAmount(SupplementObject) {

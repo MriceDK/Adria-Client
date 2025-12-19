@@ -10,7 +10,7 @@ import Profile from "./components/ProfileViewer.vue";
 
 
 
-const selectedTab = ref("Scanner")
+const selectedTab = ref("Scanner");
 const componentMap = {
   Scanner:Scanner,
   Tracker:TrackerTab,

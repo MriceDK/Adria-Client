@@ -11,16 +11,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const props = defineProps({
   value: { type: Number, required: true },
   max: { type: Number, required: true },
   color: { type: String, required: false }
-})
+});
 
-const bar = computed(() => Math.min((props.value / props.max) * 100, 100))
-const defaultColor = 'var(--progress-bar-default-color)'
+const bar = computed(() => Math.min((props.value / props.max) * 100, 100));
+const defaultColor = 'var(--progress-bar-default-color)';
 </script>
 
 <style scoped>

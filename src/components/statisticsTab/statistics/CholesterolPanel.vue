@@ -81,6 +81,17 @@ onMounted(async () => {
   background: var(--green-bg-color);
 }
 
+.cholesterol-label {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.cholesterol-current {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
 .cholesterol-card.low .cholesterol-label,
 .cholesterol-card.low .cholesterol-current {
   color: var(--main-red-color);
@@ -97,11 +108,7 @@ onMounted(async () => {
   align-items: baseline;
 }
 
-.cholesterol-label {
-  font-size: 1.25rem;
-  font-weight: normal;
-  margin: 0;
-}
+
 
 .cholesterol-goal {
   color: gray;
@@ -109,8 +116,5 @@ onMounted(async () => {
   margin: 0;
 }
 
-.cholesterol-current {
-  font-size: 1.25rem;
-  margin-top: 1rem;
-}
+
 </style>

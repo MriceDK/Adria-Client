@@ -9,7 +9,7 @@ const props = defineProps({
     supplementId: String,
     type: String,
   }
-})
+});
 const emit = defineEmits(['add-to-cart']);
 const fixedSource =  ref("./assets/images/" + props.item.name.toLowerCase().replaceAll(' ', '') + ".png");
 

@@ -2,19 +2,21 @@
 import {onMounted, ref} from "vue";
 import MainButton from "../utilities/MainButton.vue";
 
-let isScanning = ref(false);
-let cameraEnabled = ref(false);
+const isScanning = ref(false);
+const cameraEnabled = ref(false);
 
 const canvas = ref(null);
 const video = ref(null);
 const ctx = ref(null);
 
-const emit = defineEmits(['scan', 'scanned'])
+const delay = 3000;
+
+const emit = defineEmits(['scan', 'scanned']);
 
 const constraints = ref({
   video: true,
   audio: false
-})
+});
 onMounted(async () => {
   if (video.value && canvas.value) {
     ctx.value = canvas.value.getContext("2d");
@@ -33,7 +35,7 @@ function setStream(stream) {
   video.value.play();
   requestAnimationFrame(draw);
   if (isScanning.value) {
-    emit('scan')
+    emit('scan');
   }
   isScanning.value = false;
   cameraEnabled.value = true;
@@ -49,14 +51,13 @@ function draw() {
 }
 
 function scan() {
-  setTimeout(function () {emit('scanned')}, 3000)
+  setTimeout(function () {emit('scanned')}, delay);
 
 }
 
 function startScan() {
   isScanning.value = true;
-  emit('scan')
-  // TODO: Change this so that it sends the image to the server
+  emit('scan');
 }
 
 </script>

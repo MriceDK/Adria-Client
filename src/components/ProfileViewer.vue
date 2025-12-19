@@ -14,7 +14,6 @@ const userOrderHistory = ref(null);
 async function openProfilePopup() {
   userData.value = await getProfile(USER_ID);
   userOrderHistory.value = await getOrderHistory(USER_ID);
-  console.log(userOrderHistory.value);
   profileOpen.value = true;
 }
 

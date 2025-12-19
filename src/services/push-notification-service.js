@@ -10,10 +10,7 @@ const subscripteOptions = {
 
 async function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
-        try {
-            return await navigator.serviceWorker.register('/sw.js');
-        } catch (error) {
-        }
+        return await navigator.serviceWorker.register('/sw.js');
     }
 }
 

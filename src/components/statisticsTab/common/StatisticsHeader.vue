@@ -20,5 +20,5 @@ defineProps({
   title: String,
   subtitle: String,
   iconClass: String
-})
+});
 </script>

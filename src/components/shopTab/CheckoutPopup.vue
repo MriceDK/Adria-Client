@@ -1,5 +1,5 @@
 <script setup>
-import CheckoutItem from './CheckoutItem.vue'
+import CheckoutItem from './CheckoutItem.vue';
 import MainButton from "@/components/utilities/MainButton.vue";
 import {createOrder} from "@/services/api/shop.js";
 import {USER_ID} from "@/services/api/config.js";
