@@ -23,7 +23,7 @@ function handleAddToCart() {
 <template>
   <div class="shopitem">
     <!-- image -->
-    <img :src="fixedSource" :alt="fixedName" class="image" />
+    <img :src="fixedSource" :alt="props.item.name.toLowerCase().replaceAll(' ', '')" class="image" />
 
 
     <div class="info">
