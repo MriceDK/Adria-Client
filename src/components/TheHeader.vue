@@ -17,7 +17,7 @@ const selectedTab = ref("Scanner")
 </script>
 
 <template>
-  <img @click="handleLogoClick" class="logo" src="../assets/icons/nutriscan-high-resolution-logo_1-Photoroom.png" alt="Nutriscan Logo">
+  <img @click="handleLogoClick" class="logo" src="../../public/assets/icons/nutriscan-high-resolution-logo_1-Photoroom.png" alt="Nutriscan Logo">
   <nav>
     <ul>
       <NavigationButton class="icon scanner" title="Scanner" imageSource="../assets/icons/trackerIcon.png" :selectedTab="selectedTab" @navigation-click="handleNavigationClick"></NavigationButton>
@@ -67,16 +67,16 @@ ul{
 }
 
 .scanner {
-  background-image: url("../assets/icons/scanning-icon.svg");
+  background-image: url("../../public/assets/icons/scanning-icon.svg");
 }
 .tracker {
-  background-image: url("../assets/icons/trackerIcon.png");
+  background-image: url("../../public/assets/icons/trackerIcon.png");
 }
 .statistics {
-  background-image: url("../assets/icons/statsicon.png");
+  background-image: url("../../public/assets/icons/statsicon.png");
 }
 .shop {
-  background-image: url("../assets/icons/shopIcon.svg");
+  background-image: url("../../public/assets/icons/shopIcon.svg");
   background-size: 1.3rem;
 }
 </style>

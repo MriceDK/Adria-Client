@@ -67,7 +67,7 @@ updateHistory();
             </div>
             <p class="date-tracked">{{ item.scanDateTime }}</p>
           </div>
-          <img src="../../assets/icons/trash-icon.svg" alt="Delete Icon" class="delete-icon"  @click="openPopup"/>
+          <img src="../../../public/assets/icons/trash-icon.svg" alt="Delete Icon" class="delete-icon" @click="openPopup"/>
         </div>
         <ul class="nutrients">
           <li class="nutrient" v-for="nutrient in item.nutrients" :key="nutrient.nutrientId">
@@ -151,7 +151,7 @@ updateHistory();
 }
 
 .title {
-  background-image: url("../../assets/icons/history-icon.svg");
+  background-image: url("../../../public/assets/icons/history-icon.svg");
   font-family: var(--main-font-family), sans-serif;
   background-repeat: no-repeat;
   background-size: 1.5rem;

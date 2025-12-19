@@ -5,7 +5,7 @@ self.addEventListener('push', function(event) {
     if (event.data) {
         try {
             data = event.data.json();
-        } catch (e) {console.log('Push data is not string.');
+        } catch (e) {
             data = {
                 title: 'Notification',
                 body: event.data.text()
@@ -34,11 +34,13 @@ self.addEventListener('notificationclick', function(event) {
 
     event.waitUntil(
         clients.matchAll({ type: 'window' }).then(function(clientList) {
-            for (var i = 0; i < clientList.length; i++) {
-                var client = clientList[i];
+            for (let i = 0; i < clientList.length; i++) {
+                const client = clientList[i];
+
                 if (client.url === '/' && 'focus' in client)
-                    return client.focus();
+                    {return client.focus();}
             }
+
             if (clients.openWindow) {
                 return clients.openWindow('/');
             }

@@ -55,7 +55,7 @@ function enablePush() {
       <div class="subscription-info">
         <p>Subscription plan</p>
         <div class="subscription-type">
-          <img src="../assets/icons/crown-icon.svg" class="subscription-icon" alt="crown-icon">
+          <img src="../../public/assets/icons/crown-icon.svg" class="subscription-icon" alt="crown-icon">
           <p class="subscription-plan">{{ userData.subscriptionType}}</p>
 
         </div>

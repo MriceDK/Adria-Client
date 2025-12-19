@@ -29,7 +29,7 @@ getSupplements();
 <style scoped>
 .shop-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-left: 5%;
