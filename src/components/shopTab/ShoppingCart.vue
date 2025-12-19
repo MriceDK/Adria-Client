@@ -48,7 +48,7 @@ function handleOrderCreated() {
 </script>
 
 <template>
-  <img src="../../assets/icons/shopping-cart-outline-svgrepo-com.svg" alt="Shopping Cart" class="cartIcon" @click="handleOpenCart" v-show="!cartEnabled">
+  <img src="../../../public/assets/icons/shopping-cart-outline-svgrepo-com.svg" alt="Shopping Cart" class="cartIcon" @click="handleOpenCart" v-show="!cartEnabled">
   <div v-show="cartEnabled">
     <div class="cartcontainer">
       <div class="top-row">

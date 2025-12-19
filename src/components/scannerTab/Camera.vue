@@ -69,10 +69,10 @@ function takePhoto() {
 <template>
   <video ref="video" autoplay playsinline webkit-playsinline muted hidden/>
   <div v-if="!cameraEnabled" class="camera-icon-wrapper">
-    <img src="../../assets/icons/camera-disallowed-icon.svg" class="camera-icon" alt="camera icon" >
+    <img src="../../../public/assets/icons/camera-disallowed-icon.svg" class="camera-icon" alt="camera icon" >
   </div>
     <canvas v-show="cameraEnabled" ref="canvas" class="camera-stream" width="512" height="512"></canvas>
-  <img src="../../assets/icons/scanning-icon.svg" class="scanning" v-show="isScanning" alt="in progress scanning icon">
+  <img src="../../../public/assets/icons/scanning-icon.svg" class="scanning" v-show="isScanning" alt="in progress scanning icon">
   <slot></slot>
   <main-button :disabled="!cameraEnabled || isScanning" :black="true" @click="startScan">Start Scanning</main-button>
 </template>

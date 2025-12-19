@@ -16,5 +16,5 @@
 </template>
 
 <script setup>
-import "@/assets/statisticsIcons.css";
+import "../../../../public/assets/statisticsIcons.css";
 </script>
