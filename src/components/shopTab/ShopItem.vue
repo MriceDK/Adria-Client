@@ -11,7 +11,7 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['add-to-cart']);
-const fixedSource =  ref("/public/assets/images/" + props.item.name.toLowerCase().replaceAll(' ', '') + ".png");
+const fixedSource =  ref("./assets/images/" + props.item.name.toLowerCase().replaceAll(' ', '') + ".png");
 
 function handleAddToCart() {
   emit('add-to-cart', props.item);
