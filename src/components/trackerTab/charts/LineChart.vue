@@ -1,5 +1,5 @@
 <script setup>
-import {Line} from 'vue-chartjs'
+import {Line} from 'vue-chartjs';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,9 +12,9 @@ import {
   Filler
 } from 'chart.js'
 
-import { ref, onMounted } from "vue"
-import { getHistory } from "@/services/api/history.js"
-import { USER_ID } from "@/services/api/config.js"
+import { ref, onMounted } from "vue";
+import { getHistory } from "@/services/api/history.js";
+import { USER_ID } from "@/services/api/config.js";
 
 const props = defineProps({isEditing: Boolean});
 
@@ -27,46 +27,46 @@ ChartJS.register(
     Tooltip,
     Legend,
     Filler
-)
+);
 
-const chartData = ref(null)
-const needsToBeHidden = ref(true)
+const chartData = ref(null);
+const needsToBeHidden = ref(true);
 
 async function loadMacrosTimeline() {
-  const history = await getHistory(USER_ID)
+  const history = await getHistory(USER_ID);
 
   history.sort(
       (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
-  )
+  );
 
-  const labels = []
-  const protein = []
-  const carbs = []
-  const fat = []
+  const labels = [];
+  const protein = [];
+  const carbs = [];
+  const fat = [];
 
-  let totalProtein = 0
-  let totalCarbs = 0
-  let totalFat = 0
+  let totalProtein = 0;
+  let totalCarbs = 0;
+  let totalFat = 0;
 
   history.forEach(item => {
     const getAmount = (type) =>
-        item.nutrients.find(n => n.type === type)?.amount ?? 0
+        item.nutrients.find(n => n.type === type)?.amount ?? 0;
 
-    totalProtein += getAmount("Protein")
-    totalCarbs += getAmount("Carbohydrates")
-    totalFat += getAmount("Fats")
+    totalProtein += getAmount("Protein");
+    totalCarbs += getAmount("Carbohydrates");
+    totalFat += getAmount("Fats");
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit"
         })
-    )
+    );
 
-    protein.push(totalProtein)
-    carbs.push(totalCarbs)
-    fat.push(totalFat)
-  })
+    protein.push(totalProtein);
+    carbs.push(totalCarbs);
+    fat.push(totalFat);
+  });
 
   chartData.value = {
     labels,
@@ -99,10 +99,10 @@ async function loadMacrosTimeline() {
         fill: false
       }
     ]
-  }
+  };
 }
 
-onMounted(loadMacrosTimeline)
+onMounted(loadMacrosTimeline);
 
 const chartOptions = {
   responsive: true,
@@ -168,7 +168,7 @@ const chartOptions = {
       left: 0
     }
   }
-}
+};
 </script>
 
 <template>

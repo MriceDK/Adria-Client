@@ -1,65 +1,65 @@
 <script setup>
-import { ref, onMounted } from "vue"
-import { deleteScan, getHistory } from "@/services/api/history.js"
-import { USER_ID } from "@/services/api/config.js"
-import TrashIcon from "@/components/icons/TrashIcon.vue"
-import MainButton from "@/components/utilities/MainButton.vue"
+import { ref, onMounted } from "vue";
+import { deleteScan, getHistory } from "@/services/api/history.js";
+import { USER_ID } from "@/services/api/config.js";
+import TrashIcon from "@/components/icons/TrashIcon.vue";
+import MainButton from "@/components/utilities/MainButton.vue";
 
-const emit = defineEmits(["history-updated"])
+const emit = defineEmits(["history-updated"]);
 
-const userHistory = ref([])
+const userHistory = ref([]);
 
-const displayPopup = ref(false)
-const scanIdToDelete = ref(null)
-const deleteAll = ref(false)
-const scanNameToDelete = ref(null)
+const displayPopup = ref(false);
+const scanIdToDelete = ref(null);
+const deleteAll = ref(false);
+const scanNameToDelete = ref(null);
 
 
-onMounted(updateHistory)
+onMounted(updateHistory);
 
 async function updateHistory() {
-  userHistory.value = await getHistory(USER_ID)
+  userHistory.value = await getHistory(USER_ID);
 
   userHistory.value.forEach(item => {
     item.time = new Date(item.scanDateTime).toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit"
-    })
-  })
+    });
+  });
 
-  emit("history-updated")
+  emit("history-updated");
 }
 
 
 function openDeleteOnePopup(item) {
-  scanIdToDelete.value = item.scanId
-  scanNameToDelete.value = item.foodName
-  deleteAll.value = false
-  displayPopup.value = true
+  scanIdToDelete.value = item.scanId;
+  scanNameToDelete.value = item.foodName;
+  deleteAll.value = false;
+  displayPopup.value = true;
 }
 
 function openDeleteAllPopup() {
-  deleteAll.value = true
-  scanIdToDelete.value = null
-  displayPopup.value = true
+  deleteAll.value = true;
+  scanIdToDelete.value = null;
+  displayPopup.value = true;
 }
 
 function closePopup() {
-  displayPopup.value = false
-  scanIdToDelete.value = null
-  deleteAll.value = false
+  displayPopup.value = false;
+  scanIdToDelete.value = null;
+  deleteAll.value = false;
 }
 
 async function confirmDelete() {
   if (deleteAll.value) {
-    await Promise.all(userHistory.value.map(item => deleteScan(item.scanId)))
-    userHistory.value = []
+    await Promise.all(userHistory.value.map(item => deleteScan(item.scanId)));
+    userHistory.value = [];
   }
   else if (scanIdToDelete.value) {
-    await deleteScan(scanIdToDelete.value)
-    userHistory.value = userHistory.value.filter(item => item.scanId !== scanIdToDelete.value)
+    await deleteScan(scanIdToDelete.value);
+    userHistory.value = userHistory.value.filter(item => item.scanId !== scanIdToDelete.value);
   }
-  closePopup()
+  closePopup();
 }
 </script>
 
