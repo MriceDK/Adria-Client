@@ -11,9 +11,7 @@ const subscripteOptions = {
 async function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         try {
-            const registration = await navigator.serviceWorker.register('/sw.js');
-
-            return registration;
+            return await navigator.serviceWorker.register('/sw.js');
         } catch (error) {
         }
     }

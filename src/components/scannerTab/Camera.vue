@@ -57,11 +57,6 @@ function startScan() {
   isScanning.value = true;
   emit('scan')
   // TODO: Change this so that it sends the image to the server
-  takePhoto();
-}
-
-function takePhoto() {
-  const photoData = canvas.value.toDataURL();
 }
 
 </script>
