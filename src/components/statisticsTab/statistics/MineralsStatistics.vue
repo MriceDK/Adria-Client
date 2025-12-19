@@ -42,6 +42,7 @@ import "@/components/statisticsTab/common/common.css";
 import IconActivity from "@/components/icons/statisticsIcons/IconActivity.vue";
 
 const minerals = ref([]);
+const number = 0.9;
 
 onMounted(async () => {
   minerals.value = await useStats("minerals");
@@ -50,7 +51,7 @@ onMounted(async () => {
 function mineralStatus(item) {
   const ratio = item.current / item.goal;
   if (ratio >= 1) return "good";
-  if (ratio >= 0.9) return "near";
+  if (ratio >= number) return "near";
   return "low";
 }
 </script>

@@ -11,16 +11,14 @@ defineProps({
     type: String,
     required: true,
   }
-})
-const emit = defineEmits(['navigation-click'])
+});
+const emit = defineEmits(['navigation-click']);
 
 </script>
 
 <template>
   <li @click="$emit('navigation-click',title)" :class="{selected: selectedTab === title}">
-    {{ title }}
-
-  </li>
+    {{ title }}</li>
 </template>
 
 <style scoped>
@@ -37,9 +35,6 @@ li{
   float: left;
   font-size: 0.85rem;
   text-align: center;
-}
-div{
-
 }
 .selected{
   transition: ease-in 0.2s;

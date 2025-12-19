@@ -59,6 +59,9 @@ async function confirmDelete() {
     await deleteScan(scanIdToDelete.value);
     userHistory.value = userHistory.value.filter(item => item.scanId !== scanIdToDelete.value);
   }
+  else{
+    null;
+  }
   closePopup();
 }
 </script>

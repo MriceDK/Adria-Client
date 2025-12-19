@@ -60,10 +60,6 @@ const props = defineProps({
   font-size: 0.9rem;
 }
 
-.remaining {
-  color: var(--secondary-text-color);
-}
-
 .goal-edit {
   display: flex;
   flex-direction: column;

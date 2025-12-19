@@ -1,7 +1,7 @@
 <script setup>
 import NavigationButton from "./utilities/NavigationButton.vue";
 import {ref} from "vue";
-const emit = defineEmits(['navigation-click', 'logo-click'])
+const emit = defineEmits(['navigation-click', 'logo-click']);
 
 function handleNavigationClick(title) {
   selectedTab.value = title;
@@ -13,7 +13,7 @@ function handleLogoClick() {
   selectedTab.value = "Scanner";
 }
 
-const selectedTab = ref("Scanner")
+const selectedTab = ref("Scanner");
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref} from 'vue';
 import { Pie } from 'vue-chartjs';
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 
 const props = defineProps({
   isEditing: Boolean,
@@ -15,11 +15,11 @@ const props = defineProps({
 
 const goalsFiltered = computed(() => props.goals.filter((nutrient) => nutrient.label !== "Water"));
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement)
+ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 const chartDataReady = computed(() => {
-  return goalsFiltered.value && goalsFiltered.value.length > 0
-})
+  return goalsFiltered.value && goalsFiltered.value.length > 0;
+});
 
 const chartData = computed(() => ({
   labels: goalsFiltered.value.map(g =>g.label),

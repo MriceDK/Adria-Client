@@ -95,7 +95,4 @@ template {
   max-width: 23rem;
 }
 
-.scanner {
-
-}
 </style>

@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
   Filler
-} from 'chart.js'
+} from 'chart.js';
 
 import { ref, onMounted } from "vue";
 import { getHistory } from "@/services/api/history.js";
