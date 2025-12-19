@@ -32,16 +32,16 @@ const chartData = ref(null);
 const needsToBeHidden = ref(true);
 
 async function fetchSortedHistory(userId) {
-  const history = await getHistory(userId)
+  const history = await getHistory(userId);
   return history.sort(
       (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
-  )
+  );
 }
 
 function buildCalorieTimeline(history) {
-  const labels = []
-  const calories = []
-  let totalCalories = 0
+  const labels = [];
+  const calories = [];
+  let totalCalories = 0;
 
   history.forEach(item => {
     const calorie = item.nutrients.find(n => n.type === "Calories");
@@ -63,7 +63,7 @@ function buildCalorieTimeline(history) {
 }
 
 function createCaloriesGradient(context) {
-  const {ctx, chartArea} = context.chart
+  const {ctx, chartArea} = context.chart;
   if (!chartArea) return null
 
   const gradient = ctx.createLinearGradient(
@@ -71,7 +71,7 @@ function createCaloriesGradient(context) {
       chartArea.top,
       0,
       chartArea.bottom
-  )
+  );
 
   gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)")
   gradient.addColorStop(1, "rgba(59, 130, 246, 0)")
@@ -93,8 +93,8 @@ function buildCalorieDataset(calories) {
 }
 
 async function loadCalorieTimeline() {
-  const history = await fetchSortedHistory(USER_ID)
-  const {labels, calories} = buildCalorieTimeline(history)
+  const history = await fetchSortedHistory(USER_ID);
+  const {labels, calories} = buildCalorieTimeline(history);
 
   chartData.value = {
     labels,

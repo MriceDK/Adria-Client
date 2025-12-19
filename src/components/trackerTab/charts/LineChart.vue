@@ -33,7 +33,7 @@ const chartData = ref(null);
 const needsToBeHidden = ref(true);
 
 async function fetchSortedHistory(userId) {
-  const history = await getHistory(userId)
+  const history = await getHistory(userId);
   return history.sort(
       (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
   )
@@ -44,19 +44,19 @@ function getNutrientAmount(item, type) {
 }
 
 function buildMacroTimeline(history) {
-  const labels = []
-  const protein = []
-  const carbs = []
-  const fat = []
+  const labels = [];
+  const protein = [];
+  const carbs = [];
+  const fat = [];
 
   let totalProtein = 0;
   let totalCarbs = 0;
   let totalFat = 0;
 
   history.forEach(item => {
-    totalProtein += getNutrientAmount(item, "Protein")
-    totalCarbs += getNutrientAmount(item, "Carbohydrates")
-    totalFat += getNutrientAmount(item, "Fats")
+    totalProtein += getNutrientAmount(item, "Protein");
+    totalCarbs += getNutrientAmount(item, "Carbohydrates");
+    totalFat += getNutrientAmount(item, "Fats");
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
@@ -106,8 +106,8 @@ function buildMacroDatasets({ protein, carbs, fat }) {
 }
 
 async function loadMacrosTimeline() {
-  const history = await fetchSortedHistory(USER_ID)
-  const timeline = buildMacroTimeline(history)
+  const history = await fetchSortedHistory(USER_ID);
+  const timeline = buildMacroTimeline(history);
 
   chartData.value = {
     labels: timeline.labels,
