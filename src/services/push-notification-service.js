@@ -6,7 +6,7 @@ const VAPID_PUBLIC_KEY = "BL2jmCKm9V1LvSdLaBx6xd37IjmFgEQBmvo-VIUz4RoDilAAokOPb8
 const subscripteOptions = {
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-}
+};
 
 async function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
