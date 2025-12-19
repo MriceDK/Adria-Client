@@ -32,13 +32,18 @@ ChartJS.register(
 const chartData = ref(null)
 const needsToBeHidden = ref(true)
 
-async function loadMacrosTimeline() {
-  const history = await getHistory(USER_ID)
-
-  history.sort(
+async function fetchSortedHistory(userId) {
+  const history = await getHistory(userId)
+  return history.sort(
       (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
   )
+}
 
+function getNutrientAmount(item, type) {
+  return item.nutrients.find(n => n.type === type)?.amount ?? 0
+}
+
+function buildMacroTimeline(history) {
   const labels = []
   const protein = []
   const carbs = []
@@ -49,12 +54,9 @@ async function loadMacrosTimeline() {
   let totalFat = 0
 
   history.forEach(item => {
-    const getAmount = (type) =>
-        item.nutrients.find(n => n.type === type)?.amount ?? 0
-
-    totalProtein += getAmount("Protein")
-    totalCarbs += getAmount("Carbohydrates")
-    totalFat += getAmount("Fats")
+    totalProtein += getNutrientAmount(item, "Protein")
+    totalCarbs += getNutrientAmount(item, "Carbohydrates")
+    totalFat += getNutrientAmount(item, "Fats")
 
     labels.push(
         new Date(item.scanDateTime).toLocaleTimeString([], {
@@ -68,37 +70,48 @@ async function loadMacrosTimeline() {
     fat.push(totalFat)
   })
 
+  return { labels, protein, carbs, fat }
+}
+
+function buildMacroDatasets({ protein, carbs, fat }) {
+  return [
+    {
+      label: "Carbs (g)",
+      data: carbs,
+      borderColor: "#22c55e",
+      backgroundColor: "#22c55e",
+      tension: 0.4,
+      pointRadius: 3,
+      fill: false
+    },
+    {
+      label: "Fat (g)",
+      data: fat,
+      borderColor: "#f59e0b",
+      backgroundColor: "#f59e0b",
+      tension: 0.4,
+      pointRadius: 3,
+      fill: false
+    },
+    {
+      label: "Protein (g)",
+      data: protein,
+      borderColor: "#3b82f6",
+      backgroundColor: "#3b82f6",
+      tension: 0.4,
+      pointRadius: 3,
+      fill: false
+    }
+  ]
+}
+
+async function loadMacrosTimeline() {
+  const history = await fetchSortedHistory(USER_ID)
+  const timeline = buildMacroTimeline(history)
+
   chartData.value = {
-    labels,
-    datasets: [
-      {
-        label: "Carbs (g)",
-        data: carbs,
-        borderColor: "#22c55e",
-        backgroundColor: "#22c55e",
-        tension: 0.4,
-        pointRadius: 3,
-        fill: false
-      },
-      {
-        label: "Fat (g)",
-        data: fat,
-        borderColor: "#f59e0b",
-        backgroundColor: "#f59e0b",
-        tension: 0.4,
-        pointRadius: 3,
-        fill: false
-      },
-      {
-        label: "Protein (g)",
-        data: protein,
-        borderColor: "#3b82f6",
-        backgroundColor: "#3b82f6",
-        tension: 0.4,
-        pointRadius: 3,
-        fill: false
-      }
-    ]
+    labels: timeline.labels,
+    datasets: buildMacroDatasets(timeline)
   }
 }
 

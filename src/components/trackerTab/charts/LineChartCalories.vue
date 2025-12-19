@@ -31,14 +31,16 @@ ChartJS.register(
 const chartData = ref(null)
 const needsToBeHidden = ref(true)
 
-async function loadCalorieTimeline() {
-  const history = await getHistory(USER_ID)
+async function fetchSortedHistory(userId) {
+  const history = await getHistory(userId)
+  return history.sort(
+      (a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime)
+  )
+}
 
-  history.sort((a, b) => new Date(a.scanDateTime) - new Date(b.scanDateTime))
-
+function buildCalorieTimeline(history) {
   const labels = []
   const calories = []
-
   let totalCalories = 0
 
   history.forEach(item => {
@@ -57,39 +59,50 @@ async function loadCalorieTimeline() {
     calories.push(totalCalories)
   })
 
+  return {labels, calories}
+}
+
+function createCaloriesGradient(context) {
+  const {ctx, chartArea} = context.chart
+  if (!chartArea) return null
+
+  const gradient = ctx.createLinearGradient(
+      0,
+      chartArea.top,
+      0,
+      chartArea.bottom
+  )
+
+  gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)")
+  gradient.addColorStop(1, "rgba(59, 130, 246, 0)")
+
+  return gradient
+}
+
+function buildCalorieDataset(calories) {
+  return [
+    {
+      data: calories,
+      fill: true,
+      backgroundColor: createCaloriesGradient,
+      borderColor: "#3b82f6",
+      borderWidth: 2,
+      tension: 0.4
+    }
+  ]
+}
+
+async function loadCalorieTimeline() {
+  const history = await fetchSortedHistory(USER_ID)
+  const {labels, calories} = buildCalorieTimeline(history)
+
   chartData.value = {
     labels,
-    datasets: [
-      {
-        data: calories,
-        fill: true,
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx
-          const chartArea = context.chart.chartArea
-          if (!chartArea) return null
-
-          const gradient = ctx.createLinearGradient(
-              0,
-              chartArea.top,
-              0,
-              chartArea.bottom
-          )
-
-          gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)")
-          gradient.addColorStop(1, "rgba(59, 130, 246, 0)")
-
-          return gradient
-        },
-        borderColor: "#3b82f6",
-        borderWidth: 2,
-        tension: 0.4
-      }
-    ]
+    datasets: buildCalorieDataset(calories)
   }
 }
 
 onMounted(loadCalorieTimeline)
-
 
 const chartOptions = {
   responsive: true,

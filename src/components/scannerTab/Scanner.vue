@@ -94,8 +94,4 @@ template {
   text-align: center;
   max-width: 23rem;
 }
-
-.scanner {
-
-}
 </style>
