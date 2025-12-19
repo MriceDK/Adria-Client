@@ -2,6 +2,7 @@ const API_BASE = "http://localhost:8000";
 
 export async function getUserStats(userId) {
     const res = await fetch(`${API_BASE}/api/analyses/user/${userId}/stats`);
+
     return await res.json();
 }
 

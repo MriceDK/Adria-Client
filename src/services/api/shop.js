@@ -11,6 +11,7 @@ async function createOrder(adrianId, orderData) {
         adrianId: adrianId,
         supplements: orderData,
     };
+
     return await fetch(`${API_BASE}OrderSupplement`, {
         method: 'POST',
         headers: {

@@ -15,12 +15,12 @@ export function filterDailyGoals(data) {
         }));
 }
 
-
 export function filterMinerals(data) {
     const needed = [
         "Calcium", "Iron", "Magnesium", "Phosphorus", "Potassium",
         "Sodium", "Zinc", "Copper", "Manganese", "Selenium", "Iodine"
     ];
+
     return data
         .filter(item => needed.includes(item.label))
         .sort((a, b) => needed.indexOf(a.label) - needed.indexOf(b.label))
