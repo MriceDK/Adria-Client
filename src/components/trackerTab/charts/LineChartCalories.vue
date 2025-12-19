@@ -76,7 +76,7 @@ function createCaloriesGradient(context) {
   gradient.addColorStop(0, "rgba(59, 130, 246, 0.4)");
   gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
 
-  return gradient
+  return gradient;
 }
 
 function buildCalorieDataset(calories) {

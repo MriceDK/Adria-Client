@@ -74,35 +74,21 @@ function buildMacroTimeline(history) {
 }
 
 function buildMacroDatasets({ protein, carbs, fat }) {
-  return [
-    {
-      label: "Carbs (g)",
-      data: carbs,
-      borderColor: "#22c55e",
-      backgroundColor: "#22c55e",
-      tension: 0.4,
-      pointRadius: 3,
-      fill: false
-    },
-    {
-      label: "Fat (g)",
-      data: fat,
-      borderColor: "#f59e0b",
-      backgroundColor: "#f59e0b",
-      tension: 0.4,
-      pointRadius: 3,
-      fill: false
-    },
-    {
-      label: "Protein (g)",
-      data: protein,
-      borderColor: "#3b82f6",
-      backgroundColor: "#3b82f6",
-      tension: 0.4,
-      pointRadius: 3,
-      fill: false
-    }
+  const configs = [
+    ["Carbs (g)", carbs, "#22c55e"],
+    ["Fat (g)", fat, "#f59e0b"],
+    ["Protein (g)", protein, "#3b82f6"]
   ];
+
+  return configs.map(([label, data, color]) => ({
+    label,
+    data,
+    borderColor: color,
+    backgroundColor: color,
+    tension: 0.4,
+    pointRadius: 3,
+    fill: false
+  }));
 }
 
 async function loadMacrosTimeline() {
