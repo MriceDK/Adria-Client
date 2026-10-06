@@ -1,38 +1,99 @@
-# Adria client
+<div align="center">
 
-This template should help get you started developing with Vue 3 in Vite.
+# 🥗 Adria — Client
 
-## Recommended IDE Setup
+**Vue 3 single-page application built with Vite; production served as static assets via Nginx.**
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+![Node.js](https://img.shields.io/badge/Node.js-Node-blue?style=for-the-badge&logo=node.js)
+![Vue.js](https://img.shields.io/badge/Vue-3-green?style=for-the-badge&logo=vue.js)
+![Vite](https://img.shields.io/badge/Vite-Vite-black?style=for-the-badge&logo=vite)
+![Nginx](https://img.shields.io/badge/Nginx-Nginx-009639?style=for-the-badge&logo=nginx)
 
-## Recommended Browser Setup
+</div>
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+> 🎓 Created as part of a simulated 2084 "Return to Earth" startup coursework: marketing site and product POC for NutriScan.
 
-## Customize configuration
+## 📖 About
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Frontend SPA located in the `client/` folder using **Vue 3** and **Vite**.
+- Built artifacts are produced to `dist/` and served by the `client/Dockerfile` with **Nginx**.
 
-## Project Setup
 
-```sh
-npm install
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+  A[Developer Machine] -->|npm run dev| B[Vite Dev Server]
+  B -->|HTTP| C[Browser]
+  C -->|API requests| API[Adria.Main API]
+  subgraph Prod
+    D[Built /dist] --> Nginx[Nginx]
+    Nginx --> API
+  end
 ```
 
-### Compile and Hot-Reload for Development
 
-```sh
+## ✨ Features
+
+- Fast dev server via Vite
+- Componentized Vue structure (scanner, shop, statistics, tracker)
+- Production multi-stage Docker build (Node -> Nginx)
+
+
+## 🛠️ Tech Stack
+
+| Area | Technologies |
+|------|--------------|
+| Frontend | Vue 3, Vite, JavaScript |
+| Bundler | Vite |
+| Container runtime | Nginx (static assets) |
+
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (see `client/package.json` engines: `^20.19.0 || >=22.12.0`)
+- npm
+
+
+### Configuration
+
+| Variable | Description |
+|----------|-------------|
+| `BUILD_ENV` | Optional build argument used in `client/Dockerfile` (ARG BUILD_ENV=dev) |
+
+
+### Development
+
+```bash
+npm ci
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Build (production)
 
-```sh
+```bash
+npm ci
 npm run build
 ```
+
+### Build Docker image (optional)
+
+```bash
+docker build -t adria-client:latest .
+# docker run -p 80:80 adria-client:latest  # replace tag as needed
+```
+
+
+## 📡 Usage
+
+- Dev server: open the URL shown by `npm run dev`.
+- Production (container): built `dist/` served by Nginx on port `80` when run in Docker (see `client/Dockerfile`).
+
+
+## 👤 Author
+
+| Name | GitHub | LinkedIn |
+| --- | --- | --- |
+| Maurice De Kegel | [MriceDK](https://github.com/MriceDK) | [LinkedIn](https://www.linkedin.com/in/dekegelmaurice/) |
